@@ -9,30 +9,39 @@ import {
   Link
 } from "react-router-dom";
 
+import ApolloClient from "apollo-boost";
+import {ApolloProvider} from "react-apollo";
+
+const client = new ApolloClient({
+  uri: "http://localhost:3001/graphql"
+})
+
 export default function App() {
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/test">Test</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/test">
-            <Test />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/test">Test</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route path="/test">
+              <Test />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 
