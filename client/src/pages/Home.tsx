@@ -4,7 +4,7 @@ interface HomeProps {
 
 }
 
-const Home: React.FC<HomeProps> = ({}) => {
+const Home: React.FC<HomeProps> = (/*{}*/) => {
     return (
         <>
             <h2>Home</h2>
