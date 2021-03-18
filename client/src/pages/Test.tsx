@@ -1,22 +1,28 @@
 import React from 'react';
-import {gql} from "apollo-boost";
-import {graphql} from "react-apollo";
+import { useQuery, gql } from '@apollo/client';
 
 interface TestProps {
 
 }
 
 const getBooksQuery = gql`
-    {
-        books {
-            name
-            id
-        }
+{
+    books {
+      id
+      name
+      genre
+      author {
+        id
+      }
     }
-`
+}
+`;
 
 const Test: React.FC<TestProps> = ({}) => {
-    console.log(getBooksQuery);
+
+    const { loading, error, data } = useQuery(getBooksQuery);
+    console.log(loading, error, data)
+
     return (
         <>
             <h2>Test Page</h2>
@@ -24,4 +30,4 @@ const Test: React.FC<TestProps> = ({}) => {
     );
 }
 
-export default graphql(getBooksQuery)(Test);
+export default Test;

@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Test from "./pages/Test";
+import Home from "./pages/Home";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,12 +10,13 @@ import {
   Link
 } from "react-router-dom";
 
-import ApolloClient from "apollo-boost";
-import {ApolloProvider} from "react-apollo";
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: "http://localhost:3001/graphql"
-})
+  uri: 'http://localhost:3001/graphql',
+  cache: new InMemoryCache()
+});
 
 export default function App() {
   return (
@@ -43,8 +45,4 @@ export default function App() {
       </Router>
     </ApolloProvider>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
 }
