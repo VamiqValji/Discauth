@@ -10,14 +10,12 @@ const getBooksQuery = gql`
 }
 `;
 
-const addBookMutation = (bookName:string, genre:string) => {
-    return(gql`
-    mutation {
-        addBook(name: "${bookName}", authorID: "random_${Math.random().toString()}", genre:"${genre}") {
+const addBookMutation = gql`
+    mutation ($name: String!, $genre: String!) {
+        addBook(name: $name, authorID: "random", genre:$genre) {
         id
         }
     }
-    `);
-}
+`
 
 export { getBooksQuery, addBookMutation };

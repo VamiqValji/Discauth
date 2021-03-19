@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { /*gql,*/ useQuery, useMutation } from '@apollo/client';
+import { gql, useQuery, useMutation } from '@apollo/client';
 import { getBooksQuery, addBookMutation } from "../queries/queries";
 
 interface TestProps {
@@ -13,6 +13,18 @@ const Test: React.FC<TestProps> = (/*{}*/) => {
 
     const { loading, error, data } = useQuery(getBooksQuery);
     console.log(loading, error, data);
+
+    // const [
+    //     addingBook,
+    //     { loading: mutationLoading, error: mutationError }
+    //   ] = useMutation(addBookMutation({
+    //       variables: {
+    //           name: "",
+    //           genre: ""
+    //       }
+    //   }))
+
+    const [addBook, { loading: mutationLoading, error: mutationError }] = useMutation(addBookMutation);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -34,7 +46,10 @@ const Test: React.FC<TestProps> = (/*{}*/) => {
             <br/><br/>
             <form onSubmit={(e) => {
                 e.preventDefault();
-                addBookMutation(bookName.current.value, genre.current.value);
+                // addBookMutation(bookName.current.value, genre.current.value);
+                addBook({variables: {
+                    name: bookName.current.value, genre: genre.current.value
+                }});
             }}>
                 <label htmlFor="bookName">Book Name:</label><br/>
                 <input ref={bookName} type="text" placeholder="Book Name" required/><br/>
