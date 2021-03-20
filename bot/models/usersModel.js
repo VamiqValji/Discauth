@@ -9,9 +9,9 @@ let usersSchema = new Schema({
   // serverName: String,
   serversData: Array,
   email: String,
-  timeOfRegistration: String,
-  verificationCode: String,
-  verified: Boolean,
+  // timeOfRegistration: String,
+  // verificationCode: String,
+  // verified: Boolean,
 });
 
 let users = mongoose.model("users", usersSchema);

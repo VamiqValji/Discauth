@@ -18,7 +18,8 @@ const sendEmail = async (
     from: process.env.NODEMAILER_USER,
     to: to,
     subject: "Discauth Verification",
-    text: `Your Discauth verification code for the server '${serverName}' is ${verificationCode}. DM the Discauth bot '.verify ${verificationCode} to verify yourself.'`,
+    text: `Your Discauth verification code is '${verificationCode}'. DM the Discauth bot '.verify ${verificationCode} to verify yourself.'`,
+    //                                    ^ for the server '${serverName}'
   };
 
   transporter.sendMail(mailOptions, (err, data) => {
