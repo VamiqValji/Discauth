@@ -10,7 +10,7 @@ client.on("ready", () => {
   console.log(`${client.user.tag} has logged in.`);
 });
 
-client.on("message", (message:any) => {
+client.on("message", (message) => {
   if (message.author.bot) return;
   console.log(`[${message.author.tag}]: ${message.content}`);
   if (message.content.startsWith(PREFIX)) {
@@ -20,7 +20,19 @@ client.on("message", (message:any) => {
       // .split(" ");
       .split(/\s+/);
     if (cmd_name === "register") {
-    //   message.channel.send("test");
+      //   message.channel.send("test");
+      message.delete();
+      message.author.send(
+        "DM me `.register` to get start the verification process."
+      );
+      if (message.channel !== "dm") return;
+      console.log("test");
+    }
+    if (cmd_name === "clear") {
+      const numArg = parseInt(args[0]);
+      console.log(numArg);
+      if (numArg > 0) return message.channel.bulkDelete(numArg);
+      return message.channel.bulkDelete(5);
     }
   }
 });
