@@ -3,6 +3,7 @@
 import './App.css';
 import Test from "./pages/Test";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,11 +32,17 @@ export default function App() {
               <li>
                 <Link to="/test">Test</Link>
               </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
             </ul>
           </nav>
           <Switch>
             <Route path="/test">
               <Test />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <Route path="/">
               <Home />

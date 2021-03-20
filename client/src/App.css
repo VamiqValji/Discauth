@@ -4,11 +4,15 @@
   padding: 0;
 }
 
-:root{
+:root {
   --backgroundColor: #282c34;
 }
 
-* {
+body {
   background: var(--backgroundColor);
+  color: whitesmoke;
+}
+
+body a {
   color: whitesmoke;
 }
