@@ -16,6 +16,7 @@ mongoose
   .connect(process.env.DB_CONNECT, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .catch((err) => {
     console.log(err);
@@ -54,8 +55,9 @@ client.on("message", async (message) => {
           let newUser = new users({
             discordID: message.author.id,
             discordTag: message.author.tag,
-            serverID: message.guild.id,
-            serverName: message.guild.name,
+            // serverID: message.guild.id,
+            // serverName: message.guild.name,
+            serversData: [{ id: message.guild.id, name: message.guild.name }],
             email: "temp_args[0]",
             timeOfRegistration: new Date().toUTCString(),
             verificationCode: verificationCode,
@@ -84,18 +86,19 @@ client.on("message", async (message) => {
         const hasTemporaryEmail = isDuplicate.email === "temp_args[0]";
         if (isRealEmail) {
           if (isDuplicate) {
-            if (hasTemporaryEmail) {
-              await users.findOneAndUpdate(
-                {
-                  discordID: message.author.id,
+            // if (hasTemporaryEmail) {
+            await users.findOneAndUpdate(
+              {
+                discordID: message.author.id,
+              },
+              {
+                $set: {
+                  email: args[0],
                 },
-                {
-                  $set: {
-                    email: args[0],
-                  },
-                }
-              );
-            }
+              }
+            );
+            // }
+
             // send email
 
             sendEmail(args[0], verificationCode, isDuplicate.serverName);

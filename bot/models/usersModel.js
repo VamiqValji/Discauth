@@ -5,8 +5,9 @@ const Schema = mongoose.Schema;
 let usersSchema = new Schema({
   discordID: String,
   discordTag: String,
-  serverID: String,
-  serverName: String,
+  // serverID: String,
+  // serverName: String,
+  serversData: Array,
   email: String,
   timeOfRegistration: String,
   verificationCode: String,
