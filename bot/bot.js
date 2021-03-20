@@ -10,6 +10,8 @@ const mongoose = require("mongoose");
 //@ts-ignore
 const users = require("./models/usersModel");
 
+const { sendEmail } = require("./src/nodeMailer");
+
 mongoose
   .connect(process.env.DB_CONNECT, {
     useNewUrlParser: true,
@@ -33,6 +35,9 @@ client.on("message", async (message) => {
       // .split(" ");
       .split(/\s+/);
     if (cmd_name === "register") {
+      const verificationCode =
+        Math.random().toString(36).substring(7) +
+        Math.random().toString(36).substring(7);
       const isDuplicate = await users.findOne({
         discordID: message.author.id,
       });
@@ -43,14 +48,7 @@ client.on("message", async (message) => {
           "DM me '.register `YourEmail@example.com`' to start/continue the verification process."
         );
         console.log(
-          `USER ID: ${message.author.id}, \nUSER TAG: ${
-            message.author.tag
-          }, \nARGS: ${args[0]}, \nSERVER ID: ${
-            message.guild.id
-          }, \nSERVER NAME: ${message.guild.name}, \nVERIFICATION CODE: ${
-            Math.random().toString(36).substring(7) +
-            Math.random().toString(36).substring(7)
-          }`
+          `USER ID: ${message.author.id}, \nUSER TAG: ${message.author.tag}, \nARGS: ${args[0]}, \nSERVER ID: ${message.guild.id}, \nSERVER NAME: ${message.guild.name}, \nVERIFICATION CODE: ${verificationCode}`
         );
         if (!isDuplicate) {
           let newUser = new users({
@@ -60,9 +58,7 @@ client.on("message", async (message) => {
             serverName: message.guild.name,
             email: "temp_args[0]",
             timeOfRegistration: new Date().toUTCString(),
-            verificationCode:
-              Math.random().toString(36).substring(7) +
-              Math.random().toString(36).substring(7),
+            verificationCode: verificationCode,
             verified: false,
           });
 
@@ -101,6 +97,9 @@ client.on("message", async (message) => {
               );
             }
             // send email
+
+            sendEmail(args[0], verificationCode, isDuplicate.serverName);
+
             return message.author.send(
               "Already registered. Did you mean '.verify `VerificationCodeFromEmail`'? Check your email for the code."
             );
