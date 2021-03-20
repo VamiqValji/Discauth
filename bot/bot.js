@@ -6,11 +6,24 @@ const client = new Client({
 });
 const PREFIX = ".";
 
+const mongoose = require("mongoose");
+//@ts-ignore
+const users = require("./models/usersModel");
+
+mongoose
+  .connect(process.env.DB_CONNECT, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 client.on("ready", () => {
   console.log(`${client.user.tag} has logged in.`);
 });
 
-client.on("message", (message) => {
+client.on("message", async (message) => {
   if (message.author.bot) return;
   console.log(`[${message.author.tag}]: ${message.content}`);
   if (message.content.startsWith(PREFIX)) {
@@ -21,16 +34,36 @@ client.on("message", (message) => {
       .split(/\s+/);
     if (cmd_name === "register") {
       //   message.channel.send("test");
-      message.delete();
-      message.author.send(
-        "DM me `.register` to get start the verification process."
-      );
-      if (message.channel !== "dm") return;
-      console.log("test");
+      if (message.channel.type !== "dm") {
+        message.delete();
+        message.author.send(
+          "DM me '.register `YourEmail@example.com`' to start the verification process."
+        );
+      } else {
+        if (args[0].length > 4) {
+          console.log(
+            `USER ID: ${message.author.id}, USER TAG: ${message.author.tag}, ARGS: ${args[0]}`
+          );
+          let isDuplicate = await users.findOne({
+            discordID: message.author.id,
+          });
+          if (isDuplicate) return message.author.send("Duplicate.");
+          let newUser = new users({
+            discordID: message.author.id,
+            discordTag: message.author.tag,
+            email: args[0],
+            verified: false,
+          });
+          newUser.save().then((res) => {
+            if (res._id) return message.author.send("Check your email!");
+            return message.author.send("Error.");
+          });
+        }
+      }
     }
     if (cmd_name === "clear") {
       const numArg = parseInt(args[0]);
-      console.log(numArg);
+      //   console.log(numArg);
       if (numArg > 0) return message.channel.bulkDelete(numArg);
       return message.channel.bulkDelete(5);
     }
