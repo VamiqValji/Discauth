@@ -2,12 +2,19 @@ import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 're
 import React from 'react'
 import { /*gql, useQuery,*/ useMutation } from '@apollo/client';
 import { addOwnerMutation } from "../queries/ownerQueries";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn, logOut } from "../actions/index";
 
 interface LoginProps {
 
 }
 
 const Login: React.FC<LoginProps> = (/*{}*/) => {
+
+    const dispatch = useDispatch();
+
+    const loggedInfo = useSelector((state:any) => state.loggedInfo);
+    console.log(loggedInfo);
 
     const [addBook, { loading: mutationLoading, error: mutationError }] = useMutation(addOwnerMutation, {
         // refetchQueries: MutationRes => [{query: getBooksQuery}],
@@ -23,6 +30,7 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
                 googleId: res.profileObj.googleId,
             },
         });
+        dispatch(logIn(res.profileObj.googleId));
     }
 
     return (
@@ -31,7 +39,10 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
                 clientId="189591425875-5kbjefvskjc36qsl9guqcmla5ut759ip.apps.googleusercontent.com"
                 buttonText="Login"
                 onSuccess={successResponseGoogle}
-                onFailure={(res:any) => console.log(res)}
+                onFailure={(res:any) => {
+                    console.log(res, mutationLoading, mutationError)
+                    dispatch(logOut());
+                }}
                 cookiePolicy={'single_host_origin'}
             />
         </>
