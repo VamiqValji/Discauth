@@ -12,34 +12,60 @@ const {
   GraphQLInt,
   GraphQLList,
   GraphQLNonNull, // cannot be null
+  GraphQLBoolean,
 } = graphql;
+
+const UsersType = new GraphQLObjectType({
+  name: "Users",
+  description: "Users Information",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLID },
+    verified: { type: GraphQLBoolean },
+  }),
+});
+
+const ServerType = new GraphQLObjectType({
+  name: "Server",
+  description: "Server Information",
+  fields: () => ({
+    serverId: { type: GraphQLID },
+    users: { type: new GraphQLList(UsersType) },
+  }),
+});
 
 const OwnerType = new GraphQLObjectType({
   name: "Owner",
+  description: "Owner Information",
   fields: () => ({
     googleId: {
       type: GraphQLID,
-      resolve(parent, args) {
-        // console.log(parent, args);
-        // return _.find(authors, { id: parent.authorID });
-        // return Author.findById(parent.authorID);
-      },
+      // resolve(parent, args) {
+      //   console.log(parent, args);
+      //   return owners.findOne({ googleId: args.googleId });
+      // },
     },
+    servers: { type: new GraphQLList(ServerType) },
+    discordID: { type: GraphQLString },
+    discordName: { type: GraphQLString },
+    email: { type: GraphQLString },
+    verificationCode: { type: GraphQLString },
+    verified: { type: GraphQLBoolean },
   }),
 });
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
+  description: "Root Query",
   fields: {
-    owner: {
+    ownerData: {
       type: OwnerType,
       args: {
-        googleId: {
-          type: GraphQLID,
-        },
+        googleId: { type: GraphQLID },
       },
       resolve(parent, args) {
-        // console.log("root", parent, args);
+        console.log("root", parent, args);
+        return owners.findOne({ googleId: args.googleId });
       },
     },
   },
@@ -50,6 +76,7 @@ const Mutation = new GraphQLObjectType({
   fields: {
     addOwner: {
       type: OwnerType,
+      description: "Add Owner On Website Login",
       args: {
         discordID: { type: new GraphQLNonNull(GraphQLString) },
         discordName: { type: new GraphQLNonNull(GraphQLString) },
