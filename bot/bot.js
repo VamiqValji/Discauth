@@ -9,6 +9,7 @@ const PREFIX = ".";
 const mongoose = require("mongoose");
 //@ts-ignore
 const users = require("./models/usersModel");
+// const servers = require("./models/serversModel");
 
 const { sendEmail } = require("./src/nodeMailer");
 
@@ -120,9 +121,7 @@ client.on("message", async (message) => {
           );
         }
       }
-    }
-
-    if (cmd_name === "verify") {
+    } else if (cmd_name === "verify") {
       const userInputtedVerificationCode = args[0];
       if (userInputtedVerificationCode.length < 7)
         return message.author.send(
@@ -140,6 +139,18 @@ client.on("message", async (message) => {
           // server.verified = true;
 
           if (isDuplicate.serversData[i].verified === false) {
+            // let server = new servers({
+            //   id: "",
+            //   name: "",
+            //   users: "",
+            //   owner: "",
+            //   ownerEmail: "",
+            // });
+
+            // await server.save();
+
+            // isDuplicate.delete();
+
             isDuplicate.serversData[i].verified = true;
             isDuplicate.markModified("serversData");
             await isDuplicate.save();
@@ -156,13 +167,13 @@ client.on("message", async (message) => {
           );
         }
       }
-    }
-
-    if (cmd_name === "clear") {
+    } else if (cmd_name === "clear") {
       const numArg = parseInt(args[0]);
       //   console.log(numArg);
       if (numArg > 0) return message.channel.bulkDelete(numArg);
       return message.channel.bulkDelete(5);
+    } else if (cmd_name === "registerServer") {
+      console.log("registerServer");
     }
   }
 });

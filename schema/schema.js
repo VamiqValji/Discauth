@@ -30,7 +30,18 @@ const ServerType = new GraphQLObjectType({
   description: "Server Information",
   fields: () => ({
     serverId: { type: GraphQLID },
+    verificationCode: { type: GraphQLString },
+    ownerVerified: { type: GraphQLBoolean },
     users: { type: new GraphQLList(UsersType) },
+  }),
+});
+
+const verificationCodeType = new GraphQLObjectType({
+  name: "Verification Code",
+  description: "Verification Code Schema",
+  fields: () => ({
+    serverId: { type: GraphQLID },
+    code: { type: GraphQLString },
   }),
 });
 
@@ -49,8 +60,8 @@ const OwnerType = new GraphQLObjectType({
     discordID: { type: GraphQLString },
     discordName: { type: GraphQLString },
     email: { type: GraphQLString },
-    verificationCode: { type: GraphQLString },
-    verified: { type: GraphQLBoolean },
+    verificationCodes: { type: new GraphQLList(verificationCodeType) },
+    // verified: { type: GraphQLBoolean },
   }),
 });
 
@@ -94,10 +105,11 @@ const Mutation = new GraphQLObjectType({
               discordName: args.discordName,
               email: args.email,
               googleId: args.googleId,
-              verificationCode:
-                Math.random().toString(36).substring(7) +
-                Math.random().toString(36).substring(7),
-              verified: false,
+              verificationCodes: [],
+              // verificationCode:
+              //   Math.random().toString(36).substring(7) +
+              //   Math.random().toString(36).substring(7),
+              // verified: false,
             });
             return owner.save();
           }

@@ -8,8 +8,8 @@ let ownersSchema = new Schema({
   servers: Array,
   email: String,
   googleId: String,
-  verificationCode: String,
-  verified: Boolean,
+  verificationCodes: Array,
+  // verified: Boolean,
 });
 
 /* 
@@ -17,8 +17,14 @@ example servers array
 
 servers: [{ 
     serverId: ""
-    users: [{ id: "", name: "", verified: false}],
+    users: [{ id: "", name: "", verificationCode: String, ownerVerified: false, }],
 }]
+
+example servers array
+
+verificationCodes: [
+ {serverId: "", code: "random"}
+]
 
 */
 
