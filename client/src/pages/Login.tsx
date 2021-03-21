@@ -1,18 +1,30 @@
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
-
 import React from 'react'
+import { /*gql, useQuery,*/ useMutation } from '@apollo/client';
+import { addOwnerMutation } from "../queries/ownerQueries";
 
 interface LoginProps {
 
 }
 
-const successResponseGoogle = (res: GoogleLoginResponse | GoogleLoginResponseOffline | any) => {
-    console.log(res.profileObj.email);
-    console.log(res.profileObj.googleId);
-    console.log(res.profileObj.imageUrl);
-}
-
 const Login: React.FC<LoginProps> = (/*{}*/) => {
+
+    const [addBook, { loading: mutationLoading, error: mutationError }] = useMutation(addOwnerMutation, {
+        // refetchQueries: MutationRes => [{query: getBooksQuery}],
+    });
+    
+    const successResponseGoogle = (res: GoogleLoginResponse | GoogleLoginResponseOffline | any) => {
+        console.log(res.profileObj.imageUrl);
+        addBook({
+            variables: {
+                discordID: "",
+                discordName: "",
+                email: res.profileObj.email, 
+                googleId: res.profileObj.googleId,
+            },
+        });
+    }
+
     return (
         <>
             <GoogleLogin

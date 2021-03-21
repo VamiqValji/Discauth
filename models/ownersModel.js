@@ -16,7 +16,7 @@ let ownersSchema = new Schema({
 example servers array
 
 servers: [{ 
-    id: ""
+    serverId: ""
     users: [{ id: "", name: "", verified: false}],
 }]
 

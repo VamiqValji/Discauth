@@ -20,7 +20,7 @@ const OwnerType = new GraphQLObjectType({
     googleId: {
       type: GraphQLID,
       resolve(parent, args) {
-        console.log(parent, args);
+        // console.log(parent, args);
         // return _.find(authors, { id: parent.authorID });
         // return Author.findById(parent.authorID);
       },
@@ -39,13 +39,58 @@ const RootQuery = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
-        console.log("root", parent, args);
+        // console.log("root", parent, args);
       },
     },
   },
 });
 
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addOwner: {
+      type: OwnerType,
+      args: {
+        discordID: { type: new GraphQLNonNull(GraphQLString) },
+        discordName: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        googleId: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        // console.log(parent, args);
+        // let isDuplicate =
+        owners.findOne({ googleId: args.googleId }).then((res) => {
+          const isFound = res !== null;
+          if (!isFound) {
+            let owner = new owners({
+              discordID: args.discordID,
+              discordName: args.discordName,
+              email: args.email,
+              googleId: args.googleId,
+              verificationCode:
+                Math.random().toString(36).substring(7) +
+                Math.random().toString(36).substring(7),
+              verified: false,
+            });
+            return owner.save();
+          }
+        });
+      },
+    },
+  },
+});
+
+/* 
+  discordID: String,
+  discordName: String,
+  servers: Array,
+  email: String,
+  googleId: String,
+  verificationCode: String,
+  verified: Boolean,
+*/
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
-  // mutation: Mutation,
+  mutation: Mutation,
 });
