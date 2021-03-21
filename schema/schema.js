@@ -37,10 +37,11 @@ const ServerType = new GraphQLObjectType({
 });
 
 const verificationCodeType = new GraphQLObjectType({
-  name: "Verification Code",
+  name: "verificationCode",
   description: "Verification Code Schema",
   fields: () => ({
     serverId: { type: GraphQLID },
+    serverName: { type: GraphQLString },
     code: { type: GraphQLString },
   }),
 });
@@ -114,6 +115,44 @@ const Mutation = new GraphQLObjectType({
             return owner.save();
           }
         });
+      },
+    },
+    updateOwnerVerificationCodesArray: {
+      type: OwnerType,
+      description: "Update Owner's verificationCodes Array",
+      args: {
+        googleId: { type: GraphQLID },
+        code: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        // return owners.findOne({ googleId: args.googleId }).then((res) => {
+        // res.verificationCodes.push({
+        //   serverId: "", code: args.code
+        // })
+        // });
+        owners.findOne({ googleId: args.googleId }).then((res) => {
+          for (let i = 0; i < res.verificationCodes.length; i++) {
+            data = res.verificationCodes[i];
+            const hasACode = data.code === "";
+            if (!hasACode) {
+              data.code = args.code;
+              res.markModified("verificationCodes");
+              return res.save();
+            }
+          }
+        });
+        // return owners.findOneAndUpdate(
+        //   { googleId: args.googleId },
+        //   {
+        //     $addToSet: {
+        //       verificationCodes: {
+        //         serverId: "",
+        //         serverName: "",
+        //         code: args.code,
+        //       },
+        //     },
+        //   }
+        // );
       },
     },
   },

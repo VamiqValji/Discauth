@@ -1,7 +1,7 @@
 // import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Test from "./pages/Test";
+// import Test from "./pages/Test";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import {
@@ -29,18 +29,18 @@ export default function App() {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/test">Test</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/login">Login</Link>
               </li>
             </ul>
           </nav>
           <Switch>
-            <Route path="/test">
+            {/* <Route path="/test">
               <Test />
-            </Route>
+            </Route> */}
             <Route path="/login">
               <Login />
             </Route>
