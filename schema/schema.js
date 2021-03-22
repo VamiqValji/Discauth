@@ -117,37 +117,46 @@ const Mutation = new GraphQLObjectType({
         });
       },
     },
-    updateOwnerVerificationCodesArray: {
+    addServer: {
       type: OwnerType,
-      description: "Update Owner's verificationCodes Array",
+      description: "Add Server",
       args: {
         googleId: { type: GraphQLID },
+        serverName: { type: GraphQLString },
         code: { type: GraphQLString },
       },
       resolve(parent, args) {
-        // return owners.findOne({ googleId: args.googleId }).then((res) => {
-        // res.verificationCodes.push({
-        //   serverId: "", code: args.code
-        // })
-        // });
         owners.findOne({ googleId: args.googleId }).then((res) => {
-          for (let i = 0; i < res.verificationCodes.length; i++) {
-            data = res.verificationCodes[i];
-            const hasACode = data.code === "";
-            if (!hasACode) {
-              data.code = args.code;
-              res.markModified("verificationCodes");
-              return res.save();
-            }
-          }
+          const foundServer = _.find(res.verificationCodes, {
+            serverName: args.serverName,
+          });
+          if (foundServer) return res;
+          res.verificationCodes.push({
+            googleId: args.googleId,
+            serverName: args.serverName,
+            code: args.code,
+          });
+          res.markModified("verificationCodes");
+          return res.save();
         });
+
+        // owners
+        //   .find({ "verificationCodes.serverName": args.serverName })
+        //   .then((res) => {
+        //     // const foundServer = _.find(res.verificationCodes, { serverName: args.serverName });
+        //     console.log({ serverName: args.serverName }, res);
+        //     return res;
+        //   });
         // return owners.findOneAndUpdate(
         //   { googleId: args.googleId },
         //   {
+        //     $pullAll: {
+        //       verificationCodes: [{ serverName: args.serverName }],
+        //     },
         //     $addToSet: {
         //       verificationCodes: {
         //         serverId: "",
-        //         serverName: "",
+        //         serverName: args.serverName,
         //         code: args.code,
         //       },
         //     },
