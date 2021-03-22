@@ -139,14 +139,6 @@ const Mutation = new GraphQLObjectType({
           res.markModified("verificationCodes");
           return res.save();
         });
-
-        // owners
-        //   .find({ "verificationCodes.serverName": args.serverName })
-        //   .then((res) => {
-        //     // const foundServer = _.find(res.verificationCodes, { serverName: args.serverName });
-        //     console.log({ serverName: args.serverName }, res);
-        //     return res;
-        //   });
         // return owners.findOneAndUpdate(
         //   { googleId: args.googleId },
         //   {

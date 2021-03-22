@@ -9,6 +9,7 @@ const PREFIX = ".";
 const mongoose = require("mongoose");
 //@ts-ignore
 const users = require("./models/usersModel");
+const owners = require("./models/ownersModel");
 // const servers = require("./models/serversModel");
 
 const { sendEmail } = require("./src/nodeMailer");
@@ -173,7 +174,45 @@ client.on("message", async (message) => {
       if (numArg > 0) return message.channel.bulkDelete(numArg);
       return message.channel.bulkDelete(5);
     } else if (cmd_name === "registerServer") {
-      console.log("registerServer");
+      if (args[0] === undefined || args[0].length < 2) return;
+      const foundOne = await owners.findOne({
+        "verificationCodes.serverName": message.guild.name,
+      });
+      if (foundOne) {
+        // let temp = foundOne.verificationCodes.filter(
+        //   (data) => data.serverName === message.guild.name
+        // );
+
+        for (let i = 0; i < foundOne.verificationCodes.length; i++) {
+          const serverIsRegistered =
+            foundOne.verificationCodes[i].code === "" ||
+            foundOne.verificationCodes[i].code === null;
+          if (serverIsRegistered) {
+            return message.channel.send(`This server is already registered.`);
+          } else {
+            const serverNameMatches =
+              foundOne.verificationCodes[i].serverName === message.guild.name;
+            if (serverNameMatches) {
+              const codeIsCorrect =
+                args[0] === foundOne.verificationCodes[i].code;
+              if (codeIsCorrect) {
+                foundOne.verificationCodes[i].code = "";
+                foundOne.markModified("verificationCodes");
+                foundOne.save();
+                return message.channel.send(
+                  `Verified & registered '${message.guild.name}'.`
+                );
+              } else {
+                return message.channel.send(`Incorrect.`);
+              }
+            } else {
+              return message.channel.send(
+                `Didn't add server on the web page yet..`
+              );
+            }
+          }
+        }
+      }
     }
   }
 });
