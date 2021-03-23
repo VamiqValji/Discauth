@@ -208,6 +208,20 @@ client.on("message", async (message) => {
                 foundOne.verificationCodes[i].discordID = message.author.id;
                 foundOne.verificationCodes[i].discordName = message.author.tag;
                 foundOne.verificationCodes[i].code = "";
+                foundOne.servers.push({
+                  serverId: message.guild.id,
+                  serverName: message.guild.name,
+                  verificationCode: "",
+                  ownerVerified: true,
+                  users: [
+                    {
+                      id: message.author.id,
+                      name: message.author.tag,
+                      verified: true,
+                      timeOfVerification: new Date().toUTCString(),
+                    },
+                  ],
+                });
                 foundOne.markModified("verificationCodes");
                 foundOne.save();
                 return message.channel.send(

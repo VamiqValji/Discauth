@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import { useSelector } from "react-redux";
 import { loggedInformation } from "../ts/interface";
+import { addServerMutation } from "../mutations/ownerMutations";
+import { /*useQuery,*/ useMutation } from '@apollo/client';
 
 interface SetupProps {}
 
@@ -9,11 +11,25 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
     const serverAddInputRef:any = useRef(null);
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
 
+    const [addServerMutationVar, { loading: mutationLoading, error: mutationError }] = useMutation(addServerMutation, {
+        // refetchQueries: MutationRes => [{query: getBooksQuery}],
+    });
+    console.log(mutationError, mutationLoading);
+
     const addServer = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (serverAddInputRef.current.value.length < 1) return;
         console.log(serverAddInputRef.current.value);
+        const serverName = serverAddInputRef.current.value;
         serverAddInputRef.current.value = "";
+        addServerMutationVar({
+            variables: {
+                googleId: loggedInfo.id, 
+                serverName: serverName,
+                code: Math.random().toString(36).substring(7) +
+                Math.random().toString(36).substring(7),
+            }
+        });
     }
 
     const renderIfLoggedIn = () => {

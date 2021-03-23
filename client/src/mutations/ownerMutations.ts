@@ -8,10 +8,11 @@ mutation addOwner($discordID: String!, $discordName: String!, $email: String!, $
   }
 `;
 
-export const addServer = gql`
-mutation addServer($googleId: String!, $serverName: String!, $code: String!) {
+export const addServerMutation = gql`
+mutation addServer($googleId: ID!, $serverName: String!, $code: String!) {
   addServer(googleId: $googleId, serverName: $serverName, code: $code) {
     email
+    discordName
   }
 }
 `;
