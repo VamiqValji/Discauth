@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import MyServers from "../components/MyServers";
 import Setup from "../components/Setup";
+import Modal from "../components/Modal";
 
 interface DashboardProps {
 
@@ -19,6 +20,7 @@ const Dashboard: React.FC<DashboardProps> = (/*{}*/) => {
 
     return (
         <>  
+            <Modal message={"Please Login."} />
             <br/>
             <h1>Owner Dashboard</h1>
             <br/>

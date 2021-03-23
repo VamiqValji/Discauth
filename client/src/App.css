@@ -6,6 +6,7 @@
 
 :root {
   --backgroundColor: #282c34;
+  --lightSuccess: rgba(46, 204, 113, 0.85);
 }
 
 body {
@@ -16,3 +17,27 @@ body {
 body a {
   color: whitesmoke;
 }
+
+/* SHORTCUTS */
+
+.center {
+  margin: 0 auto;
+}
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
+.c {
+  margin: 0 auto;
+}
+.cursorPointer {
+  cursor: pointer;
+}
+.whiteSmoke {
+  color: whitesmoke;
+}
+.lightSuccess {
+  color: var(--lightSuccess);
+}
+
+/* SHORTCUTS */
