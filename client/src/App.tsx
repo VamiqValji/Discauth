@@ -4,6 +4,7 @@ import './App.css';
 // import Test from "./pages/Test";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +34,9 @@ export default function App() {
                 <Link to="/test">Test</Link>
               </li> */}
               <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
                 <Link to="/login">Login</Link>
               </li>
             </ul>
@@ -43,6 +47,9 @@ export default function App() {
             </Route> */}
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
             <Route path="/">
               <Home />
