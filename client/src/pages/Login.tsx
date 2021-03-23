@@ -4,14 +4,10 @@ import { /*gql, useQuery,*/ useMutation } from '@apollo/client';
 import { addOwnerMutation } from "../mutations/ownerMutations";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn, logOut } from "../actions/index";
+import { loggedInformation } from "../ts/interface";
 
 interface LoginProps {
 
-}
-
-interface loggedInformation {
-    loggedIn: boolean,
-    id: string
 }
 
 const Login: React.FC<LoginProps> = (/*{}*/) => {

@@ -1,12 +1,8 @@
 import React, { useRef } from 'react'
 import { useSelector } from "react-redux";
+import { loggedInformation } from "../ts/interface";
 
 interface SetupProps {}
-
-interface loggedInformation {
-    loggedIn: boolean,
-    id: string
-}
 
 const Setup: React.FC<SetupProps> = (/*{}*/) => {
 
