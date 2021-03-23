@@ -174,7 +174,16 @@ client.on("message", async (message) => {
       if (numArg > 0) return message.channel.bulkDelete(numArg);
       return message.channel.bulkDelete(5);
     } else if (cmd_name === "registerServer") {
-      if (args[0] === undefined || args[0].length < 2) return;
+      const isOwner = message.guild.ownerID === message.author.id;
+      if (!isOwner)
+        return message.channel.send(
+          `This command is only for the server owner.`
+        );
+      const codeIsInvalid = args[0] === undefined || args[0].length < 2;
+      if (codeIsInvalid)
+        return message.channel.send(
+          `Enter a valid code Example: '.registerServer EXAMPLE_CODE'.`
+        );
       const foundOne = await owners.findOne({
         "verificationCodes.serverName": message.guild.name,
       });
@@ -196,6 +205,8 @@ client.on("message", async (message) => {
               const codeIsCorrect =
                 args[0] === foundOne.verificationCodes[i].code;
               if (codeIsCorrect) {
+                foundOne.verificationCodes[i].discordID = message.author.id;
+                foundOne.verificationCodes[i].discordName = message.author.tag;
                 foundOne.verificationCodes[i].code = "";
                 foundOne.markModified("verificationCodes");
                 foundOne.save();
