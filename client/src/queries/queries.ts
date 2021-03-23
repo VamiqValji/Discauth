@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+// EXAMPLE QUERY & MUTATION
+
 const getBooksQuery = gql`
 {
     books {

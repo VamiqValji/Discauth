@@ -1,3 +1,29 @@
-// import { gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-export const placeholder = {};
+export const getAddedServersQuery = gql`
+
+  query ($googleId: ID!){
+    ownerData(googleId: $googleId) {
+          
+      verificationCodes {
+        serverName
+        code
+        discordName
+      }
+    }
+  }
+
+`;
+
+export const getMyServersQuery = gql`
+query ($googleId: ID!){
+    ownerData(googleId: $googleId) {
+      servers {
+        serverName
+        users {
+          name
+        }
+      }
+    }
+  }
+`;

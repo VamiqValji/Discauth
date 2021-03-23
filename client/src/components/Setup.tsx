@@ -1,18 +1,25 @@
 import React, { useRef } from 'react'
 import { useSelector } from "react-redux";
-import { loggedInformation } from "../ts/interface";
+import { loggedInformation, ownerVerificationCodesInformation } from "../ts/interface";
 import { addServerMutation } from "../mutations/ownerMutations";
-import { /*useQuery,*/ useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { getAddedServersQuery } from "../queries/ownerQueries";
 
 interface SetupProps {}
 
 const Setup: React.FC<SetupProps> = (/*{}*/) => {
 
+    
     const serverAddInputRef:any = useRef(null);
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
-
+    
+    const { loading: getAddedServersQueryLoading, error: getAddedServersQueryError, data: getAddedServersQueryData } = useQuery(getAddedServersQuery, {
+        variables: { googleId: loggedInfo.id }
+    });
+    console.log(getAddedServersQueryLoading, getAddedServersQueryError, getAddedServersQueryData);
+    
     const [addServerMutationVar, { loading: mutationLoading, error: mutationError }] = useMutation(addServerMutation, {
-        // refetchQueries: MutationRes => [{query: getBooksQuery}],
+        refetchQueries: MutationRes => [{query: getAddedServersQuery}],
     });
     console.log(mutationError, mutationLoading);
 
@@ -32,6 +39,32 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
         });
     }
 
+    const renderAddedServers = () => {
+
+        if (getAddedServersQueryData) {
+            console.log(getAddedServersQueryData.ownerData.verificationCodes);
+            return getAddedServersQueryData.ownerData.verificationCodes.map((server:ownerVerificationCodesInformation, idx:number) => {
+                // const isVerified = ;
+                console.log(server.serverName);
+                return(
+                <div key={idx}>
+                    <br/>
+                    {
+                        server.code !== "" || server.code !== null ?
+                        (
+                            <>
+                                <h3>{server.serverName}</h3>
+                                {/* <h4>{server.discordName}</h4> */}
+                            </>
+                        ) : (<></>)
+                    }
+                </div>);
+            });
+        } else {
+            return <>dd</>;
+        }
+    }
+
     const renderIfLoggedIn = () => {
         if (loggedInfo.loggedIn) {
             return  (
@@ -47,6 +80,10 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                         <input type="text" id="lname" name="lname" value="Doe"/><br/><br/> */}
                         <input type="submit" value="Add Server"/>
                     </form>
+                    <br/>
+                    <h3>Your Added Servers</h3>
+                    <h5 style={{color:"grey"}}>Once you verify them, they will move to the "My Servers" tab.</h5>
+                    {renderAddedServers()}
                 </>
             );
         }

@@ -45,6 +45,8 @@ const verificationCodeType = new GraphQLObjectType({
     serverId: { type: GraphQLID },
     serverName: { type: GraphQLString },
     code: { type: GraphQLString },
+    discordId: { type: GraphQLString },
+    discordName: { type: GraphQLString },
   }),
 });
 
