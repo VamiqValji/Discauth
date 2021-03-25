@@ -20,6 +20,7 @@ query ($googleId: ID!){
     ownerData(googleId: $googleId) {
       servers {
         serverName
+        ownerVerified
         users {
           name
         }
