@@ -25,8 +25,10 @@ export default function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
+          <div className="nav">
           <nav>
             <ul>
+            <span className="leftNav">
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -39,22 +41,29 @@ export default function App() {
               <li>
                 <Link to="/login">Login</Link>
               </li>
+              </span>
+              <span className="rightNav">{"h"}</span>
             </ul>
           </nav>
-          <Switch>
-            {/* <Route path="/test">
-              <Test />
-            </Route> */}
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          </div>
+          <div className="appContainer">
+            <div className="appContainerContainer">
+              <Switch>
+                {/* <Route path="/test">
+                  <Test />
+                </Route> */}
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Route path="/dashboard">
+                  <Dashboard />
+                </Route>
+                <Route path="/">
+                  <Home />
+                </Route>
+              </Switch>
+            </div>
+          </div>
         </div>
       </Router>
     </ApolloProvider>
