@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let ownersSchema = new Schema({
-  discordID: String,
+  discordId: String,
   discordName: String,
   servers: Array,
   email: String,

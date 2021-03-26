@@ -21,7 +21,7 @@ const UsersType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLID },
-    icon: { type: GraphQLString },
+    avatar: { type: GraphQLString },
     verified: { type: GraphQLBoolean },
     timeOfVerification: { type: GraphQLString },
   }),
@@ -46,7 +46,7 @@ const verificationCodeType = new GraphQLObjectType({
   fields: () => ({
     serverId: { type: GraphQLID },
     serverName: { type: GraphQLString },
-    icon: { type: GraphQLString },
+    avatar: { type: GraphQLString },
     code: { type: GraphQLString },
     discordId: { type: GraphQLString },
     discordName: { type: GraphQLString },
@@ -65,7 +65,7 @@ const OwnerType = new GraphQLObjectType({
       // },
     },
     servers: { type: new GraphQLList(ServerType) },
-    discordID: { type: GraphQLString },
+    discordId: { type: GraphQLString },
     discordName: { type: GraphQLString },
     email: { type: GraphQLString },
     verificationCodes: { type: new GraphQLList(verificationCodeType) },
@@ -97,7 +97,7 @@ const Mutation = new GraphQLObjectType({
       type: OwnerType,
       description: "Add Owner On Website Login",
       args: {
-        discordID: { type: new GraphQLNonNull(GraphQLString) },
+        discordId: { type: new GraphQLNonNull(GraphQLString) },
         discordName: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         googleId: { type: new GraphQLNonNull(GraphQLString) },
@@ -109,7 +109,7 @@ const Mutation = new GraphQLObjectType({
           const isFound = res !== null;
           if (!isFound) {
             let owner = new owners({
-              discordID: args.discordID,
+              discordId: args.discordId,
               discordName: args.discordName,
               email: args.email,
               googleId: args.googleId,
@@ -167,7 +167,7 @@ const Mutation = new GraphQLObjectType({
 });
 
 /* 
-  discordID: String,
+  discordId: String,
   discordName: String,
   servers: Array,
   email: String,

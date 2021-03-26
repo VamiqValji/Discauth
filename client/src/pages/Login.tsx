@@ -26,7 +26,7 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
         console.log(res.profileObj.imageUrl);
         addBook({
             variables: {
-                discordID: "",
+                discordId: "",
                 discordName: "",
                 email: res.profileObj.email, 
                 googleId: res.profileObj.googleId,

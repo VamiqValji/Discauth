@@ -14,6 +14,9 @@ const owners = require("./models/ownersModel");
 
 const { sendEmail } = require("./src/nodeMailer");
 
+const adminModeOn = false;
+// only owner can access
+
 mongoose
   .connect(process.env.DB_CONNECT, {
     useNewUrlParser: true,
@@ -29,6 +32,7 @@ client.on("ready", () => {
 });
 
 client.on("message", async (message) => {
+  if (adminModeOn) return;
   if (message.author.bot) return;
   console.log(`[${message.author.tag}]: ${message.content}`);
   if (message.content.startsWith(PREFIX)) {
@@ -44,7 +48,8 @@ client.on("message", async (message) => {
       const isDuplicate = await users.findOne({
         discordTag: message.author.tag,
       });
-      if (isDuplicate) return message.channel.send(`Email already sent.`);
+      const emailSent = isDuplicate.email !== "temp_args[0]";
+      if (emailSent) return message.channel.send(`Email already sent.`);
       if (message.channel.type !== "dm") {
         // message sent in server
         message.delete();
@@ -56,7 +61,7 @@ client.on("message", async (message) => {
         );
         if (!isDuplicate) {
           let newUser = new users({
-            discordID: message.author.id,
+            discordId: message.author.id,
             discordTag: message.author.tag,
             // serverID: message.guild.id,
             // serverName: message.guild.name,
@@ -98,7 +103,7 @@ client.on("message", async (message) => {
             // if (hasTemporaryEmail) {
             await users.findOneAndUpdate(
               {
-                discordID: message.author.id,
+                discordId: message.author.id,
               },
               {
                 $set: {
@@ -131,7 +136,7 @@ client.on("message", async (message) => {
           "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
         );
       const isDuplicate = await users.findOne({
-        discordID: message.author.id,
+        discordId: message.author.id,
       });
       let isVerified = false;
       for (let i = 0; i < isDuplicate.serversData.length; i++) {
@@ -219,10 +224,12 @@ client.on("message", async (message) => {
               const codeIsCorrect =
                 args[0] === foundOne.verificationCodes[i].code;
               if (codeIsCorrect) {
-                foundOne.verificationCodes[i].discordID = message.author.id;
+                foundOne.verificationCodes[i].discordId = message.author.id;
                 foundOne.verificationCodes[i].discordName = message.author.tag;
                 foundOne.verificationCodes[i].code = "";
-                foundOne.verificationCodes[i].icon = message.author.avatarURL();
+                foundOne.verificationCodes[
+                  i
+                ].avatar = message.author.avatarURL();
                 foundOne.servers.push({
                   serverId: message.guild.id,
                   serverName: message.guild.name,
@@ -233,7 +240,7 @@ client.on("message", async (message) => {
                     {
                       id: message.author.id,
                       name: message.author.tag,
-                      icon: message.author.avatarURL(),
+                      avatar: message.author.avatarURL(),
                       verified: true,
                       timeOfVerification: new Date().toUTCString(),
                     },

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // create schema (like a blueprint)
 let usersSchema = new Schema({
-  discordID: String,
+  discordId: String,
   discordTag: String,
   // serverID: String,
   // serverName: String,

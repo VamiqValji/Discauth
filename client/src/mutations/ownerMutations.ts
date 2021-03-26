@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const addOwnerMutation = gql`
-mutation addOwner($discordID: String!, $discordName: String!, $email: String!, $googleId: String!){
-    addOwner(discordID: $discordID, discordName: $discordName, email: $email, googleId: $googleId) {
+mutation addOwner($discordId: String!, $discordName: String!, $email: String!, $googleId: String!){
+    addOwner(discordId: $discordId, discordName: $discordName, email: $email, googleId: $googleId) {
       googleId
     }
   }
