@@ -9,6 +9,7 @@ export interface ownerServersInformation {
     verificationCode?: string,
     ownerVerified?: boolean,
     users?: object[],
+    icon?: string,
 }
 
 export interface ownerVerificationCodesInformation {

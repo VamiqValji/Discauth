@@ -19,11 +19,11 @@ export const getMyServersQuery = gql`
 query ($googleId: ID!){
     ownerData(googleId: $googleId) {
       servers {
+        serverId
         serverName
+        icon
+        verificationCode
         ownerVerified
-        users {
-          name
-        }
       }
     }
   }

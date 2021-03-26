@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { loggedInformation, ownerServersInformation } from "../ts/interface";
 import { getMyServersQuery } from "../queries/ownerQueries";
 import { useQuery } from '@apollo/client';
+import "./componentStyles/MyServers.css";
 
 interface MyServersProps {}
 
@@ -27,9 +28,13 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                     server.ownerVerified ?
                     (
                         <>
-                            <h3>{server.serverName}</h3>
                             {console.log(`should render ${server.serverName}`)}
-                            {/* <h4>{server.discordName}</h4> */}
+                            <div className="myServerCardContainer">
+                                <h2 className="title">{server.serverName}</h2>
+                                <h3 className="muted subtitle">Server ID: {server.serverId}</h3>
+                                <img className="serverIcon" src={server.icon} alt="Server Icon"/>
+                                <button>View Users</button>
+                            </div>
                         </>
                     ) : (<></>)
                 }
