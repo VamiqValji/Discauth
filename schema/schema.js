@@ -80,7 +80,7 @@ const RootQuery = new GraphQLObjectType({
         googleId: { type: GraphQLID },
       },
       resolve(parent, args) {
-        console.log("root", parent, args);
+        // console.log("root", parent, args);
         return owners.findOne({ googleId: args.googleId });
       },
     },
@@ -130,7 +130,7 @@ const Mutation = new GraphQLObjectType({
         code: { type: GraphQLString },
       },
       resolve(parent, args) {
-        owners.findOne({ googleId: args.googleId }).then((res) => {
+        return owners.findOne({ googleId: args.googleId }).then((res) => {
           const foundServer = _.find(res.verificationCodes, {
             serverName: args.serverName,
           });
@@ -140,8 +140,8 @@ const Mutation = new GraphQLObjectType({
             serverName: args.serverName,
             code: args.code,
           });
-          res.markModified("verificationCodes");
-          return res.save();
+          res.markModified("res.verificationCodes");
+          res.save();
         });
         // return owners.findOneAndUpdate(
         //   { googleId: args.googleId },

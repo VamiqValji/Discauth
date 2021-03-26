@@ -44,7 +44,7 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
             {/* <h1>Login</h1> */}
             <GoogleLogin
                 clientId="189591425875-5kbjefvskjc36qsl9guqcmla5ut759ip.apps.googleusercontent.com"
-                buttonText="Login"
+                buttonText="Login / Sign Up"
                 onSuccess={successResponseGoogle}
                 onFailure={(res:any) => {
                     console.log(res, mutationLoading, mutationError)
