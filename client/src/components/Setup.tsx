@@ -19,7 +19,8 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
     console.log(getAddedServersQueryLoading, getAddedServersQueryError, getAddedServersQueryData);
     
     const [addServerMutationVar, { loading: mutationLoading, error: mutationError }] = useMutation(addServerMutation, {
-        refetchQueries: MutationRes => [{query: getAddedServersQuery}],
+        // awaitRefetchQueries: true,
+        refetchQueries: MutationRes => [{query: getAddedServersQuery, variables:{ googleId: loggedInfo.id }}],
     });
     console.log(mutationError, mutationLoading);
 
@@ -46,11 +47,12 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
             return getAddedServersQueryData.ownerData.verificationCodes.map((server:ownerVerificationCodesInformation, idx:number) => {
                 // const isVerified = ;
                 console.log(server.serverName);
+                const isVerified = server.code === "" || server.code === null;
                 return(
                 <div key={idx}>
                     <br/>
                     {
-                        server.code !== "" || server.code !== null ?
+                        !isVerified ?
                         (
                             <>
                                 <h3>{server.serverName}</h3>
@@ -61,7 +63,7 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                 </div>);
             });
         } else {
-            return <>dd</>;
+            return <>Didn't load correctly.</>;
         }
     }
 

@@ -41,7 +41,7 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
 
     if (!loggedIn) return (
         <>
-            <h1>Login</h1>
+            {/* <h1>Login</h1> */}
             <GoogleLogin
                 clientId="189591425875-5kbjefvskjc36qsl9guqcmla5ut759ip.apps.googleusercontent.com"
                 buttonText="Login"
@@ -58,7 +58,7 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
 
     return (
         <>
-            <h1>Log Out</h1>
+            {/* <h1>Log Out</h1> */}
             <GoogleLogout
                 clientId="189591425875-5kbjefvskjc36qsl9guqcmla5ut759ip.apps.googleusercontent.com"
                 buttonText="Log Out"

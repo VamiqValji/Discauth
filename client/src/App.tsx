@@ -38,31 +38,29 @@ export default function App() {
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/login">Login</Link>
-              </li>
+              </li> */}
               </span>
-              <span className="rightNav">{"h"}</span>
+              <span className="rightNav"><li><Login /></li></span>
             </ul>
           </nav>
           </div>
           <div className="appContainer">
-            <div className="appContainerContainer">
-              <Switch>
-                {/* <Route path="/test">
-                  <Test />
-                </Route> */}
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Route path="/dashboard">
-                  <Dashboard />
-                </Route>
-                <Route path="/">
-                  <Home />
-                </Route>
-              </Switch>
-            </div>
+            <Switch>
+              {/* <Route path="/test">
+                <Test />
+              </Route> */}
+              {/* <Route path="/login">
+                <Login />
+              </Route> */}
+              <Route path="/dashboard">
+                <Dashboard />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
           </div>
         </div>
       </Router>

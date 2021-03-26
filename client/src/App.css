@@ -79,8 +79,5 @@ body a {
 .appContainer {
   margin: 0 auto;
   width: 50vw;
-}
-
-.appContainerContainer {
-  margin-top: 6rem;
+  margin-top: 7rem;
 }
