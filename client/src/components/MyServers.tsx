@@ -33,7 +33,7 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                                 <h2 className="title">{server.serverName}</h2>
                                 <h3 className="muted subtitle">Server ID: {server.serverId}</h3>
                                 <img className="serverIcon" src={server.icon} alt="Server Icon"/>
-                                <button>View Users</button>
+                                <button className="regularBtn">View Users</button>
                             </div>
                         </>
                     ) : (<></>)

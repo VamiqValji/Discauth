@@ -10,6 +10,8 @@
 :root {
   --backgroundColor: #282c34;
   --lightSuccess: rgba(46, 204, 113, 0.85);
+  --primaryColor: #9b59b6;
+  --secondaryColor: #8e44ad;
 }
 
 body {
@@ -86,4 +88,26 @@ body a {
   margin: 0 auto;
   width: 50vw;
   margin-top: 7rem;
+}
+
+.regularBtn,
+.regularBtn:active {
+  border-radius: 1rem;
+  border: 0.1rem solid var(--secondaryColor);
+  font-size: 1rem;
+  padding: 0.8rem;
+  background: var(--primaryColor);
+  color: whitesmoke;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.regularBtn:hover {
+  border: 0.1rem solid var(--primaryColor);
+  background: var(--secondaryColor);
+}
+button {
+  background: black;
+}
+button:active {
+  background: white;
 }
