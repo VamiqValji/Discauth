@@ -63,6 +63,7 @@ client.on("message", async (message) => {
               {
                 id: message.guild.id,
                 name: message.guild.name,
+                pfp: message.author.avatarURL(),
                 verificationCode: verificationCode,
                 verified: false,
                 timeOfRegistration: new Date().toUTCString(),
@@ -163,9 +164,15 @@ client.on("message", async (message) => {
             `You are already verified for the server ${isDuplicate.serversData[i].name}. :white_check_mark:.`
           );
         } else {
-          return message.author.send(
-            "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
-          );
+          const isVerified = isDuplicate.serversData[i].verified;
+          console.log(isVerified);
+          if (isVerified) {
+            return message.author.send("Verified.");
+          } else {
+            return message.author.send(
+              "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
+            );
+          }
         }
       }
     } else if (cmd_name === "clear") {
@@ -174,6 +181,12 @@ client.on("message", async (message) => {
       if (numArg > 0) return message.channel.bulkDelete(numArg);
       return message.channel.bulkDelete(5);
     } else if (cmd_name === "registerServer") {
+      try {
+        console.log(message.guild.iconURL());
+      } catch {
+        return message.channel.send(`Must execute this command in a server.`);
+      }
+
       const isOwner = message.guild.ownerID === message.author.id;
       if (!isOwner)
         return message.channel.send(
@@ -211,12 +224,14 @@ client.on("message", async (message) => {
                 foundOne.servers.push({
                   serverId: message.guild.id,
                   serverName: message.guild.name,
+                  icon: message.guild.iconURL(),
                   verificationCode: "",
                   ownerVerified: true,
                   users: [
                     {
                       id: message.author.id,
                       name: message.author.tag,
+                      icon: message.guild.iconURL(),
                       verified: true,
                       timeOfVerification: new Date().toUTCString(),
                     },
@@ -237,6 +252,15 @@ client.on("message", async (message) => {
             }
           }
         }
+      }
+    } else if (cmd_name === "test") {
+      const isJynqz = message.author.id === "264578444912754698";
+      if (!isJynqz) return message.channel.send(`Must be jynqz to run this!`);
+      console.log(message.author.avatarURL());
+      try {
+        console.log(message.guild.iconURL());
+      } catch {
+        return message.channel.send(`Must be in a server.`);
       }
     }
   }

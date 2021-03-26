@@ -39,6 +39,9 @@ body a {
 .lightSuccess {
   color: var(--lightSuccess);
 }
+.muted {
+  color: grey;
+}
 
 /* SHORTCUTS */
 

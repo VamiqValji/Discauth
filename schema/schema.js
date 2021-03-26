@@ -21,6 +21,7 @@ const UsersType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLID },
+    icon: { type: GraphQLString },
     verified: { type: GraphQLBoolean },
     timeOfVerification: { type: GraphQLString },
   }),
@@ -32,6 +33,7 @@ const ServerType = new GraphQLObjectType({
   fields: () => ({
     serverId: { type: GraphQLID },
     serverName: { type: GraphQLString },
+    icon: { type: GraphQLString },
     verificationCode: { type: GraphQLString },
     ownerVerified: { type: GraphQLBoolean },
     users: { type: new GraphQLList(UsersType) },

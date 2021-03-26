@@ -84,7 +84,7 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                     </form>
                     <br/>
                     <h3>Your Added Servers</h3>
-                    <h5 style={{color:"grey"}}>Once you verify them, they will move to the "My Servers" tab.</h5>
+                    <h5 className="muted">Once you verify them, they will move to the "My Servers" tab.</h5>
                     {renderAddedServers()}
                 </>
             );
