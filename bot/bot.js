@@ -42,8 +42,9 @@ client.on("message", async (message) => {
         Math.random().toString(36).substring(7) +
         Math.random().toString(36).substring(7);
       const isDuplicate = await users.findOne({
-        discordID: message.author.id,
+        discordTag: message.author.tag,
       });
+      if (isDuplicate) return message.channel.send(`Email already sent.`);
       if (message.channel.type !== "dm") {
         // message sent in server
         message.delete();
@@ -132,6 +133,7 @@ client.on("message", async (message) => {
       const isDuplicate = await users.findOne({
         discordID: message.author.id,
       });
+      let isVerified = false;
       for (let i = 0; i < isDuplicate.serversData.length; i++) {
         console.log(isDuplicate.serversData[i]);
         if (
@@ -154,6 +156,7 @@ client.on("message", async (message) => {
             // isDuplicate.delete();
 
             isDuplicate.serversData[i].verified = true;
+            isVerified = true;
             isDuplicate.markModified("serversData");
             await isDuplicate.save();
             return message.author.send(
@@ -164,8 +167,6 @@ client.on("message", async (message) => {
             `You are already verified for the server ${isDuplicate.serversData[i].name}. :white_check_mark:.`
           );
         } else {
-          const isVerified = isDuplicate.serversData[i].verified;
-          console.log(isVerified);
           if (isVerified) {
             return message.author.send("Verified.");
           } else {
@@ -221,6 +222,7 @@ client.on("message", async (message) => {
                 foundOne.verificationCodes[i].discordID = message.author.id;
                 foundOne.verificationCodes[i].discordName = message.author.tag;
                 foundOne.verificationCodes[i].code = "";
+                foundOne.verificationCodes[i].icon = message.author.avatarURL();
                 foundOne.servers.push({
                   serverId: message.guild.id,
                   serverName: message.guild.name,
@@ -231,7 +233,7 @@ client.on("message", async (message) => {
                     {
                       id: message.author.id,
                       name: message.author.tag,
-                      icon: message.guild.iconURL(),
+                      icon: message.author.avatarURL(),
                       verified: true,
                       timeOfVerification: new Date().toUTCString(),
                     },
