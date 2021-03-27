@@ -38,7 +38,11 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                                 <h3 className="muted subtitle">Server ID: {server.serverId}</h3>
                                 <img className="serverIcon" src={server.icon} alt="Server Icon"/>
                                 <button className="btn" onClick={() => {
-                                    setUserSelected(server.serverName);
+                                    setUserSelected({
+                                        serverName: server.serverName,
+                                        serverId: server.serverId,
+                                        serverIcon: server.icon,
+                                    });
                                 }}>View Users</button>
                             </div>
                         </>
@@ -56,9 +60,9 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                 <div className="myServersCardsContainer">
                     {renderIfLoggedIn()}
                 </div>
-                    {userSelected === "" ? (<ViewUsers serverName={"Placeholder Server Name"} serverId={"Select a server first!"} serverIcon={"https://cdn.discordapp.com/icons/765028026802896936/8aafa61cfff7dcda61de2b11bf4b5c49.webp"} isPlaceHolder={true} />) : 
+                    {userSelected === "" ? (<ViewUsers />) : 
                     (<>
-                        <ViewUsers serverName={userSelected} serverId={""} serverIcon={""} isPlaceHolder={false} />
+                        <ViewUsers serverName={userSelected.serverName} serverId={userSelected.serverId} serverIcon={userSelected.serverIcon} isPlaceHolder={false} />
                     </>)
                     }
             </div>
