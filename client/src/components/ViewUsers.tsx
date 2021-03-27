@@ -1,4 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { useSelector } from "react-redux";
+import { loggedInformation } from "../ts/interface";
+import { getMyServersUsersQuery } from "../queries/ownerQueries";
 
 interface ViewUsersProps {
     serverName?: string,
@@ -15,6 +19,16 @@ const ViewUsers: React.FC<ViewUsersProps> = (
         isPlaceHolder=true
     }) => { // ^^default values
     console.log("viewUsersArgs:", {serverName, serverId, serverIcon});
+
+    const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
+
+    const { loading: getQueryLoading, error: getQueryError, data: getQueryData } = useQuery(getMyServersUsersQuery, {
+        variables: { googleId: loggedInfo.id }
+    });
+    console.log(getQueryLoading, getQueryError, getQueryData);
+
+    // console.log(getQueryData.ownerData.servers.users);
+
 
         const renderData = () => { 
             if (isPlaceHolder) {
@@ -46,6 +60,9 @@ const ViewUsers: React.FC<ViewUsersProps> = (
                     {renderData()}
                 </div>
             </div>
+            {[1,2].map((n) => {
+                return <div>{n}</div>
+            })}
         </div>
     </>
     );

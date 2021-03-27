@@ -28,3 +28,20 @@ query ($googleId: ID!){
     }
   }
 `;
+
+export const getMyServersUsersQuery = gql`
+query ($googleId: ID!){
+  ownerData(googleId: $googleId) {
+		servers {
+      serverId
+      users {
+        id
+        name
+        avatar
+        verified
+        timeOfVerification
+      }
+    }
+  }
+}
+`;

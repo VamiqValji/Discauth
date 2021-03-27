@@ -13,7 +13,7 @@
 
 .myServerCardContainer {
   height: 15.5rem;
-  width: 20rem;
+  width: 21rem;
   padding: 1rem;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 1rem;
@@ -36,9 +36,12 @@
   filter: drop-shadow(0rem 0rem 0.1rem black);
 }
 .myServerCardContainer button {
-  transform: translate(0.3rem, -4.5rem);
-  font-size: 1.2rem;
-  font-weight: 500;
+  transform: translate(9.5rem, -6.7rem);
+  font-size: 1rem;
+  font-weight: 600;
+  max-width: 10rem;
+  padding: 0.5rem;
+  overflow-x: hidden;
 }
 
 .viewUsersContainer {

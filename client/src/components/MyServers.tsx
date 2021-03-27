@@ -38,12 +38,14 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                                 <h3 className="muted subtitle">Server ID: {server.serverId}</h3>
                                 <img className="serverIcon" src={server.icon} alt="Server Icon"/>
                                 <button className="btn" onClick={() => {
+                                    const alreadySelected = userSelected.serverName === undefined || userSelected.serverName === server.serverName;
+                                    if (alreadySelected) return;
                                     setUserSelected({
                                         serverName: server.serverName,
                                         serverId: server.serverId,
                                         serverIcon: server.icon,
                                     });
-                                }}>View Users</button>
+                                }}>View Verified Users</button>
                             </div>
                         </>
                     ) : (<></>)
