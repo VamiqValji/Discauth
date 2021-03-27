@@ -87,12 +87,35 @@
   width: 100%;
   /* max-height: 10rem; */
   border-radius: 1rem;
-  background: black;
+  background: rgba(0, 0, 0, 0.5);
+  h2 {
+    padding: 0.8rem;
+    font-weight: 600;
+  }
+  h3,
+  h4,
+  h5 {
+    margin-left: 0.7rem;
+  }
+  h3 {
+    font-weight: 400;
+    &::before {
+      font-weight: 500;
+      content: "User ID: ";
+    }
+  }
+  h4 {
+    font-weight: 500;
+  }
+  h5 {
+    font-weight: 300;
+    padding-bottom: 1rem;
+  }
+  img {
+    float: right;
+    transform: translate(-0.3rem, -8.1rem);
+    width: 115px;
+    height: 115px;
+    // filter: drop-shadow(0rem 0.3rem 0.6rem black);
+  }
 }
-.usersList img {
-  float: right;
-  transform: translate(0rem, -5rem);
-}
-/* .usersList {
-  
-} */
