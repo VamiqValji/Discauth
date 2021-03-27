@@ -8,7 +8,8 @@ export interface ownerServersInformation {
     serverName?: string,
     verificationCode?: string,
     ownerVerified?: boolean,
-    users?: object[],
+    // users?: object[],
+    users?: user,
     icon?: string,
 }
 
@@ -18,4 +19,12 @@ export interface ownerVerificationCodesInformation {
     code?: string,
     discordId?: string,
     discordName?: string,
+}
+
+export interface user {
+    id:string,
+    name:string,
+    avatar:string,
+    verified: boolean,
+    timeOfVerification: string | Date,
 }

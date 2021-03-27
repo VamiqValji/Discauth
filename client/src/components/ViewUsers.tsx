@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from "react-redux";
-import { loggedInformation, ownerServersInformation } from "../ts/interface";
+import { loggedInformation, ownerServersInformation, user } from "../ts/interface";
 import { getMyServersUsersQuery } from "../queries/ownerQueries";
 
 interface ViewUsersProps {
@@ -75,10 +75,14 @@ const ViewUsers: React.FC<ViewUsersProps> = (
                     {renderData()}
                 </div>
             </div>
-            {currentUsersList.map((user:any, idx:number) => {
+            {!isPlaceHolder && currentUsersList.map((user:user, idx:number) => {
                 return (
-                <div key={idx}>
-                    <>{user.toString()}</>
+                <div key={idx} className="usersList">
+                    <h2>{user.name}</h2>
+                    <h3 className="muted">{user.id}</h3>
+                    <h4 style={user.verified ? {color:"green"} : {color:"red"} }>{user.verified ? "Verified!" : "Not Verified."}</h4>
+                    <h5>Verified On: {user.timeOfVerification}</h5>
+                    <img className="userAvatar" src={user.avatar} alt="User Avatar"/>
                 </div>
                 );
             })}

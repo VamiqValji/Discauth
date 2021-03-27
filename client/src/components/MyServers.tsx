@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { loggedInformation, ownerServersInformation } from "../ts/interface";
 import { getMyServersQuery } from "../queries/ownerQueries";
 import { useQuery } from '@apollo/client';
-import "./componentStyles/MyServers.css";
+import "./componentStyles/MyServers.scss";
 import ViewUsers from './ViewUsers';
 // import MyButton from "./MyButton";
 

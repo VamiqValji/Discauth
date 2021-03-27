@@ -81,3 +81,18 @@
 .viewUsersContainer {
   overflow-y: auto;
 }
+
+.usersList {
+  margin-top: 1rem;
+  width: 100%;
+  /* max-height: 10rem; */
+  border-radius: 1rem;
+  background: black;
+}
+.usersList img {
+  float: right;
+  transform: translate(0rem, -5rem);
+}
+/* .usersList {
+  
+} */
