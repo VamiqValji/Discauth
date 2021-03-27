@@ -4,6 +4,7 @@ import { loggedInformation, ownerServersInformation } from "../ts/interface";
 import { getMyServersQuery } from "../queries/ownerQueries";
 import { useQuery } from '@apollo/client';
 import "./componentStyles/MyServers.css";
+// import MyButton from "./MyButton";
 
 interface MyServersProps {}
 
@@ -33,7 +34,7 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                                 <h2 className="title">{server.serverName}</h2>
                                 <h3 className="muted subtitle">Server ID: {server.serverId}</h3>
                                 <img className="serverIcon" src={server.icon} alt="Server Icon"/>
-                                <button className="regularBtn">View Users</button>
+                                <button className="btn">View Users</button>
                             </div>
                         </>
                     ) : (<></>)

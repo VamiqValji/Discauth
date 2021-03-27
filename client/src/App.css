@@ -90,8 +90,7 @@ body a {
   margin-top: 7rem;
 }
 
-.regularBtn,
-.regularBtn:active {
+.btn {
   border-radius: 1rem;
   border: 0.1rem solid var(--secondaryColor);
   font-size: 1rem;
@@ -101,13 +100,16 @@ body a {
   transition: 0.2s;
   cursor: pointer;
 }
-.regularBtn:hover {
+.button.btn:active {
+  border: 0.2rem solid var(--secondaryColor);
+}
+.btn:hover {
   border: 0.1rem solid var(--primaryColor);
   background: var(--secondaryColor);
 }
-button {
+/* button {
   background: black;
 }
 button:active {
   background: white;
-}
+} */
