@@ -11,7 +11,7 @@ interface MyServersProps {}
 
 const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
 
-    const [userSelected, setUserSelected] = useState<string>("");
+    const [userSelected, setUserSelected] = useState<any>("");
 
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
 
@@ -37,7 +37,9 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                                 <h2 className="title">{server.serverName}</h2>
                                 <h3 className="muted subtitle">Server ID: {server.serverId}</h3>
                                 <img className="serverIcon" src={server.icon} alt="Server Icon"/>
-                                <button className="btn">View Users</button>
+                                <button className="btn" onClick={() => {
+                                    setUserSelected(server.serverName);
+                                }}>View Users</button>
                             </div>
                         </>
                     ) : (<></>)
@@ -51,8 +53,14 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
             <br/>
             <h1>My Servers</h1>
             <div className="myServerContainer">
-                {renderIfLoggedIn()}
-                {userSelected === "" ? (<ViewUsers serverName={"Placeholder Server Name"} serverId={"Select a server first!"} serverIcon={"https://cdn.discordapp.com/icons/765028026802896936/8aafa61cfff7dcda61de2b11bf4b5c49.webp"} />) : (<></>)}
+                <div className="myServersCardsContainer">
+                    {renderIfLoggedIn()}
+                </div>
+                    {userSelected === "" ? (<ViewUsers serverName={"Placeholder Server Name"} serverId={"Select a server first!"} serverIcon={"https://cdn.discordapp.com/icons/765028026802896936/8aafa61cfff7dcda61de2b11bf4b5c49.webp"} isPlaceHolder={true} />) : 
+                    (<>
+                        <ViewUsers serverName={userSelected} serverId={""} serverIcon={""} isPlaceHolder={false} />
+                    </>)
+                    }
             </div>
         </>
     );

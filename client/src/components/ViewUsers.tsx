@@ -4,9 +4,11 @@ interface ViewUsersProps {
     serverName: string,
     serverId: string,
     serverIcon: string,
+    isPlaceHolder: boolean,
 }
 
-const ViewUsers: React.FC<ViewUsersProps> = ({serverName, serverId, serverIcon}) => {
+const ViewUsers: React.FC<ViewUsersProps> = ({serverName, serverId, serverIcon, isPlaceHolder}) => {
+    console.log("viewUsersArgs:", {serverName, serverId, serverIcon});
     return (
     <>
         <div className="viewUsersContainer">
