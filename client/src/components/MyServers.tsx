@@ -4,6 +4,7 @@ import { loggedInformation, ownerServersInformation } from "../ts/interface";
 import { getMyServersQuery } from "../queries/ownerQueries";
 import { useQuery } from '@apollo/client';
 import "./componentStyles/MyServers.css";
+import ViewUsers from './ViewUsers';
 // import MyButton from "./MyButton";
 
 interface MyServersProps {}
@@ -45,8 +46,12 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
 
     return (
         <>
+            <br/>
             <h1>My Servers</h1>
-            {renderIfLoggedIn()}
+            <div className="myServerContainer">
+                {renderIfLoggedIn()}
+                <ViewUsers serverName={"placeholder"} serverId={"placeholder"} serverIcon={"https://cdn.discordapp.com/icons/765028026802896936/8aafa61cfff7dcda61de2b11bf4b5c49.webp"} />
+            </div>
         </>
     );
 }
