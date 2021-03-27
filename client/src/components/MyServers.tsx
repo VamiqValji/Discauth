@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import { loggedInformation, ownerServersInformation } from "../ts/interface";
 import { getMyServersQuery } from "../queries/ownerQueries";
@@ -10,6 +10,8 @@ import ViewUsers from './ViewUsers';
 interface MyServersProps {}
 
 const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
+
+    const [userSelected, setUserSelected] = useState<string>("");
 
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
 
@@ -50,7 +52,7 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
             <h1>My Servers</h1>
             <div className="myServerContainer">
                 {renderIfLoggedIn()}
-                <ViewUsers serverName={"placeholder"} serverId={"placeholder"} serverIcon={"https://cdn.discordapp.com/icons/765028026802896936/8aafa61cfff7dcda61de2b11bf4b5c49.webp"} />
+                {userSelected === "" ? (<ViewUsers serverName={"Placeholder Server Name"} serverId={"Select a server first!"} serverIcon={"https://cdn.discordapp.com/icons/765028026802896936/8aafa61cfff7dcda61de2b11bf4b5c49.webp"} />) : (<></>)}
             </div>
         </>
     );
