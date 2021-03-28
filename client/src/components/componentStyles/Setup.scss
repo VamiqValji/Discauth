@@ -1,0 +1,38 @@
+@mixin basicBox {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  display: inline-flex;
+}
+
+.addServersContainer {
+  @include basicBox;
+  margin-top: 1rem;
+  width: 28rem;
+  height: calc(2rem + 20vh);
+  flex-wrap: wrap;
+  overflow-y: auto;
+  justify-content: center;
+}
+
+.addedServerContainer {
+  @include basicBox;
+  padding: 1.3rem;
+  margin: 1rem 1rem 1rem 0rem;
+  width: 8rem;
+  height: 2rem;
+  justify-content: space-evenly;
+  align-items: center;
+  h3 {
+    font-weight: 500;
+  }
+  i {
+    color: var(--primaryColor);
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    transition: 0.1s;
+    border-radius: 1rem;
+    &:hover {
+      color: var(--secondaryColor);
+    }
+  }
+}

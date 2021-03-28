@@ -120,3 +120,16 @@ input[type="submit"]:hover {
 .noBorderLeft {
   border-radius: 0rem 1rem 1rem 0rem;
 }
+
+input[type="text"] {
+  background: rgba(0, 0, 0, 0.4);
+  border: 0.1rem solid var(--primaryColor);
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  margin-left: 0rem;
+  color: whitesmoke;
+  &:focus {
+    border: 0.1rem solid var(--secondaryColor);
+  }
+}

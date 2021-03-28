@@ -4,6 +4,7 @@ import { loggedInformation, ownerVerificationCodesInformation } from "../ts/inte
 import { addServerMutation } from "../mutations/ownerMutations";
 import { useQuery, useMutation } from '@apollo/client';
 import { getAddedServersQuery } from "../queries/ownerQueries";
+import "./componentStyles/Setup.scss";
 
 interface SetupProps {}
 
@@ -54,10 +55,10 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                     {
                         !isVerified ?
                         (
-                            <>
+                            <div className="addedServerContainer">
                                 <h3>{server.serverName}</h3>
-                                {/* <h4>{server.discordName}</h4> */}
-                            </>
+                                <i className="fas fa-trash cursorPointer"></i>
+                            </div>
                         ) : (<></>)
                     }
                 </div>);
@@ -85,7 +86,9 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                     <br/>
                     <h3>Your Added Servers</h3>
                     <h5 className="muted">Once you verify them, they will move to the "My Servers" tab.</h5>
-                    {renderAddedServers()}
+                    <div className="addServersContainer" >
+                        {renderAddedServers()}
+                    </div>
                 </>
             );
         }
