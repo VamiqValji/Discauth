@@ -16,6 +16,11 @@
   justify-content: center;
 }
 
+.muted {
+  font-weight: 300;
+  @include linearGradient;
+}
+
 .addedServerContainer {
   @include basicBox;
   padding: 1.3rem;
@@ -49,10 +54,13 @@
 
 @mixin basicInstructionsBox {
   width: 22rem;
-  background: rgba(0, 0, 0, 0.4);
-  height: 12rem;
+  background: rgba(255, 255, 255, 0.05);
+  // height: 12rem;
+  max-height: 40vh;
   border-radius: 1rem;
   margin-top: 0.5rem;
+  padding: 1rem;
+  overflow-y: auto;
   .title {
     color: var(--primaryColor);
     font-weight: 600;
@@ -60,13 +68,44 @@
   }
 }
 
+.instructionsModalContainer {
+  display: flex;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
 .instructionsContainer {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  margin-left: 0rem;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  .header {
+    display: inline-flex;
+    align-items: center;
+    i {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      font-size: 1.3rem;
+      margin-left: 10rem;
+      padding: 0.3rem;
+    }
+  }
   .ownerInstructions {
     @include basicInstructionsBox;
   }
   .userInstructions {
     @include basicInstructionsBox;
-    margin-left: 1rem;
+    margin-top: 1rem;
   }
 }

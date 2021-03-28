@@ -6,12 +6,12 @@ import { useQuery, useMutation } from '@apollo/client';
 import { getAddedServersQuery } from "../queries/ownerQueries";
 import "./componentStyles/Setup.scss";
 import AddedServer from "./AddedServer";
+import InstructionsModal from "./InstructionsModal";
 
 interface SetupProps {}
 
 const Setup: React.FC<SetupProps> = (/*{}*/) => {
 
-    
     const serverAddInputRef:any = useRef(null);
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
     
@@ -60,39 +60,13 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
         }
     }
 
-    const ownerInstructions = () => {
-        return (
-            <div className="ownerInstructions">
-                <h3 className="title">Owner Instructions</h3>
-                <br/>
-                <p>Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
-                <p>As the owner of a server you would like to connect Discauth to, write `.registerServer` in a channel, then refresh this web page.</p>
-                <p>Now, write `<b>.verifyOwner {"placeHolderCode"}</b>` in a channel, then refresh this web page.</p>
-            </div>
-        );
-    }
-
-    const userInstructions = () => {
-        return (
-            <div className="userInstructions">
-                <h3 className="title">User Instructions</h3>
-                <br/>
-                <p>test</p>
-            </div>
-        );
-    }
-
     const renderIfLoggedIn = () => {
         if (loggedInfo.loggedIn) {
             return  (
                 <>
-                    <br/>
-                    <h2>Instructions</h2>
-                    <div className="instructionsContainer">
-                        {ownerInstructions()}
-                        {userInstructions()}
-                    </div>
+                    <InstructionsModal />
                     <form onSubmit={(e) => addServer(e)}>
+                        <br/>
                         <label htmlFor="ServerName">Server Name:</label><br/>
                         <input ref={serverAddInputRef} type="text" name="serverName" placeholder="Server Name..."/><br/>
                         <input type="submit" value="Add Server"/>
