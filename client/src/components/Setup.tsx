@@ -5,6 +5,7 @@ import { addServerMutation } from "../mutations/ownerMutations";
 import { useQuery, useMutation } from '@apollo/client';
 import { getAddedServersQuery } from "../queries/ownerQueries";
 import "./componentStyles/Setup.scss";
+import AddedServer from "./AddedServer";
 
 interface SetupProps {}
 
@@ -52,15 +53,7 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                 return(
                 <div key={idx}>
                     <br/>
-                    {
-                        !isVerified ?
-                        (
-                            <div className="addedServerContainer">
-                                <h3>{server.serverName}</h3>
-                                <i className="fas fa-trash cursorPointer"></i>
-                            </div>
-                        ) : (<></>)
-                    }
+                    {!isVerified ? <AddedServer serverName={server.serverName} code={server.code} /> : (<></>)}
                 </div>);
             });
         } else {

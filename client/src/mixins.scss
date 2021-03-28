@@ -1,0 +1,19 @@
+@mixin linearGradientTransparent {
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin linearGradient {
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+}
+
+@mixin linearGradient45Deg($color1, $color2) {
+  background-image: linear-gradient(45deg, $color1, $color2);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
