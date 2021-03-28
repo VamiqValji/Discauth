@@ -60,19 +60,41 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
         }
     }
 
+    const ownerInstructions = () => {
+        return (
+            <div className="ownerInstructions">
+                <h3 className="title">Owner Instructions</h3>
+                <br/>
+                <p>Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
+                <p>As the owner of a server you would like to connect Discauth to, write `.registerServer` in a channel, then refresh this web page.</p>
+                <p>Now, write `<b>.verifyOwner {"placeHolderCode"}</b>` in a channel, then refresh this web page.</p>
+            </div>
+        );
+    }
+
+    const userInstructions = () => {
+        return (
+            <div className="userInstructions">
+                <h3 className="title">User Instructions</h3>
+                <br/>
+                <p>test</p>
+            </div>
+        );
+    }
+
     const renderIfLoggedIn = () => {
         if (loggedInfo.loggedIn) {
             return  (
                 <>
+                    <br/>
                     <h2>Instructions</h2>
-                    <p>Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
-                    <p>As the owner of a server you would like to connect Discauth to, write `.registerServer` in a channel, then refresh this web page.</p>
-                    <p>Now, write `<b>.verifyOwner {"placeHolderCode"}</b>` in a channel, then refresh this web page.</p>
+                    <div className="instructionsContainer">
+                        {ownerInstructions()}
+                        {userInstructions()}
+                    </div>
                     <form onSubmit={(e) => addServer(e)}>
                         <label htmlFor="ServerName">Server Name:</label><br/>
                         <input ref={serverAddInputRef} type="text" name="serverName" placeholder="Server Name..."/><br/>
-                        {/* <label htmlFor="lname">Last name:</label><br/>
-                        <input type="text" id="lname" name="lname" value="Doe"/><br/><br/> */}
                         <input type="submit" value="Add Server"/>
                     </form>
                     <br/>
@@ -88,6 +110,7 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
 
     return (
         <>
+            <br/>
             <h1>Setup</h1>
             {renderIfLoggedIn()}
         </>

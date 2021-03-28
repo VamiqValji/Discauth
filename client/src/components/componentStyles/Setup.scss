@@ -46,3 +46,27 @@
     }
   }
 }
+
+@mixin basicInstructionsBox {
+  width: 22rem;
+  background: rgba(0, 0, 0, 0.4);
+  height: 12rem;
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+  .title {
+    color: var(--primaryColor);
+    font-weight: 600;
+    @include linearGradient;
+  }
+}
+
+.instructionsContainer {
+  display: inline-flex;
+  .ownerInstructions {
+    @include basicInstructionsBox;
+  }
+  .userInstructions {
+    @include basicInstructionsBox;
+    margin-left: 1rem;
+  }
+}
