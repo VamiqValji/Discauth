@@ -16,3 +16,11 @@ mutation addServer($googleId: ID!, $serverName: String!, $code: String!) {
   }
 }
 `;
+
+export const deleteServerMutation = gql`
+mutation deleteServer($googleId: String!, $serverName: String!) {
+  deleteServer(googleId: $googleId, serverName: $serverName) {
+		googleId
+  }
+}
+`;

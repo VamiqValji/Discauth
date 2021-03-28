@@ -52,7 +52,6 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                 const isVerified = server.code === "" || server.code === null;
                 return(
                 <div key={idx}>
-                    <br/>
                     {!isVerified ? <AddedServer serverName={server.serverName} code={server.code} /> : (<></>)}
                 </div>);
             });

@@ -31,7 +31,7 @@ const ViewUsers: React.FC<ViewUsersProps> = (
     console.log(getQueryLoading, getQueryError, getQueryData);
 
     useEffect(() => {
-        // set data
+        // set which list of users to map
         if (getQueryData) {
             getQueryData.ownerData.servers.forEach((server:ownerServersInformation) => {
                 console.log("getQueryData MAP", server.serverId);
@@ -42,7 +42,7 @@ const ViewUsers: React.FC<ViewUsersProps> = (
                 }
             });
         }
-    }, [])
+    }, [getQueryData, serverId]);
 
     const renderData = () => { 
         // if (isPlaceHolder) {
