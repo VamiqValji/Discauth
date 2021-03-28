@@ -164,6 +164,28 @@ const Mutation = new GraphQLObjectType({
         // );
       },
     },
+    deleteServer: {
+      type: OwnerType,
+      description: "Deletes server from added servers",
+      args: {
+        googleId: { type: new GraphQLNonNull(GraphQLString) },
+        serverName: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        owners.findOne({ googleId: args.googleId }).then((res) => {
+          res.verificationCodes.map((server) => {
+            const foundServer = server.serverName === args.serverName;
+            if (foundServer) {
+              res.verificationCodes = res.verificationCodes.filter(
+                (s) => s !== server
+              );
+              res.markModified("verificationCodes");
+              return res.save();
+            }
+          });
+        });
+      },
+    },
   },
 });
 
