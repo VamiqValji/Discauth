@@ -24,8 +24,8 @@ const Dashboard: React.FC<DashboardProps> = (/*{}*/) => {
             <br/>
             <h1>Owner Dashboard</h1>
             <br/>
-            <button onClick={updatePanel}>Setup</button>
-            <button onClick={updatePanel}>My Servers</button>
+            <button className="noBorderRight" onClick={updatePanel}>Setup</button>
+            <button className="noBorderLeft" onClick={updatePanel}>My Servers</button>
             <br/>
             {
                 panel === "" || panel === "Setup" ? 

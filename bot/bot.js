@@ -161,6 +161,7 @@ client.on("message", async (message) => {
             // isDuplicate.delete();
 
             isDuplicate.serversData[i].verified = true;
+            isDuplicate.serversData[i].email = isDuplicate.email;
             isVerified = true;
             isDuplicate.markModified("serversData");
             await isDuplicate.save();
@@ -241,6 +242,9 @@ client.on("message", async (message) => {
                       id: message.author.id,
                       name: message.author.tag,
                       avatar: message.author.avatarURL(),
+                      email: await users.findOne({
+                        discordTag: message.author.tag,
+                      }).email,
                       verified: true,
                       timeOfVerification: new Date().toUTCString(),
                     },

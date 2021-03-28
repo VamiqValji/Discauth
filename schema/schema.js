@@ -22,6 +22,7 @@ const UsersType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLID },
     avatar: { type: GraphQLString },
+    email: { type: GraphQLString },
     verified: { type: GraphQLBoolean },
     timeOfVerification: { type: GraphQLString },
   }),
