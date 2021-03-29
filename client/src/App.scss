@@ -58,7 +58,23 @@ nav a {
   color: grey;
 }
 .gradient {
+  color: var(--primaryColor);
   @include linearGradient;
+}
+.command {
+  background: -webkit-linear-gradient(
+    rgba(238, 238, 238, 0.1),
+    rgba(51, 51, 51, 0.1)
+  );
+  color: var(--primaryColor);
+  transition: 0.5s;
+  &:hover {
+    background: -webkit-linear-gradient(
+      rgba(238, 238, 238, 0.15),
+      rgba(51, 51, 51, 0.15)
+    );
+    color: var(--secondaryColor);
+  }
 }
 
 /* SHORTCUTS */
