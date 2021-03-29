@@ -20,9 +20,9 @@ const InstructionsModal: React.FC<InstructionsModalProps> = (/*{}*/) => {
                     <h3 className="title">Server Owner Instructions</h3>
                     <br/>
                     <p>1. Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
-                    <p>2. As the owner of a server you would like to connect Discauth to, write `.registerServer` in a channel, then refresh this web page.</p>
-                    <p>3. Add your server below! Use the given code from adding your server, in the next step!</p>
-                    <p>4. Now, write <span className="command">.verifyOwner <b>{"givenCode"}</b></span> in any channel of that server, then refresh this web page.</p>
+                    {/* <p>2. As the owner of a server you would like to connect Discauth to, write <span className="command">.registerServer</span> in a channel, then refresh this web page.</p> */}
+                    <p>2. Add your server below! Use the given code from adding your server, in the next step!</p>
+                    <p>3. Now, write <span className="command">.registerServer <b>{"givenCode"}</b></span> in any channel of that server, then refresh this web page.</p>
                     <br/>
                     <p className="gradient">If you did everything right, your added server should be gone from the list below, and should be able to be seen in the "My Servers" tab found above. This means that your server has been verified. <i className="fas fa-check"></i></p>
                 </div>

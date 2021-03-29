@@ -46,6 +46,9 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
 
         if (getAddedServersQueryData) {
             console.log(getAddedServersQueryData.ownerData.verificationCodes);
+            if (getAddedServersQueryData.ownerData.verificationCodes.length < 1) return (
+                <p className="tip gradient">First, add some servers using the above instructions.</p>);
+                
             return getAddedServersQueryData.ownerData.verificationCodes.map((server:ownerVerificationCodesInformation, idx:number) => {
                 // const isVerified = ;
                 console.log(server.serverName);

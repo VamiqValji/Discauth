@@ -23,6 +23,8 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
     const renderIfLoggedIn = () => {
 
         if (!getMyServersQueryData) return <>Didn't load correctly.</>;
+        if (getMyServersQueryData.ownerData.servers.length < 1) return (
+        <p className="tip gradient">Add some servers with the "Setup" tab first.</p>);
 
         return getMyServersQueryData.ownerData.servers.map((server:ownerServersInformation, idx:number) => {
             return(
