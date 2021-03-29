@@ -16,7 +16,7 @@ const InstructionsModal: React.FC<InstructionsModalProps> = (/*{}*/) => {
                     <h2>Instructions</h2>
                     <i className="fas fa-times cursorPointer" onClick={() => setInstructionsModalIsOn(!instructionsModalIsOn)}></i>
                 </div>
-                <div className="ownerInstructions">
+                <div className="ownerInstructions customScrollbarLight">
                     <h3 className="title">Server Owner Instructions</h3>
                     <br/>
                     <p>1. Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
@@ -26,7 +26,7 @@ const InstructionsModal: React.FC<InstructionsModalProps> = (/*{}*/) => {
                     <br/>
                     <p className="gradient">If you did everything right, your added server should be gone from the list below, and should be able to be seen in the "My Servers" tab found above. This means that your server has been verified. <i className="fas fa-check"></i></p>
                 </div>
-                <div className="userInstructions">
+                <div className="userInstructions customScrollbarLight">
                     <h3 className="title">User Instructions</h3>
                     <br/>
                     <p>It is recommended to paste the following in a certain Discord channel on your server, so that users understand how to get setup.</p>
@@ -35,7 +35,7 @@ const InstructionsModal: React.FC<InstructionsModalProps> = (/*{}*/) => {
                     <p>2. Then reply to the bot's DM with <span className="command">.register <b>YOUR_EMAIL_HERE</b></span>.</p>
                     <p>3. Check your the code emailed to you. Write <span className="command">.verify <b>CODE_FROM_EMAIL_HERE</b></span> in a channel on that server.</p>
                     <br/>
-                    <p className="gradient">Nice, you're now verified on that server!<i className="fas fa-check"></i></p>
+                    <p className="gradient">Nice, you're now verified on that server! <i className="fas fa-check"></i></p>
                 </div>
             </div>
         </div>}

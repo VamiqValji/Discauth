@@ -53,10 +53,11 @@
 }
 
 @mixin basicInstructionsBox {
-  width: 22rem;
+  // width: 30rem;
+  width: 50vw;
   background: rgba(255, 255, 255, 0.05);
   // height: 12rem;
-  max-height: 40vh;
+  max-height: 30vh;
   border-radius: 1rem;
   margin-top: 0.5rem;
   padding: 1rem;
@@ -93,11 +94,12 @@
   .header {
     display: inline-flex;
     align-items: center;
+    justify-content: space-between;
     i {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 1rem;
       font-size: 1.3rem;
-      margin-left: 10rem;
+      // margin-left: 18rem;
       padding: 0.3rem;
     }
   }
