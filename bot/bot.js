@@ -217,13 +217,15 @@ client.on("message", async (message) => {
             owners
               .findOne({ "servers.serverId": res.serverId })
               .then((result) => {
+                if (!result)
+                  return message.author.send(`Couldn't find server. ERR #6.`);
                 result.servers.forEach((server) => {
                   const foundServer = server.serverId === res.serverId;
                   const sameUserVerifyingAsOneWhoRegistered =
                     res.discordId === message.author.id;
                   if (foundServer && sameUserVerifyingAsOneWhoRegistered) {
                     server.users.push(newUser);
-                    result.markModified("servers.users");
+                    result.markModified("servers");
                     result.save();
                     res.delete();
                     return message.author.send(
