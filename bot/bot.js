@@ -45,7 +45,7 @@ client.on("message", async (message) => {
       const verificationCode =
         Math.random().toString(36).substring(7) +
         Math.random().toString(36).substring(7);
-      console.log(verificationCode);
+      // console.log("registration verificationcode", verificationCode);
       const isDuplicate = await users.findOne({
         discordTag: message.author.tag,
       });
@@ -53,7 +53,8 @@ client.on("message", async (message) => {
         try {
           const emailSent =
             isDuplicate.email !== null && isDuplicate.email !== "temp_args[0]";
-          if (emailSent) return message.channel.send(`Email already sent.`);
+          message.delete();
+          if (emailSent) return message.author.send(`Email already sent.`);
         } catch {
           return message.channel.send(`Error #1. Ask jynqz.`);
         }
@@ -68,6 +69,7 @@ client.on("message", async (message) => {
           `USER ID: ${message.author.id}, \nUSER TAG: ${message.author.tag}, \nARGS: ${args[0]}, \nSERVER ID: ${message.guild.id}, \nSERVER NAME: ${message.guild.name}, \nVERIFICATION CODE: ${verificationCode}`
         );
         if (!isDuplicate) {
+          // console.log("BEFORE AFTER ADDING TO SERVERDATA", verificationCode);
           let newUser = new users({
             discordId: message.author.id,
             discordTag: message.author.tag,
@@ -97,6 +99,24 @@ client.on("message", async (message) => {
             .catch((err) => {
               return message.author.send("Error #2. Ask jynqz.");
             });
+        } else {
+          try {
+            let isRealEmail = args[0].length > 4;
+          } catch {
+            return message.author.send(
+              "Pass in a real email. Example: '.register `YourEmail@example.com`'"
+            );
+          }
+          await users.findOneAndUpdate(
+            {
+              discordId: message.author.id,
+            },
+            {
+              $set: {
+                email: args[0],
+              },
+            }
+          );
         }
       } else {
         // message sent to bot in dm
@@ -113,21 +133,44 @@ client.on("message", async (message) => {
         if (isRealEmail) {
           if (isDuplicate) {
             // if (hasTemporaryEmail) {
-            await users.findOneAndUpdate(
-              {
-                discordId: message.author.id,
-              },
-              {
-                $set: {
-                  email: args[0],
-                },
-              }
-            );
+            // await users.findOneAndUpdate(
+            //   {
+            //     discordId: message.author.id,
+            //   },
+            //   {
+            //     $set: {
+            //       email: args[0],
+            //     },
+            //   }
+            // );
+
+            // let verifCode = "";
+
+            // users.findOne({ discordId: message.author.id }).then((res) => {
+            //   if (!res)
+            //     return console.log(
+            //       ".findOne({ discordId: message.author.id }) = NONE"
+            //     );
+            //   res.email = args[0];
+            //   res.serversData.forEach((server) => {
+            //     const foundServer = server.id === message.guild.id;
+            //     if (foundServer) {
+            //       verifCode = server.verificationCode;
+            //     }
+            //   });
+            //   res.save();
+            // });
+
             // }
 
             // send email
 
-            console.log("serverdata", verificationCode);
+            // console.log(
+            //   "serverdata - user trying to get verified on email sending stage:",
+            //   verificationCode
+            // );
+
+            // if (verifCode)
             sendEmail(args[0], verificationCode, isDuplicate.serverName);
 
             return message.author.send(
