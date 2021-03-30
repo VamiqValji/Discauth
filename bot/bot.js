@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const users = require("./models/usersModel");
 const owners = require("./models/ownersModel");
 // const servers = require("./models/serversModel");
+const verificationCodes = require("./models/verificationCodesModel");
 
 const { sendEmail } = require("./src/nodeMailer");
 
@@ -99,25 +100,26 @@ client.on("message", async (message) => {
             .catch((err) => {
               return message.author.send("Error #2. Ask jynqz.");
             });
-        } else {
-          try {
-            let isRealEmail = args[0].length > 4;
-          } catch {
-            return message.author.send(
-              "Pass in a real email. Example: '.register `YourEmail@example.com`'"
-            );
-          }
-          await users.findOneAndUpdate(
-            {
-              discordId: message.author.id,
-            },
-            {
-              $set: {
-                email: args[0],
-              },
-            }
-          );
         }
+        // else {
+        //   try {
+        //     let isRealEmail = args[0].length > 4;
+        //   } catch {
+        //     return message.author.send(
+        //       "Pass in a real email. Example: '.register `YourEmail@example.com`'"
+        //     );
+        //   }
+        //   await users.findOneAndUpdate(
+        //     {
+        //       discordId: message.author.id,
+        //     },
+        //     {
+        //       $set: {
+        //         email: args[0],
+        //       },
+        //     }
+        //   );
+        // }
       } else {
         // message sent to bot in dm
         let isRealEmail;
@@ -171,6 +173,16 @@ client.on("message", async (message) => {
             // );
 
             // if (verifCode)
+
+            let newVerificationCode = new verificationCodes({
+              discordId: message.author.id,
+              discordTag: message.author.tag,
+              email: args[0],
+              verificationCode: verificationCode,
+            });
+
+            await newVerificationCode.save();
+
             sendEmail(args[0], verificationCode, isDuplicate.serverName);
 
             return message.author.send(
@@ -206,37 +218,37 @@ client.on("message", async (message) => {
         discordId: message.author.id,
       });
       let isVerified = false;
+
+      let response;
+      verificationCodes
+        .findOne({ verificationCode: userInputtedVerificationCode })
+        .then((res) => {
+          if (!res)
+            return message.author.send(
+              "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
+            );
+          response = res;
+          console.log(res);
+          res.delete();
+        });
+      console.log("RESPONSE", response);
       for (let i = 0; i < isDuplicate.serversData.length; i++) {
         // console.log(isDuplicate.serversData[i]);
-        if (
-          isDuplicate.serversData[i].verificationCode ===
-          userInputtedVerificationCode
-        ) {
-          // server.verified = true;
+        if (response.verificationCode === userInputtedVerificationCode) {
+          server.verified = true;
+
           const isVerifiedOnDB = isDuplicate.serversData[i].verified;
           if (isVerifiedOnDB)
             return message.author.send(
               `Already verified for the server '${isDuplicate.serversData[i].name}'. :white_check_mark:`
             );
+
           if (!isVerifiedOnDB) {
-            // let server = new servers({
-            //   id: "",
-            //   name: "",
-            //   users: "",
-            //   owner: "",
-            //   ownerEmail: "",
-            // });
-
-            // await server.save();
-
-            // isDuplicate.delete();
-
             isDuplicate.serversData[i].verified = true;
             isDuplicate.serversData[i].email = isDuplicate.email;
             isVerified = true;
             isDuplicate.markModified("serversData");
             await isDuplicate.save();
-            // ADD HERE
             return message.author.send(
               `You verified for the server ${isDuplicate.serversData[i].name}. :white_check_mark:.`
             );
@@ -244,15 +256,16 @@ client.on("message", async (message) => {
           return message.author.send(
             `You are already verified for the server ${isDuplicate.serversData[i].name}. :white_check_mark:.`
           );
-        } else {
-          if (isVerified) {
-            return message.author.send("Verified.");
-          } else {
-            return message.author.send(
-              "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
-            );
-          }
         }
+
+        // else {
+        //   if (isVerified) {
+        //     return message.author.send("Verified.");
+        //   } else {
+        //     return message.author.send(
+        //       "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
+        //     );
+        //   }
       }
     } else if (cmd_name === "clear") {
       const numArg = parseInt(args[0]);
