@@ -54,9 +54,17 @@ client.on("message", async (message) => {
         try {
           const emailSent =
             isDuplicate.email !== null && isDuplicate.email !== "temp_args[0]";
-          if (emailSent) return message.channel.send(`Email already sent.`);
+          if (emailSent) {
+            isDuplicate.serversData.forEach((server) => {
+              if (server.id === message.guild.id) {
+                return message.channel.send(`Email already sent.`);
+              }
+            });
+          }
         } catch {
-          return message.channel.send(`Error #1.`);
+          return message.channel.send(
+            `Error #1. Maybe try in server (not if you are passing in your email)?`
+          );
         }
       }
       const messageInServer = message.channel.type !== "dm";
@@ -162,15 +170,16 @@ client.on("message", async (message) => {
             verificationCodes
               .findOne({ discordId: message.author.id })
               .then((res) => {
-                if (res)
+                if (res) {
                   sendEmail(
                     args[0],
                     res.verificationCode,
                     isDuplicate.serverName
                   );
-                return message.author.send(
-                  "Already registered. Next step: '.verify `VerificationCodeFromEmail`'? Check your email for the code."
-                );
+                  return message.author.send(
+                    "Already registered. Next step: '.verify `VerificationCodeFromEmail`'? Check your email for the code."
+                  );
+                }
               });
             // return message.author.send("Error #3. Ask dev.");
           } else {
@@ -224,10 +233,41 @@ client.on("message", async (message) => {
                   const sameUserVerifyingAsOneWhoRegistered =
                     res.discordId === message.author.id;
                   if (foundServer && sameUserVerifyingAsOneWhoRegistered) {
+                    // if already in the server they are looking to register to,
+                    // don't let them register again.
+                    result.servers.forEach((server) => {
+                      const foundOwnerServer = server.serverId === res.serverId;
+                      if (foundOwnerServer) {
+                        server.users.forEach((user) => {
+                          if (user.id === message.author.id) {
+                            return message.author.send("Already registered.");
+                          }
+                        });
+                      }
+                    });
+                    //
+
                     server.users.push(newUser);
                     result.markModified("servers");
                     result.save();
                     res.delete();
+
+                    users
+                      .findOne({ discordId: message.author.id })
+                      .then((usersRes) => {
+                        if (!usersRes) return;
+                        usersRes.serversData.forEach((server) => {
+                          const foundUserServer = server.id === res.serverId;
+                          if (foundUserServer) {
+                            usersRes.serversData = usersRes.serversData.filter(
+                              (s) => s !== server
+                            );
+                            usersRes.markModified("serversData");
+                            usersRes.save();
+                          }
+                        });
+                      });
+
                     return message.author.send(
                       `Verified for ${res.serverName} :white_check_mark:.`
                     );
@@ -373,6 +413,13 @@ client.on("message", async (message) => {
           }
         }
       }
+    } else if (cmd_name === "clearCurrentRegistration") {
+      verificationCodes
+        .findOne({ discordId: message.author.id })
+        .then((res) => {
+          if (res) res.delete();
+        });
+      return message.channel.send(`Cleared registration.`);
     } else if (cmd_name === "test") {
       const isDev = message.author.id === "264578444912754698";
       // if (!isDev) return message.channel.send(`Must be DEV_OWNER to run this!`);
