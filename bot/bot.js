@@ -45,11 +45,19 @@ client.on("message", async (message) => {
       const verificationCode =
         Math.random().toString(36).substring(7) +
         Math.random().toString(36).substring(7);
+      console.log(verificationCode);
       const isDuplicate = await users.findOne({
         discordTag: message.author.tag,
       });
-      const emailSent = isDuplicate.email !== "temp_args[0]";
-      if (emailSent) return message.channel.send(`Email already sent.`);
+      if (isDuplicate) {
+        try {
+          const emailSent =
+            isDuplicate.email !== null && isDuplicate.email !== "temp_args[0]";
+          if (emailSent) return message.channel.send(`Email already sent.`);
+        } catch {
+          return message.channel.send(`Error #1. Ask jynqz.`);
+        }
+      }
       if (message.channel.type !== "dm") {
         // message sent in server
         message.delete();
@@ -78,13 +86,17 @@ client.on("message", async (message) => {
             email: "temp_args[0]",
           });
 
-          newUser.save().then((res) => {
-            if (res._id) return; // saved to db
-            // return message.author.send(
-            //   "Check your email! Follow those instructions."
-            // );
-            return message.author.send("Error.");
-          });
+          newUser
+            .save()
+            .then((res) => {
+              if (res._id) return; // saved to db
+              // return message.author.send(
+              //   "Check your email! Follow those instructions."
+              // );
+            })
+            .catch((err) => {
+              return message.author.send("Error #2. Ask jynqz.");
+            });
         }
       } else {
         // message sent to bot in dm
@@ -115,10 +127,11 @@ client.on("message", async (message) => {
 
             // send email
 
+            console.log("serverdata", verificationCode);
             sendEmail(args[0], verificationCode, isDuplicate.serverName);
 
             return message.author.send(
-              "Already registered. Did you mean '.verify `VerificationCodeFromEmail`'? Check your email for the code."
+              "Already registered. Next step: '.verify `VerificationCodeFromEmail`'? Check your email for the code."
             );
           } else {
             return message.author.send("Start by registering in a server.");
@@ -131,23 +144,38 @@ client.on("message", async (message) => {
       }
     } else if (cmd_name === "verify") {
       const userInputtedVerificationCode = args[0];
-      if (userInputtedVerificationCode.length < 7)
+      try {
+        if (
+          userInputtedVerificationCode.length === undefined ||
+          userInputtedVerificationCode.length < 7
+        ) {
+          return message.author.send(
+            "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
+          );
+        }
+      } catch {
         return message.author.send(
           "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
         );
+      }
+
       const isDuplicate = await users.findOne({
         discordId: message.author.id,
       });
       let isVerified = false;
       for (let i = 0; i < isDuplicate.serversData.length; i++) {
-        console.log(isDuplicate.serversData[i]);
+        // console.log(isDuplicate.serversData[i]);
         if (
           isDuplicate.serversData[i].verificationCode ===
           userInputtedVerificationCode
         ) {
           // server.verified = true;
-
-          if (isDuplicate.serversData[i].verified === false) {
+          const isVerifiedOnDB = isDuplicate.serversData[i].verified;
+          if (isVerifiedOnDB)
+            return message.author.send(
+              `Already verified for the server '${isDuplicate.serversData[i].name}'. :white_check_mark:`
+            );
+          if (!isVerifiedOnDB) {
             // let server = new servers({
             //   id: "",
             //   name: "",
@@ -165,6 +193,7 @@ client.on("message", async (message) => {
             isVerified = true;
             isDuplicate.markModified("serversData");
             await isDuplicate.save();
+            // ADD HERE
             return message.author.send(
               `You verified for the server ${isDuplicate.serversData[i].name}. :white_check_mark:.`
             );
@@ -242,9 +271,7 @@ client.on("message", async (message) => {
                       id: message.author.id,
                       name: message.author.tag,
                       avatar: message.author.avatarURL(),
-                      email: await users.findOne({
-                        discordTag: message.author.tag,
-                      }).email,
+                      email: foundOne.email,
                       verified: true,
                       timeOfVerification: new Date().toUTCString(),
                     },
@@ -268,10 +295,57 @@ client.on("message", async (message) => {
       }
     } else if (cmd_name === "test") {
       const isJynqz = message.author.id === "264578444912754698";
-      if (!isJynqz) return message.channel.send(`Must be jynqz to run this!`);
-      console.log(message.author.avatarURL());
+      // if (!isJynqz) return message.channel.send(`Must be jynqz to run this!`);
       try {
-        console.log(message.guild.iconURL());
+        const res = await owners.findOne({
+          "servers.serverId": message.guild.id,
+        });
+        if (res) {
+          res.servers.forEach(async (server) => {
+            const foundServerById = server.serverId === message.guild.id;
+            if (foundServerById) {
+              const serverIsVerified = server.ownerVerified;
+              if (serverIsVerified) {
+                let userAlreadyExists = false;
+                server.users.forEach((user) => {
+                  if (user.id === message.author.id) userAlreadyExists = true;
+                });
+
+                if (userAlreadyExists)
+                  return message.channel.send(
+                    "User already exists in this server's instance."
+                  );
+                if (!userAlreadyExists) {
+                  const foundEmail = await users.findOne({
+                    discordId: message.author.id,
+                  });
+                  if (!foundEmail)
+                    return message.channel.send(
+                      "Couldn't find user's registration."
+                    );
+                  if (foundEmail) {
+                    let newUser = {
+                      id: message.author.id,
+                      name: message.author.tag,
+                      avatar: message.author.avatarURL(),
+                      email: foundEmail.email,
+                      verified: true,
+                      timeOfVerification: new Date().toUTCString(),
+                    };
+                    server.users.push(newUser);
+                    console.log(newUser);
+                    res.markModified("servers.users");
+                    res.save();
+                  }
+                }
+              } else {
+                return message.channel.send(
+                  "Ask the owner to verify this server first."
+                );
+              }
+            }
+          });
+        }
       } catch {
         return message.channel.send(`Must be in a server.`);
       }

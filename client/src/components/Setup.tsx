@@ -69,10 +69,10 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                 <>
                     <InstructionsModal />
                     <form onSubmit={(e) => addServer(e)}>
-                        <br/>
+                        <br/><br/>
                         <label htmlFor="ServerName">Server Name:</label><br/>
-                        <input ref={serverAddInputRef} type="text" name="serverName" placeholder="Server Name..."/><br/>
-                        <input type="submit" value="Add Server"/>
+                        <input ref={serverAddInputRef} type="text" name="serverName" placeholder="Server Name..."/>
+                        <input type="submit" style={{padding: 8}} value="Add Server"/>
                     </form>
                     <br/>
                     <h3>Your Added Servers</h3>
