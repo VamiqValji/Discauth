@@ -79,6 +79,17 @@ client.on("message", async (message) => {
         );
         // const noSpacedDiscordServerName = message.guild.name.replace(" ", "");
         // const newVerificationCode = `${noSpacedDiscordServerName}:${verificationCode}`;
+
+        // let isADuplicateServerRegistration = false;
+        // if (isDuplicate.serversData) {
+        //   isDuplicate.serversData.forEach((server) => {
+        //     if (!server) return;
+        //     if (server.id === message.guild.id) {
+        //       isADuplicateServerRegistration = true;
+        //     }
+        //   });
+        // }
+
         console.log("NEW VERIF CODE", verificationCode);
         if (!isDuplicate) {
           let newUser = new users({
@@ -235,11 +246,15 @@ client.on("message", async (message) => {
                   if (foundServer && sameUserVerifyingAsOneWhoRegistered) {
                     // if already in the server they are looking to register to,
                     // don't let them register again.
+                    let alreadyRegistered = false;
                     result.servers.forEach((server) => {
                       const foundOwnerServer = server.serverId === res.serverId;
                       if (foundOwnerServer) {
                         server.users.forEach((user) => {
-                          if (user.id === message.author.id) {
+                          const foundUserInServer =
+                            user.id === message.author.id;
+                          if (foundUserInServer) {
+                            alreadyRegistered = true;
                             return message.author.send("Already registered.");
                           }
                         });
@@ -247,7 +262,9 @@ client.on("message", async (message) => {
                     });
                     //
 
-                    server.users.push(newUser);
+                    if (!alreadyRegistered) {
+                      server.users.push(newUser);
+                    }
                     result.markModified("servers");
                     result.save();
                     res.delete();
@@ -262,8 +279,9 @@ client.on("message", async (message) => {
                             usersRes.serversData = usersRes.serversData.filter(
                               (s) => s !== server
                             );
-                            usersRes.markModified("serversData");
-                            usersRes.save();
+                            // usersRes.markModified("serversData");
+                            // usersRes.save();
+                            // ^^^REMOVE USER SERVER DATA ON THEIR PROFILE, ON VERIFICATION
                           }
                         });
                       });
@@ -362,12 +380,15 @@ client.on("message", async (message) => {
         // );
 
         for (let i = 0; i < foundOne.verificationCodes.length; i++) {
+          if (foundOne.verificationCodes[i].serverName !== message.guild.name)
+            return;
           const serverIsRegistered =
             foundOne.verificationCodes[i].code === "" ||
             foundOne.verificationCodes[i].code === null;
           if (serverIsRegistered) {
             return message.channel.send(`This server is already registered.`);
-          } else {
+          }
+          if (!serverIsRegistered) {
             const serverNameMatches =
               foundOne.verificationCodes[i].serverName === message.guild.name;
             if (serverNameMatches) {
@@ -414,11 +435,11 @@ client.on("message", async (message) => {
         }
       }
     } else if (cmd_name === "clearCurrentRegistration") {
-      verificationCodes
-        .findOne({ discordId: message.author.id })
-        .then((res) => {
-          if (res) res.delete();
-        });
+      verificationCodes.deleteMany({ discordId: message.author.id });
+      // users.deleteMany({ discordId: message.author.id });
+      // .then((res) => {
+      //   if (res) res.deleteMany();
+      // });
       return message.channel.send(`Cleared registration.`);
     } else if (cmd_name === "test") {
       const isDev = message.author.id === "264578444912754698";
