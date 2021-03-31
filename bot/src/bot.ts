@@ -6,8 +6,9 @@ const client = new Client({
 });
 const PREFIX = ".";
 
-const verificationCodes = require("../models/verificationCodesModel");
-const { verifCodesSchema } = require("./utils/interface");
+import verificationCodes from "./models/verificationCodesModel";
+import owners from "./models/ownersModel";
+import {verifCodesSchema} from "./utils/interface";
 
 client.on("ready", () => {
   console.log(`${client.user.tag} has logged in.`);
@@ -34,9 +35,9 @@ client.on("message", async (message:any) => {
         discordTag: message.author.tag,
       });
 
-      isDuplicates.map((user:verifCodesSchema) => {
-
-      });
+      // isDuplicates.map((user:verifCodesSchema) => {
+      //   if (user.)
+      // });
 
       if (!isDM /*&& !isDuplicates*/) {
         message.delete();
