@@ -15,7 +15,7 @@ const owners = require("./models/ownersModel");
 const verificationCodes = require("./models/verificationCodesModel");
 // const servers = require("./models/serversModel");
 
-const { sendEmail } = require("./src/nodeMailer");
+const { sendEmail } = require("./nodeMailer");
 
 const adminModeOn = false;
 // only owner can access

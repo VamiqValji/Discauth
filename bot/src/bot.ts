@@ -1,4 +1,5 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const { Client } = require("discord.js");
 const client = new Client({
@@ -8,7 +9,7 @@ const PREFIX = ".";
 
 import verificationCodes from "./models/verificationCodesModel";
 import owners from "./models/ownersModel";
-import {verifCodesSchema} from "./utils/interface";
+import { verifCodesSchema } from "./utils/interface";
 
 client.on("ready", () => {
   console.log(`${client.user.tag} has logged in.`);
@@ -35,11 +36,7 @@ client.on("message", async (message:any) => {
         discordTag: message.author.tag,
       });
 
-      // isDuplicates.map((user:verifCodesSchema) => {
-      //   if (user.)
-      // });
-
-      if (!isDM /*&& !isDuplicates*/) {
+      if (!isDM) {
         message.delete();
         message.author.send(
           "DM me '.register `YourEmail@example.com`' to start/continue the verification process."
@@ -57,9 +54,6 @@ client.on("message", async (message:any) => {
         });
         await verif.save();
       }
-      // if (isDuplicates && isDM) {
-
-      // }
     } else if (cmd_name === "clear") {
       const numArg = parseInt(args[0]);
       if (numArg > 0) return message.channel.bulkDelete(numArg);
