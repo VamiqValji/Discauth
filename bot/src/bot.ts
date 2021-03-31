@@ -6,11 +6,14 @@ const client = new Client({
 });
 const PREFIX = ".";
 
+const verificationCodes = require("../models/verificationCodesModel");
+const { verifCodesSchema } = require("./utils/interface");
+
 client.on("ready", () => {
   console.log(`${client.user.tag} has logged in.`);
 });
 
-client.on("message", (message:any) => {
+client.on("message", async (message:any) => {
   if (message.author.bot) return;
   console.log(`[${message.author.tag}]: ${message.content}`);
   if (message.content.startsWith(PREFIX)) {
@@ -19,11 +22,45 @@ client.on("message", (message:any) => {
       .substring(PREFIX.length)
       // .split(" ");
       .split(/\s+/);
+
+    const isDM = message.channel.type === "dm";
+
+    const verificationCode =
+    Math.random().toString(36).substring(7) +
+    Math.random().toString(36).substring(7);
+
     if (cmd_name === "register") {
-      message.channel.send("test");
+      const isDuplicates = await verificationCodes.find({
+        discordTag: message.author.tag,
+      });
+
+      isDuplicates.map((user:verifCodesSchema) => {
+
+      });
+
+      if (!isDM /*&& !isDuplicates*/) {
+        message.delete();
+        message.author.send(
+          "DM me '.register `YourEmail@example.com`' to start/continue the verification process."
+        );
+
+        let verif = new verificationCodes({
+          discordId: message.author.id,
+          discordTag: message.author.tag,
+          email: "",
+          avatar: message.author.displayAvatarURL(),
+          serverId: message.guild.id,
+          serverName: message.guild.name,
+          verificationCode: verificationCode,
+          time: new Date().toUTCString(),
+        });
+        await verif.save();
+      }
+      // if (isDuplicates && isDM) {
+
+      // }
     } else if (cmd_name === "clear") {
       const numArg = parseInt(args[0]);
-      //   console.log(numArg);
       if (numArg > 0) return message.channel.bulkDelete(numArg);
       return message.channel.bulkDelete(5);
     }
