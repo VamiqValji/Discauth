@@ -20,7 +20,12 @@ client.on("message", (message:any) => {
       // .split(" ");
       .split(/\s+/);
     if (cmd_name === "register") {
-    //   message.channel.send("test");
+      message.channel.send("test");
+    } else if (cmd_name === "clear") {
+      const numArg = parseInt(args[0]);
+      //   console.log(numArg);
+      if (numArg > 0) return message.channel.bulkDelete(numArg);
+      return message.channel.bulkDelete(5);
     }
   }
 });

@@ -9,7 +9,9 @@ const PREFIX = ".";
 const mongoose = require("mongoose");
 //@ts-ignore
 const users = require("./models/usersModel");
+//@ts-ignore
 const owners = require("./models/ownersModel");
+//@ts-ignore
 const verificationCodes = require("./models/verificationCodesModel");
 // const servers = require("./models/serversModel");
 
