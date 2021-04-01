@@ -42,7 +42,8 @@ client.on("message", async (message:Message) => {
     const serverIsRegisteredByOwner = await owners.findOne({
       "servers.serverId": message.guild?.id,
     });
-    if (!serverIsRegisteredByOwner && inServer) return message.channel.send(
+    const isOwner = message.guild?.ownerID === message.author.id;
+    if (!serverIsRegisteredByOwner && inServer && !isOwner) return message.channel.send(
       "Ask the server owner to register this server with Discauth."
     ); 
 
@@ -112,8 +113,10 @@ client.on("message", async (message:Message) => {
         const codeIsInvalid = args[0] === undefined || args[0].length < 2;
         if (codeIsInvalid)
           return message.channel.send(
-            `Enter a valid code Example: '.registerServer EXAMPLE_CODE'.`
+            `Enter a valid code. Example: '.registerServer EXAMPLE_CODE'.`
           );
+        const userInputtedVerificationCode = args[0];
+        if (!userInputtedVerificationCode || userInputtedVerificationCode.length < 5) return message.channel.send(`Invalid arguments. Usage: '.registerServer EXAMPLE_CODE'.`);
 
         const foundOne = await owners.findOne({
           "verificationCodes.serverName": message.guild!.name,
@@ -125,7 +128,45 @@ client.on("message", async (message:Message) => {
           );
         } else {
           foundOne.verificationCodes.map((code: addServer) => {
-            
+            const serverIsRegistered = code.code === "" || code.code === null;
+            if (serverIsRegistered) {
+              return message.channel.send(`This server is already registered.`);
+            }
+            const codeIsCorrect = code.code === userInputtedVerificationCode;
+            const serverNameMatches =
+              code.serverName === message.guild!.name;
+            if (codeIsCorrect && serverNameMatches) {
+              code.discordId = message.author.id;
+              code.discordName = message.author.tag;
+              code.code = ""; // means server is verified
+              code.avatar = message.author.displayAvatarURL();
+
+              //push a server into "servers"
+              foundOne.servers.push({
+                serverId: message.guild!.id,
+                serverName: message.guild!.name,
+                icon: message.guild!.iconURL(),
+                verificationCode: "",
+                ownerVerified: true,
+                users: [
+                  {
+                    id: message.author.id,
+                    name: message.author.tag,
+                    avatar: message.author.displayAvatarURL(),
+                    email: foundOne.email,
+                    verified: true,
+                    timeOfVerification: new Date().toUTCString(),
+                  },
+                ],
+              });
+
+              foundOne.markModified("verificationCodes");
+              foundOne.save();
+              return message.channel.send(
+                `Verified & registered '${message.guild!.name}'.`
+              );
+
+            }
           });
         }
 
