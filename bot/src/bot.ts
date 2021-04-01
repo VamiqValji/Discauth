@@ -36,18 +36,16 @@ client.on("message", async (message:Message) => {
       // .split(" ");
       .split(/\s+/);
 
-    const isDM = message.channel.type === "dm";
-
-    const verificationCode =
-    Math.random().toString(36).substring(7) +
-    Math.random().toString(36).substring(7);
+    // const isDM = message.channel.type === "dm";
+    const inServer = message.channel.type = "text"; // a guild text channel
 
     if (cmd_name === "register") {
 
-      if (isDM) return message.author.send(
+      if (!inServer) return message.author.send(
         "'.register' only works in servers."
       );
-      if (!isDM) {
+
+      if (inServer) {
         message.delete();
         message.author.send(
           "DM me '.register `YourEmail@example.com`' to start/continue the verification process."
@@ -59,17 +57,35 @@ client.on("message", async (message:Message) => {
 
         console.log(isDuplicates);
 
-        let verif = new verificationCodes({
-          discordId: message.author.id,
-          discordTag: message.author.tag,
-          email: "",
-          avatar: message.author.displayAvatarURL(),
-          serverId: message.guild!.id,
-          serverName: message.guild!.name,
-          verificationCode: verificationCode,
-          time: new Date().toUTCString(),
+        let alreadyRegisteringForThisServer = false;
+        isDuplicates.map((user:verifCodesSchema) => {
+          const registeringForSameServer = user.serverId === message.guild!.id;
+          if (registeringForSameServer) {
+            alreadyRegisteringForThisServer = true;
+          }
         });
-        await verif.save();
+
+        if (alreadyRegisteringForThisServer) {
+          return message.author.send(
+            ".registerEmail `YOUR_EMAIL` is your next step towards registering on this server."
+          );
+        } else {
+          const verificationCode =
+          Math.random().toString(36).substring(7) +
+          Math.random().toString(36).substring(7);
+  
+          let verif = new verificationCodes({
+            discordId: message.author.id,
+            discordTag: message.author.tag,
+            email: "",
+            avatar: message.author.displayAvatarURL(),
+            serverId: message.guild!.id,
+            serverName: message.guild!.name,
+            verificationCode: verificationCode,
+            time: new Date().toUTCString(),
+          });
+          await verif.save();
+        }
       }
     } else if (cmd_name === "clear") {
       const numArg = parseInt(args[0]);
