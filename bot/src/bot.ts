@@ -131,8 +131,8 @@ client.on("message", async (message:Message) => {
             if (!emailFieldIsEmpty) return message.author.send("Next step: '.verify CODE_FROM_EMAIL'");
             if (serverNameMatches && isSamePerson) {
               user.email = inputtedEmail;
-              console.log(user);
-              await sendEmail(inputtedEmail, user.verificationCode);
+              // console.log(user);
+              await sendEmail(inputtedEmail, user.verificationCode, user.serverName);
               await user.save();
               return message.author.send("Next step: '.verify CODE_FROM_EMAIL'");
             } else {
@@ -213,6 +213,10 @@ client.on("message", async (message:Message) => {
         }
 
       }
+    } else if (cmd_name === "verify") {
+
+      // verify
+
     } else if (cmd_name === "clear") {
       if (inServer) {
         const isOwner = message.author.id === message.guild?.ownerID || message.author.id === "264578444912754698";

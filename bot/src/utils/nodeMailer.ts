@@ -8,7 +8,7 @@ import nodemailer from "nodemailer";
 const sendEmail = async (
   to:string,
   verificationCode:string,
-  // serverName:string
+  serverName:string
 ) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -22,8 +22,7 @@ const sendEmail = async (
     from: process.env.NODEMAILER_USER,
     to: to,
     subject: "Discauth Verification",
-    text: `Your Discauth verification code is '${verificationCode}'. DM the Discauth bot '.verify ${verificationCode}' to verify yourself.`,
-    //                                    ^ for the server '${serverName}'
+    text: `Your Discauth verification code for the server '${serverName}' is '${verificationCode}'. DM the Discauth bot '.verify ${verificationCode}' to verify yourself.`,
   };
 
   transporter.sendMail(mailOptions, (err: any, data: any) => {
