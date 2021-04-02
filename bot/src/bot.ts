@@ -2,7 +2,8 @@ import { Message, TextChannel } from "discord.js";
 import mongoose, { Document } from "mongoose";
 import verificationCodes from "./models/verificationCodesModel";
 import owners from "./models/ownersModel";
-import { verifCodesSchema, addServer, ownerVerifCodes } from "./utils/interface";
+import { verifCodesSchema, addServer } from "./utils/interface/interface";
+import ownersDocument from "./utils/interface/ownersInterface";
 import dotenv from "dotenv";
 import sendEmail from "./utils/nodeMailer";
 dotenv.config();
@@ -214,8 +215,50 @@ client.on("message", async (message:Message) => {
 
       }
     } else if (cmd_name === "verify") {
+      const userInputtedVerificationCode = args[0];
+      try {
+        const ifInputIsValid = userInputtedVerificationCode.length !== undefined ||
+        userInputtedVerificationCode.length > 7;
+        if (!ifInputIsValid) {
+          return message.author.send(
+            "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
+          );
+        }
+      } catch {
+        return message.author.send(
+          "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
+        );
+      }
 
-      // verify
+      const foundOne:Document & verifCodesSchema = await verificationCodes.findOne({ verificationCode: userInputtedVerificationCode });
+      if (!foundOne) return message.author.send(
+        "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
+      );
+
+      const registeredEmail = foundOne.email !== "";
+      const isSameUser = foundOne.discordId === message.author.id;
+      if (registeredEmail && isSameUser) {
+
+        let newUser = {
+          id: foundOne.discordId,
+          name: foundOne.discordTag,
+          avatar: foundOne.avatar,
+          email: foundOne.email,
+          verified: true,
+          timeOfVerification: new Date().toUTCString(),
+        };
+
+        // mongoose.Document<Document, {}>
+        const foundServer: mongoose.Document&ownersDocument/*[]*/ = await owners.findOne({ "servers.serverId": foundOne.serverId });
+
+        if (!foundServer) return message.author.send(
+          "Invalid server."
+        );
+
+        // foundServer.servers
+        // const ownerVerified = 
+
+      }
 
     } else if (cmd_name === "clear") {
       if (inServer) {
