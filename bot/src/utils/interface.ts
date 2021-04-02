@@ -9,6 +9,15 @@ export interface verifCodesSchema {
     time: string,
 }
 
+export interface ownerVerifCodes {
+    googleId: string,
+    serverName: string,
+    code: string,
+    discordId: string,
+    discordName: string,
+    avatar: string,
+}
+
 export interface user {
     id: string,
     name: string,

@@ -2,7 +2,7 @@ import { Message, TextChannel } from "discord.js";
 import mongoose from "mongoose";
 import verificationCodes from "./models/verificationCodesModel";
 import owners from "./models/ownersModel";
-import { verifCodesSchema, addServer } from "./utils/interface";
+import { verifCodesSchema, addServer, ownerVerifCodes } from "./utils/interface";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -38,14 +38,16 @@ client.on("message", async (message:Message) => {
 
     const isDM = message.channel.type === "dm";
     const inServer = message.channel.type = "text"; // a guild text channel
-
-    const serverIsRegisteredByOwner = await owners.findOne({
-      "servers.serverId": message.guild?.id,
-    });
-    const isOwner = message.guild?.ownerID === message.author.id;
-    if (!serverIsRegisteredByOwner && inServer && !isOwner) return message.channel.send(
-      "Ask the server owner to register this server with Discauth."
-    ); 
+    
+    if (inServer && !isDM) {
+      const serverIsRegisteredByOwner = await owners.findOne({
+        "servers.serverId": message.guild?.id,
+      });
+      const isOwner = message.guild?.ownerID === message.author.id;
+      if (!serverIsRegisteredByOwner && inServer && !isOwner) return message.channel.send(
+        "Ask the server owner to register this server with Discauth."
+      ); 
+    }
 
     if (cmd_name === "register") {
 
@@ -73,7 +75,7 @@ client.on("message", async (message:Message) => {
 
         if (alreadyRegisteringForThisServer) {
           return message.author.send(
-            "'.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN`' is your next step towards registering on this server."
+            "'.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`' is your next step towards registering on this server."
           );
         } else {
           const verificationCode =
@@ -98,7 +100,43 @@ client.on("message", async (message:Message) => {
         "'.registerEmail' can only be used in DM's. "
       );
       if (isDM) {
-        console.log(args[0], args[1]);
+        // console.log(args[0], args[1]);
+        let inputtedEmail:string;
+        let nameOfServerToRegisterIn:string;
+        let serverName:string;
+        try {
+          inputtedEmail = args[0];
+          nameOfServerToRegisterIn = args[1];
+          serverName = nameOfServerToRegisterIn.replace("_", " ");   
+          if (!inputtedEmail && !serverName) return message.author.send("Usage: '.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`'");
+        } catch {
+          return message.author.send("Usage: '.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`'");
+        }
+
+        // checks start
+        
+        // checks end
+
+        const foundSome:any = await owners.find({
+          "verificationCodes.serverName": serverName,
+        });
+
+        if (foundSome) {
+          // go through checks and send email
+          foundSome.map((user:verifCodesSchema) => {
+            const serverNameMatches = user.serverName === serverName;
+            if (serverNameMatches) {
+              user.email = inputtedEmail;
+              foundSome.save();
+            }
+          });
+          // foundOne.delete(); 
+        }
+
+        // foundOne.servers.map((server:addServer) => {
+        //   if (server.serverName)
+        // });
+
       } 
     } else if (cmd_name === "registerServer") {
       if (!inServer) {
