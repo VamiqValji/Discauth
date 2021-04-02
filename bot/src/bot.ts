@@ -1,9 +1,10 @@
 import { Message, TextChannel } from "discord.js";
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import verificationCodes from "./models/verificationCodesModel";
 import owners from "./models/ownersModel";
 import { verifCodesSchema, addServer, ownerVerifCodes } from "./utils/interface";
 import dotenv from "dotenv";
+import sendEmail from "./utils/nodeMailer";
 dotenv.config();
 
 const { Client } = require("discord.js");
@@ -57,9 +58,9 @@ client.on("message", async (message:Message) => {
 
       if (inServer) {
         message.delete();
-        message.author.send(
-          "DM me '.register `YourEmail@example.com`' to start/continue the verification process."
-        );
+        // message.author.send(
+        //   "DM me '.register `YourEmail@example.com`' to start/continue the verification process."
+        // );
 
         const isDuplicates = await verificationCodes.find({
           discordTag: message.author.tag,
@@ -96,9 +97,12 @@ client.on("message", async (message:Message) => {
         }
       }
     } else if (cmd_name === "registerEmail") {
-      if (!isDM) return message.author.send(
+      if (!isDM) {
+        message.delete();
+        return message.author.send(
         "'.registerEmail' can only be used in DM's. "
       );
+    }
       if (isDM) {
         // console.log(args[0], args[1]);
         let inputtedEmail:string;
@@ -112,31 +116,31 @@ client.on("message", async (message:Message) => {
         } catch {
           return message.author.send("Usage: '.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`'");
         }
-
-        // checks start
         
-        // checks end
-
-        const foundSome:any = await owners.find({
-          "verificationCodes.serverName": serverName,
+        const foundSome:any = await verificationCodes.find({
+          "serverName": serverName,
         });
 
         if (foundSome) {
-          // go through checks and send email
-          foundSome.map((user:verifCodesSchema) => {
+        
+          foundSome.map(async (user: Document & verifCodesSchema) => {
             const serverNameMatches = user.serverName === serverName;
-            if (serverNameMatches) {
+            const isSamePerson = user.discordId === message.author.id;
+            const emailFieldIsEmpty = user.email === "";
+
+            if (!emailFieldIsEmpty) return message.author.send("Next step: '.verify CODE_FROM_EMAIL'");
+            if (serverNameMatches && isSamePerson) {
               user.email = inputtedEmail;
-              foundSome.save();
+              console.log(user);
+              await sendEmail(inputtedEmail, user.verificationCode);
+              await user.save();
+              return message.author.send("Next step: '.verify CODE_FROM_EMAIL'");
+            } else {
+              return message.author.send("Invalid. ERR #1. Try '.verify CODE_FROM_EMAIL'.");
             }
           });
-          // foundOne.delete(); 
+
         }
-
-        // foundOne.servers.map((server:addServer) => {
-        //   if (server.serverName)
-        // });
-
       } 
     } else if (cmd_name === "registerServer") {
       if (!inServer) {
