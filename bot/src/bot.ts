@@ -6,6 +6,7 @@ import { verifCodesSchema, addServer } from "./utils/interface/interface";
 import ownersDocument from "./utils/interface/ownersInterface";
 import dotenv from "dotenv";
 import sendEmail from "./utils/nodeMailer";
+import addRole from "./utils/addRole";
 dotenv.config();
 
 const { Client } = require("discord.js");
@@ -39,7 +40,7 @@ client.on("message", async (message:Message) => {
       .split(/\s+/);
 
     const isDM = message.channel.type === "dm";
-    const inServer = message.channel.type = "text"; // a guild text channel
+    const inServer = message.channel.type === "text"; // a guild text channel
     
     if (inServer && !isDM) {
       const serverIsRegisteredByOwner = await owners.findOne({
@@ -216,6 +217,16 @@ client.on("message", async (message:Message) => {
 
       }
     } else if (cmd_name === "verify") {
+      if (!inServer) return message.author.send(
+        "You must be in a server for this command. Usage: '.verify `VerificationCodeFromEmail`'"
+      );
+      const role = message.guild?.roles.cache.find((role) => {
+        return role.name === "Verified";
+      });
+      if (!role) return message.author.send(
+        "Role not added. Ask the owner to add a role called 'Verified'."
+      );
+
       const userInputtedVerificationCode = args[0];
       try {
         const ifInputIsValid = userInputtedVerificationCode.length !== undefined ||
@@ -270,6 +281,7 @@ client.on("message", async (message:Message) => {
                   // console.log(foundServer);
                   await foundServer.save();
                   await foundOne.delete();
+                  addRole(message, inServer);
 
                   return message.author.send(
                     `Verified for ${server.serverName} :white_check_mark:.`
@@ -304,32 +316,7 @@ client.on("message", async (message:Message) => {
         }
       }
     } else if (cmd_name === "test") {
-      let roleName:string;
-      try {
-        roleName = args[0].replace("_", " ");
-      } catch {
-         return;
-      }
-
-      if (inServer) {
-        const isOwner = message.guild?.ownerID === message.author.id;
-        if (isOwner) {
-
-          const role = message.guild?.roles.cache.find((role) => {
-            return role.name === roleName;
-          });
-          
-          if (!role) {
-            console.log("role not found");
-            return;
-          }
-
-          console.log(`${role.name} found.`);
-
-          const member = message.guild?.members.cache.get(message.author.id);
-          member?.roles.add(role);
-        }
-      }
+      // addRole(message, inServer);
     }
   }
 });
