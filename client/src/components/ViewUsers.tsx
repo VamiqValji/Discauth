@@ -69,7 +69,7 @@ const ViewUsers: React.FC<ViewUsersProps> = (
 
     return (
     <>
-        <div className="viewUsersContainer">
+        <div className="viewUsersContainer customScrollbarDark">
             <div className="viewUsersInformationContainer">
                 <div className="header">
                     {renderData()}
