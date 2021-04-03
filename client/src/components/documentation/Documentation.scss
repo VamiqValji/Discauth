@@ -1,0 +1,36 @@
+@import "../../mixins.scss";
+
+.documentationContainer {
+  margin-top: 1rem;
+  display: inline-flex;
+  .documentationScrollbar {
+    background: rgba(0, 0, 0, 0.4);
+    width: 10rem;
+    height: 75vh;
+    padding: 0.8rem 0rem 0.8rem 0rem;
+    border-radius: 1rem 0rem 0rem 1rem;
+    border-right: 0.3rem solid black;
+    overflow-y: auto;
+    .header {
+      margin: 0.8rem 0rem 0rem 0rem;
+      font-size: 1.2rem;
+    }
+    li {
+      display: flex;
+      justify-content: center;
+      padding: 0.8rem 0rem 0.8rem 0rem;
+      list-style-type: none;
+      transition: 0.2s;
+      cursor: pointer;
+      &:hover {
+        background: rgba(0, 0, 0, 0.4);
+        color: var(--primaryColor);
+      }
+    }
+  }
+  .documentationWriting {
+    margin-left: 0.6rem;
+    width: calc(10rem + 30vw);
+    overflow-y: auto;
+  }
+}
