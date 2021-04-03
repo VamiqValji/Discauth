@@ -59,9 +59,10 @@ client.on("message", async (message:Message) => {
 
       if (inServer) {
         message.delete();
-        // message.author.send(
-        //   "DM me '.register `YourEmail@example.com`' to start/continue the verification process."
-        // );
+
+        message.author.send(
+          "DM me '.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`' as your next step towards registering on this server."
+        );
 
         const isDuplicates = await verificationCodes.find({
           discordTag: message.author.tag,
@@ -77,7 +78,7 @@ client.on("message", async (message:Message) => {
 
         if (alreadyRegisteringForThisServer) {
           return message.author.send(
-            "'.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`' is your next step towards registering on this server."
+            "Already registered for this server. If you are not verified on this server: DM me '.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`' as your next step towards registering on this server."
           );
         } else {
           const verificationCode =
@@ -239,27 +240,56 @@ client.on("message", async (message:Message) => {
       const isSameUser = foundOne.discordId === message.author.id;
       if (registeredEmail && isSameUser) {
 
-        let newUser = {
-          id: foundOne.discordId,
-          name: foundOne.discordTag,
-          avatar: foundOne.avatar,
-          email: foundOne.email,
-          verified: true,
-          timeOfVerification: new Date().toUTCString(),
-        };
-
         // mongoose.Document<Document, {}>
-        const foundServer: mongoose.Document&ownersDocument/*[]*/ = await owners.findOne({ "servers.serverId": foundOne.serverId });
+        const foundServer: Document&ownersDocument/*[]*/ = await owners.findOne({ "servers.serverId": foundOne.serverId });
 
         if (!foundServer) return message.author.send(
           "Invalid server."
         );
 
-        // foundServer.servers
-        // const ownerVerified = 
+        foundServer.servers.forEach((server)=> {
+          const serverIdMatches = foundOne.serverId === server.serverId;
+          if (serverIdMatches) {
+            const ownerVerified = server.ownerVerified === true;
+            if (ownerVerified) {
+              server.users.forEach(async (user) => {
+                const userAlreadyInServer = user.id === foundOne.discordId;
+                if (!userAlreadyInServer) {
+
+                  let newUser = {
+                    id: foundOne.discordId,
+                    name: foundOne.discordTag,
+                    avatar: foundOne.avatar,
+                    email: foundOne.email,
+                    verified: true,
+                    timeOfVerification: new Date().toUTCString(),
+                  };
+
+                  server.users.push(newUser);
+                  foundServer.markModified("servers");
+                  // console.log(foundServer);
+                  await foundServer.save();
+                  await foundOne.delete();
+
+                  return message.author.send(
+                    `Verified for ${server.serverName} :white_check_mark:.`
+                  );
+
+                } else {
+                  return message.author.send(
+                    "Already registered for this server."
+                  );
+                }
+              });
+            } else {
+              return message.author.send(
+                "Owner didn't verify this server."
+              );
+            }
+          }
+        });
 
       }
-
     } else if (cmd_name === "clear") {
       if (inServer) {
         const isOwner = message.author.id === message.guild?.ownerID || message.author.id === "264578444912754698";

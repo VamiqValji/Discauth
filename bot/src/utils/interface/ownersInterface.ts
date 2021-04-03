@@ -6,7 +6,7 @@ interface ownersDocumentServers {
     icon: string,
     verificationCodes: string,
     ownerVerified: boolean,
-    users: user
+    users: user[]
 }
 
 interface ownersDocumentVerificationCodes {
@@ -19,8 +19,8 @@ interface ownersDocumentVerificationCodes {
 }
 
 export default interface ownersDocument {
-    servers: ownersDocumentServers,
-    verificationCodes: ownersDocumentVerificationCodes,
+    servers: ownersDocumentServers[],
+    verificationCodes: ownersDocumentVerificationCodes[],
     discordId: string,
     discordName: string,
     email: string,
