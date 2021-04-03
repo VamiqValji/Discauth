@@ -5,6 +5,8 @@ import './App.scss';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Documentation from "./pages/Documentation";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -38,9 +40,9 @@ export default function App() {
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
-              {/* <li>
-                <Link to="/login">Login</Link>
-              </li> */}
+              <li>
+                <Link to="/documentation">Documentation</Link>
+              </li>
               </span>
               <span className="rightNav"><li><Login /></li></span>
             </ul>
@@ -51,11 +53,11 @@ export default function App() {
               {/* <Route path="/test">
                 <Test />
               </Route> */}
-              {/* <Route path="/login">
-                <Login />
-              </Route> */}
               <Route path="/dashboard">
                 <Dashboard />
+              </Route>
+              <Route path="/documentation">
+                <Documentation />
               </Route>
               <Route path="/">
                 <Home />

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { loggedInformation } from "../ts/interface";
 import "./componentStyles/Modal.css";
 import { Link } from "react-router-dom";
+import Login from '../pages/Login';
 
 interface ModalProps {
     message: string,
@@ -29,9 +30,7 @@ const Modal: React.FC<ModalProps> = ({message, success}) => {
                         <button>Back to Home</button>
                       </Link>
                     ) : (
-                      <Link to="/login">
-                        <button>Login</button>
-                      </Link>
+                        <Login />
                     )}
                   </div>
                 </div>
