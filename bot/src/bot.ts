@@ -103,9 +103,9 @@ client.on("message", async (message:Message) => {
       if (!isDM) {
         message.delete();
         return message.author.send(
-        "'.registerEmail' can only be used in DM's. "
-      );
-    }
+          "'.registerEmail' can only be used in DM's. "
+        );
+      }
       if (isDM) {
         // console.log(args[0], args[1]);
         let inputtedEmail:string;
@@ -131,13 +131,13 @@ client.on("message", async (message:Message) => {
             const isSamePerson = user.discordId === message.author.id;
             const emailFieldIsEmpty = user.email === "";
 
-            if (!emailFieldIsEmpty) return message.author.send("Next step: '.verify CODE_FROM_EMAIL'");
+            if (!emailFieldIsEmpty) return message.author.send("Next step: '.verify CODE_FROM_EMAIL' in the respective server you want to verify in.");
             if (serverNameMatches && isSamePerson) {
               user.email = inputtedEmail;
               // console.log(user);
               await sendEmail(inputtedEmail, user.verificationCode, user.serverName);
               await user.save();
-              return message.author.send("Next step: '.verify CODE_FROM_EMAIL'");
+              return message.author.send("Next step: '.verify CODE_FROM_EMAIL' in the respective server you want to verify in.");
             } else {
               return message.author.send("Invalid. ERR #1. Try '.verify CODE_FROM_EMAIL'.");
             }
@@ -205,6 +205,9 @@ client.on("message", async (message:Message) => {
                 ],
               });
 
+              foundOne.discordId = message.author.id;
+              foundOne.discordName = message.author.tag;
+
               foundOne.markModified("verificationCodes");
               foundOne.save();
               return message.channel.send(
@@ -220,11 +223,16 @@ client.on("message", async (message:Message) => {
       if (!inServer) return message.author.send(
         "You must be in a server for this command. Usage: '.verify `VerificationCodeFromEmail`'"
       );
+      message.delete();
       const role = message.guild?.roles.cache.find((role) => {
         return role.name === "Verified";
       });
       if (!role) return message.author.send(
         "Role not added. Ask the owner to add a role called 'Verified'."
+      );
+      const alreadyVerified = message.guild?.members.cache.get(message.author.id)?.roles.cache.get(role.id);
+      if (alreadyVerified) return message.author.send(
+        `You are already verified in the server named '${message.guild?.name}'.`
       );
 
       const userInputtedVerificationCode = args[0];
@@ -281,7 +289,7 @@ client.on("message", async (message:Message) => {
                   // console.log(foundServer);
                   await foundServer.save();
                   await foundOne.delete();
-                  addRole(message, inServer);
+                  await addRole(message, inServer);
 
                   return message.author.send(
                     `Verified for ${server.serverName} :white_check_mark:.`

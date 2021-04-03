@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 
-const addRole = (message:Message, inServer:boolean, roleName="Verified" /*args:string[]*/) => {
+const addRole = async (message:Message, inServer:boolean, roleName="Verified" /*args:string[]*/) => {
 
     if (!inServer) return message.author.send(
         "Not in a server."
@@ -15,8 +15,8 @@ const addRole = (message:Message, inServer:boolean, roleName="Verified" /*args:s
     }
     */
    
-    const isOwner = message.guild?.ownerID === message.author.id;
-    if (isOwner) {
+    // const isOwner = message.guild?.ownerID === message.author.id;
+    // if (isOwner) {
 
         const role = message.guild?.roles.cache.find((role) => {
             return role.name === roleName;
@@ -29,8 +29,8 @@ const addRole = (message:Message, inServer:boolean, roleName="Verified" /*args:s
         console.log(`${role.name} found.`);
 
         const member = message.guild?.members.cache.get(message.author.id);
-        member?.roles.add(role);
-    }
+        await member?.roles.add(role);
+    // }
 }
 
 export default addRole;
