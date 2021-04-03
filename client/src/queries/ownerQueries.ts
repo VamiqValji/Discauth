@@ -38,6 +38,7 @@ query ($googleId: ID!){
         id
         name
         avatar
+        email
         verified
         timeOfVerification
       }

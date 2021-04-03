@@ -25,6 +25,7 @@ export interface user {
     id:string,
     name:string,
     avatar:string,
+    email: string,
     verified: boolean,
     timeOfVerification: string | Date,
 }

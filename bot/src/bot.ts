@@ -247,7 +247,7 @@ client.on("message", async (message:Message) => {
           "Invalid server."
         );
 
-        foundServer.servers.forEach((server)=> {
+        foundServer.servers.forEach((server) => {
           const serverIdMatches = foundOne.serverId === server.serverId;
           if (serverIdMatches) {
             const ownerVerified = server.ownerVerified === true;
@@ -289,6 +289,10 @@ client.on("message", async (message:Message) => {
           }
         });
 
+      } else {
+        return message.author.send(
+          "Email not registered or invalid user. Perhaps try doing the previous steps first."
+        );
       }
     } else if (cmd_name === "clear") {
       if (inServer) {

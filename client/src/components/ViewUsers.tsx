@@ -81,7 +81,8 @@ const ViewUsers: React.FC<ViewUsersProps> = (
                     <h2>{user.name}</h2>
                     <h3 className="muted">{user.id}</h3>
                     <h4 style={user.verified ? {color:"green"} : {color:"red"} }>{user.verified ? "Verified!" : "Not Verified."}</h4>
-                    <h5>Verified On: {user.timeOfVerification}</h5>
+                    <h5>Email: {user.email}</h5>
+                    <h6>Verified On: {user.timeOfVerification}</h6>
                     <img className="userAvatar" src={user.avatar} alt="User Avatar"/>
                 </div>
                 );
