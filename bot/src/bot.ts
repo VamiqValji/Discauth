@@ -303,6 +303,33 @@ client.on("message", async (message:Message) => {
           return (message.channel as TextChannel).bulkDelete(5);
         }
       }
+    } else if (cmd_name === "test") {
+      let roleName:string;
+      try {
+        roleName = args[0].replace("_", " ");
+      } catch {
+         return;
+      }
+
+      if (inServer) {
+        const isOwner = message.guild?.ownerID === message.author.id;
+        if (isOwner) {
+
+          const role = message.guild?.roles.cache.find((role) => {
+            return role.name === roleName;
+          });
+          
+          if (!role) {
+            console.log("role not found");
+            return;
+          }
+
+          console.log(`${role.name} found.`);
+
+          const member = message.guild?.members.cache.get(message.author.id);
+          member?.roles.add(role);
+        }
+      }
     }
   }
 });
