@@ -38,10 +38,10 @@ export default function App() {
                 <Link to="/test">Test</Link>
               </li> */}
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/documentation">Documentation</Link>
               </li>
               <li>
-                <Link to="/documentation">Documentation</Link>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               </span>
               <span className="rightNav"><li><Login /></li></span>
@@ -53,11 +53,11 @@ export default function App() {
               {/* <Route path="/test">
                 <Test />
               </Route> */}
-              <Route path="/dashboard">
-                <Dashboard />
-              </Route>
               <Route path="/documentation">
                 <Documentation />
+              </Route>
+              <Route path="/dashboard">
+                <Dashboard />
               </Route>
               <Route path="/">
                 <Home />
