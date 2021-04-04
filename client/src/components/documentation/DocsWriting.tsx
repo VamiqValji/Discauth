@@ -1,13 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { sectionsText } from "../../ts/types";
 
-interface DocsWritingProps {}
+interface DocsWritingProps {
+    selectedSection: sectionsText | string,
+}
 
-const DocsWriting: React.FC<DocsWritingProps> = (/*{}*/) => {
+const DocsWriting: React.FC<DocsWritingProps> = ({selectedSection}) => {
 
 
     const [serverName, setServerName] = useState<string>("NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES");
     const serverNameInput = useRef<HTMLInputElement | null>(null);
+
+    const introductionRef = useRef<HTMLDivElement | null>(null);
+    const aboutRef = useRef<HTMLDivElement | null>(null);
+    const gettingStartedRef = useRef<HTMLDivElement | null>(null);
+    const ownerInstructionsRef = useRef<HTMLDivElement | null>(null);
+    const userInstructionsRef = useRef<HTMLDivElement | null>(null);
 
     const handleOnChange = () => {
         if (serverNameInput.current === null || serverNameInput.current.value.length < 1 ) {
@@ -20,15 +29,30 @@ const DocsWriting: React.FC<DocsWritingProps> = (/*{}*/) => {
         }
     };
 
+    useEffect(() => {
+        if (selectedSection === "Introduction") {
+            introductionRef.current?.scrollIntoView();
+        } else if (selectedSection === "About") {
+            aboutRef.current?.scrollIntoView();
+        } else if (selectedSection === "Getting Started") {
+            gettingStartedRef.current?.scrollIntoView();
+        } else if (selectedSection === "Owner Instructions") {
+            ownerInstructionsRef.current?.scrollIntoView();
+        } else if (selectedSection === "User Instructions") {
+            userInstructionsRef.current?.scrollIntoView();
+        }
+        selectedSection= "";
+    }, [selectedSection])
+
     return (
     <>
         <div className="documentationWriting customScrollbarDark">
-            <div className="sectionBackground">
+            <div ref={introductionRef} className="sectionBackground">
                 <h2>Introduction</h2>
                 <p className="muted">Discauth is the only user-verification bot you'll ever need!</p>
                 <br/>
                 <span className="separator"></span>
-                <div className="innerSectionBackground">
+                <div ref={aboutRef} className="innerSectionBackground">
                     <h3>About</h3>
                     <p>Learn a bit about Discauth!</p>
                     <br/>
@@ -43,12 +67,12 @@ const DocsWriting: React.FC<DocsWritingProps> = (/*{}*/) => {
                 </div>
             </div>
             <br/>
-            <div className="sectionBackground">
+            <div ref={gettingStartedRef} className="sectionBackground">
                 <h2>Getting Started</h2>
                 <p className="muted">Time to get started!</p>
                 <br/>
                 <span className="separator"></span>
-                <div className="innerSectionBackground">
+                <div ref={ownerInstructionsRef} className="innerSectionBackground">
                     <h4>Owner Instructions</h4>
                     <br/>
                     <p>1. Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
@@ -62,13 +86,13 @@ const DocsWriting: React.FC<DocsWritingProps> = (/*{}*/) => {
                     <p className="gradient">If you did everything right, your added server should be gone from the list below, and should be able to be seen in the "My Servers" tab found above. This means that your server has been verified. <i className="fas fa-check"></i></p>
                 </div>
                 <span className="separator"></span>
-                <div className="innerSectionBackground">
+                <div ref={userInstructionsRef} className="innerSectionBackground">
                     <h4>User Instructions</h4>
                     <br/>
                     <p>It is recommended to paste the following in a certain Discord channel on your server, so that users understand how to get setup.</p>
                     <br/>
                     <p>1. Write <span className="command">.register</span> in the channel of the server you'd like to register in.</p>
-                    <p>2. <input placeholder="Your server's name..." type="text" ref={serverNameInput} onChange={handleOnChange} /> <br /> Then reply to the bot's DM with <span className="command">.registerEmail <b>YOUR_EMAIL_HERE</b> <b>{serverName}</b></span>.</p>
+                    <p>2. <input placeholder="Your server's name..." type="text" ref={serverNameInput} onChange={handleOnChange} /> <br /> Then reply to the bot's DM with <span className="command">.registerEmail <b>YOUR_EMAIL_HERE</b> <b>{serverName}</b></span>. For example, if the server you want to register in is named "Test Server", you would DM the bot ".registerEmail YOUR_EMAIL Test_Server".</p>
                     <p>3. Check the code emailed to you. Write <span className="command">.verify <b>CODE_FROM_EMAIL_HERE</b></span> in a channel on that server.</p>
                     <br/>
                     <p className="gradient">Nice, you're now verified on that server! Check to make sure you got the 'Verified' role on the server. <i className="fas fa-check"></i></p>

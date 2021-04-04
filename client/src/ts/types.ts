@@ -1,0 +1,1 @@
+export type sectionsText = "Introduction" | "About" | "Getting Started" | "Owner Instructions" | "User Instructions";
