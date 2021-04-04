@@ -4,7 +4,7 @@ import "./Documentation.scss";
 
 interface DocsScrollbarProps {}
 
-const DocsScrollbar: React.FC<DocsScrollbarProps> = ({}) => {
+const DocsScrollbar: React.FC<DocsScrollbarProps> = (/*{}*/) => {
     return (
     <>
         <div className="documentationContainer">
@@ -17,7 +17,6 @@ const DocsScrollbar: React.FC<DocsScrollbarProps> = ({}) => {
                 <li>Owner Instructions</li>
                 <li>User Instructions</li>
             </ul>
-
             <DocsWriting />
         </div>
     </>);

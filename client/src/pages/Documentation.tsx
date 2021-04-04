@@ -3,7 +3,7 @@ import DocsScrollbar from '../components/documentation/DocsScrollbar';
 
 interface DocumentationProps {}
 
-const Documentation: React.FC<DocumentationProps> = ({}) => {
+const Documentation: React.FC<DocumentationProps> = (/*{}*/) => {
     return (
     <> 
         <br/>
