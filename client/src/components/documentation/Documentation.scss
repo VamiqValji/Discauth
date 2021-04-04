@@ -12,10 +12,13 @@
     border-right: 0.3rem solid black;
     overflow-y: auto;
     .header {
+      font-size: 1rem;
       margin: 0.8rem 0rem 0rem 0rem;
-      font-size: 1.2rem;
+      font-weight: 600;
     }
     li {
+      font-size: 0.9rem;
+      font-weight: 300;
       display: flex;
       justify-content: center;
       padding: 0.8rem 0rem 0.8rem 0rem;
@@ -31,6 +34,26 @@
   .documentationWriting {
     margin-left: 0.6rem;
     width: calc(10rem + 30vw);
+    height: 75vh;
     overflow-y: auto;
+    h2 {
+      font-weight: 800;
+    }
+    h3 {
+      font-weight: 700;
+    }
+    h4 {
+      font-weight: 600;
+    }
+    p {
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 400;
+    }
+    .gradient {
+      color: var(--primaryColor);
+    }
+    .muted {
+      color: grey;
+    }
   }
 }
