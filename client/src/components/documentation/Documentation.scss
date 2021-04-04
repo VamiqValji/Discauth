@@ -5,7 +5,7 @@
   display: inline-flex;
   .documentationScrollbar {
     background: rgba(0, 0, 0, 0.4);
-    width: 10rem;
+    width: 12rem;
     height: 75vh;
     padding: 0.8rem 0rem 0.8rem 0rem;
     border-radius: 1rem 0rem 0rem 1rem;
@@ -32,10 +32,24 @@
     }
   }
   .documentationWriting {
-    margin-left: 0.6rem;
-    width: calc(10rem + 30vw);
+    // margin-left: 0.6rem;
+    width: calc(10rem + 35vw);
     height: 75vh;
     overflow-y: auto;
+    .sectionBackground {
+      width: 98%;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      padding-bottom: 0rem;
+      border-radius: 1rem;
+    }
+    .innerSectionBackground {
+      border-radius: 1rem;
+      padding: 1rem;
+      //   background: rgba(0, 0, 0, 0.3);
+      margin-left: -1rem;
+    }
     h2 {
       font-weight: 800;
     }
