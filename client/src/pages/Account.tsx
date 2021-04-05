@@ -1,6 +1,7 @@
 import React from 'react';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import axios from "axios";
 
 interface AccountProps {}
 
@@ -13,13 +14,23 @@ const CheckoutForm = () => {
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
-        const {error, paymentMethod} = await stripe!.createPaymentMethod({
+        const { error, paymentMethod } = await stripe!.createPaymentMethod({
             type: "card",
             card: elements!.getElement(CardElement)!,
         })
 
         if (!error) {
             console.log(paymentMethod);
+
+            try {
+                const { id } = paymentMethod!;
+                console.log({ id, amount: 500 });
+                const { data } = await axios.post("http://localhost:3001/api/charge", { id, amount: 500 });
+                console.log(data);
+            } catch(err) {
+                console.log(err);
+            }
+
         }
     };
     

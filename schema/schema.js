@@ -116,7 +116,7 @@ const Mutation = new GraphQLObjectType({
               email: args.email,
               googleId: args.googleId,
               verificationCodes: [],
-              membership: "",
+              membership: "Free",
               // verificationCode:
               //   Math.random().toString(36).substring(7) +
               //   Math.random().toString(36).substring(7),
