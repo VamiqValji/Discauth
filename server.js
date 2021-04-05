@@ -45,6 +45,7 @@ app.post("/api/charge", async (req, res) => {
       const isAPreviousCustomer = customerId !== "";
       if (!isAPreviousCustomer) {
         customer = await stripe.customers.create({
+          payment_method: id,
           email: email,
         });
         foundOne.stripeData.customerId = customer.id;
@@ -61,14 +62,25 @@ app.post("/api/charge", async (req, res) => {
       }
     }
 
-    const payment = await stripe.paymentIntents.create({
-      amount,
-      currency: "CAD",
-      description: "Membership Subscription",
-      payment_method: id,
+    // const payment = await stripe.paymentIntents.create({
+    //   amount,
+    //   currency: "CAD",
+    //   description: "Membership Subscription",
+    //   payment_method: id,
+    //   customer: CUSTOMER_ID,
+    //   confirm: true, // skips confirmation step of payment, and goes straight to processing payment
+    // });
+
+    const subscription = await stripe.subscriptions.create({
       customer: CUSTOMER_ID,
-      confirm: true, // skips confirmation step of payment, and goes straight to processing payment
+      items: [{ plan: "price_1IcwasEdCEoU8nXu38DK2g8I" }],
+      expand: ["latest_invoice.payment_intent"],
+      default_payment_method: id,
     });
+
+    const status = subscription["latest_invoice"]["payment_intent"]["status"];
+    const client_secret =
+      subscription["latest_invoice"]["payment_intent"]["client_secret"];
 
     foundOne.stripeData.paymentDate = new Date().toUTCString();
     if (membership === "Free") {
@@ -82,6 +94,8 @@ app.post("/api/charge", async (req, res) => {
       success: true,
       tracking: "id",
       message: "Payment processed.",
+      status: status,
+      client_secret: client_secret,
     });
   } catch (err) {
     console.log(err);
@@ -89,6 +103,8 @@ app.post("/api/charge", async (req, res) => {
       success: false,
       tracking: "id",
       message: `Error: ${err.message}`,
+      status: "",
+      client_secret: "",
     });
   }
 });
