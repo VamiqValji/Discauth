@@ -25,4 +25,5 @@ export default interface ownersDocument {
     discordName: string,
     email: string,
     googleId: string,
+    membership: string,
 }

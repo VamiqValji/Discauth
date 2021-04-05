@@ -112,9 +112,11 @@ const Mutation = new GraphQLObjectType({
             let owner = new owners({
               discordId: args.discordId,
               discordName: args.discordName,
+              servers: [],
               email: args.email,
               googleId: args.googleId,
               verificationCodes: [],
+              membership: "",
               // verificationCode:
               //   Math.random().toString(36).substring(7) +
               //   Math.random().toString(36).substring(7),
