@@ -16,6 +16,7 @@ import {
 
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
+import Account from './pages/Account';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
@@ -43,6 +44,9 @@ export default function App() {
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
+              <li>
+                <Link to="/account">Account</Link>
+              </li>
               </span>
               <span className="rightNav"><li><Login /></li></span>
             </ul>
@@ -58,6 +62,9 @@ export default function App() {
               </Route>
               <Route path="/dashboard">
                 <Dashboard />
+              </Route>
+              <Route path="/account">
+                <Account />
               </Route>
               <Route path="/">
                 <Home />
