@@ -9,6 +9,7 @@ let ownersSchema = new Schema({
   email: String,
   googleId: String,
   verificationCodes: Array,
+  stripeData: Object,
   // verified: Boolean,
 });
 

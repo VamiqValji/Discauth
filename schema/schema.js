@@ -54,6 +54,15 @@ const verificationCodeType = new GraphQLObjectType({
   }),
 });
 
+const stripeDataType = new GraphQLObjectType({
+  name: "stripeData",
+  description: "Owner data for Stripe",
+  fields: () => ({
+    membership: { type: GraphQLString },
+    customerId: { type: GraphQLString },
+  }),
+});
+
 const OwnerType = new GraphQLObjectType({
   name: "Owner",
   description: "Owner Information",
@@ -70,6 +79,7 @@ const OwnerType = new GraphQLObjectType({
     discordName: { type: GraphQLString },
     email: { type: GraphQLString },
     verificationCodes: { type: new GraphQLList(verificationCodeType) },
+    stripeData: { type: stripeDataType },
     // verified: { type: GraphQLBoolean },
   }),
 });
@@ -116,7 +126,10 @@ const Mutation = new GraphQLObjectType({
               email: args.email,
               googleId: args.googleId,
               verificationCodes: [],
-              membership: "Free",
+              stripeData: {
+                membership: "Free",
+                customerId: "",
+              },
               // verificationCode:
               //   Math.random().toString(36).substring(7) +
               //   Math.random().toString(36).substring(7),
