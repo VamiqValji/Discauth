@@ -90,6 +90,17 @@ app.post("/api/charge", async (req, res) => {
     foundOne.markModified("stripeData");
     foundOne.save();
 
+    if (status === "requires_action") {
+      stripe.confirmCardPayment(client_secret).then((res) => {
+        if (res.error) {
+          // maybe return as res to client and display in ui
+          return console.log(res.error);
+        } else {
+          console.log(res);
+        }
+      });
+    }
+
     return res.status(200).json({
       success: true,
       tracking: "id",
@@ -106,6 +117,27 @@ app.post("/api/charge", async (req, res) => {
       status: "",
       client_secret: "",
     });
+  }
+});
+
+app.post("/api/cancel", async (req, res) => {
+  const { /*id,*/ amount, email } = req.body;
+  const foundOne = await owners.findOne({ email });
+
+  const { membership, customerId, paymentDate } = foundOne.stripeData;
+  const onFreeTier = membership === "Free";
+  if (!onFreeTier) {
+    try {
+      const stripeCustomer = await stripe.customers.retrieve(customerId);
+      // console.log(stripeCustomer);
+      // const deleted = await stripe.subscriptions.del(
+      //   'sub_JFSM6HxaxIAozw'
+      // );
+
+      await stripe.subscriptions.del("sub_JFTR2KNGfNwd91");
+    } catch (err) {
+      console.log(err);
+    }
   }
 });
 

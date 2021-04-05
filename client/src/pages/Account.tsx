@@ -38,11 +38,33 @@ const CheckoutForm = () => {
 
         }
     };
+
+    const handleCancel = async (e:any) => {
+        e.preventDefault();
+        // const { error, paymentMethod } = await stripe!.createPaymentMethod({
+        //     type: "card",
+        //     card: elements!.getElement(CardElement)!,
+        // })
+
+        // if (!error) {
+            try {
+                // const { id } = paymentMethod!;
+                const { data } = await axios.post("http://localhost:3001/api/cancel", { /*id,*/ amount: 500, email: loggedInfo.email });
+                console.log(data);
+            } catch(err) {
+                console.log(err);
+            }
+
+        // }
+    };
     
     return (<>
     <form onSubmit={handleSubmit}>
         <CardElement />
         <button type="submit" disabled={!stripe || !elements}>Submit</button>
+    </form>
+    <form onSubmit={handleCancel}>
+        <button type="submit" disabled={!stripe || !elements}>Cancel Subscription</button>
     </form>
     </>);
 };
