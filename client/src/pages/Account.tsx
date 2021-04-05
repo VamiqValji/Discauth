@@ -1,12 +1,46 @@
 import React from 'react';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 interface AccountProps {}
 
-const Account: React.FC<AccountProps> = ({}) => {
+const stripePromise = loadStripe("pk_test_51IciNGEdCEoU8nXuSTPSTm2Fn5GDe0QgKYwLOrjuKUaPEH2iL5a7reysQcdZId1pJveyukcW4jB5Xwdu0xZMaIr800MvkfxBRv");
+
+const CheckoutForm = () => {
+    const elements = useElements();
+
+    const stripe = useStripe();
+
+    const handleSubmit = async (e:any) => {
+        e.preventDefault();
+        const {error, paymentMethod} = await stripe!.createPaymentMethod({
+            type: "card",
+            card: elements!.getElement(CardElement)!,
+        })
+
+        if (!error) {
+            console.log(paymentMethod);
+        }
+    };
+    
+    return (<>
+    <form onSubmit={handleSubmit}>
+        <CardElement />
+        <button type="submit" disabled={!stripe}>Submit</button>
+    </form>
+    </>);
+};
+
+const Account: React.FC<AccountProps> = (/*{}*/) => {
+
     return (
     <>
         <br/>
-        <h1>Account</h1>
+        <Elements stripe={stripePromise}>
+            <h1>Account</h1>
+            <CheckoutForm />
+        </Elements>
+
     </>);
 }
 
