@@ -25,7 +25,7 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/api/charge", async (req, res) => {
-  const { id, amount } = req.body;
+  const { id, amount, email } = req.body;
 
   try {
     const payment = await stripe.paymentIntents.create({
@@ -35,6 +35,12 @@ app.post("/api/charge", async (req, res) => {
       payment_method: id,
       confirm: true, // skips confirmation step of payment, and goes straight to processing payment
     });
+
+    const customer = await stripe.customers.create({
+      email: email,
+    });
+
+    console.log(`customerID: ${customer.id}`);
 
     // console.log(payment.receipt_url);
     return res.status(200).json({

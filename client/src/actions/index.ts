@@ -1,14 +1,14 @@
-export const logIn = (id:string) => {
+export const logIn = (id:string, email:string) => {
     return {
       type: "LOG_IN",
-      payload: {id: id}
+      payload: {id, email}
     };
   };
   
   export const logOut = () => {
     return {
       type: "LOG_OUT",
-      payload: {id: ""}
+      payload: {id: "", email: ""}
     };
   };
   

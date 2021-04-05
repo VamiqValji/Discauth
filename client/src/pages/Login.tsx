@@ -32,7 +32,7 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
                 googleId: res.profileObj.googleId,
             },
         });
-        dispatch(logIn(res.profileObj.googleId));
+        dispatch(logIn(res.profileObj.googleId, res.profileObj.email));
     }
 
     const logOutUser = () => {

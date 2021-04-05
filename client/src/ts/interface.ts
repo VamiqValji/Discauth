@@ -1,6 +1,7 @@
 export interface loggedInformation {
     loggedIn: boolean,
-    id: string
+    id: string,
+    email: string,
 }
 
 export interface ownerServersInformation {
