@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 interface InstructionsModalProps {}
 
@@ -15,7 +16,7 @@ const InstructionsModal: React.FC<InstructionsModalProps> = (/*{}*/) => {
                 <div className="header">
                     <div className="subHeader">
                         <h2>Quick Instructions</h2>
-                        <h4 className="muted">For detailed instructions with examples, visit the documentation.</h4>
+                        <h4 className="muted">For detailed instructions with examples, visit the <Link to="/documentation">documentation</Link>.</h4>
                     </div>
                     <i className="fas fa-times cursorPointer" onClick={() => setInstructionsModalIsOn(!instructionsModalIsOn)}></i>
                 </div>

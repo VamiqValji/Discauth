@@ -8,7 +8,6 @@ interface DocsWritingProps {
 
 const DocsWriting: React.FC<DocsWritingProps> = ({selectedSection}) => {
 
-
     const [serverName, setServerName] = useState<string>("NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES");
     const serverNameInput = useRef<HTMLInputElement | null>(null);
 
@@ -41,8 +40,8 @@ const DocsWriting: React.FC<DocsWritingProps> = ({selectedSection}) => {
         } else if (selectedSection === "User Instructions") {
             userInstructionsRef.current?.scrollIntoView();
         }
-        selectedSection= "";
-    }, [selectedSection])
+        // selectedSection= "";
+    }, [selectedSection]);
 
     return (
     <>
@@ -57,7 +56,7 @@ const DocsWriting: React.FC<DocsWritingProps> = ({selectedSection}) => {
                     <p>Learn a bit about Discauth!</p>
                     <br/>
                     <h4>What is Discauth and what does it do?</h4>
-                    <p>Discauth is a Discord server bot and service that helps you verify users in a server. This is helpful for more formal servers, or servers that need participants to provide credentials (email). For example, hosting a game tournament on Discord would be easier with the help of Discauth, because participants would need to verify on the server with their email, instead of going through the manual monotonous verifying process with server admins.</p>
+                    <p>Discauth is a Discord server bot and service that helps you verify users in a server. This is helpful for more formal servers, or servers that need participants to provide credentials (email) to be able to interact in that server. For example, hosting a game tournament on Discord would be easier with the help of Discauth, because participants would need to verify on the server with their email, instead of going through the manual monotonous verifying process with server admins.</p>
                     <br/>
                     <h4>Why should I use Discauth?</h4>
                     <p>It starts with a free tier, and you can get started within a few steps.</p>
