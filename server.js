@@ -42,7 +42,8 @@ app.post("/api/charge", async (req, res) => {
       });
 
     if (foundOne) {
-      if (customerId === "") {
+      const isAPreviousCustomer = customerId !== "";
+      if (!isAPreviousCustomer) {
         customer = await stripe.customers.create({
           email: email,
         });
@@ -69,6 +70,7 @@ app.post("/api/charge", async (req, res) => {
       confirm: true, // skips confirmation step of payment, and goes straight to processing payment
     });
 
+    foundOne.stripeData.paymentDate = new Date().toUTCString();
     if (membership === "Free") {
       foundOne.stripeData.membership = "Basic";
     }

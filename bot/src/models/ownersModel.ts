@@ -8,7 +8,7 @@ let ownersSchema = new Schema({
   email: String,
   googleId: String,
   verificationCodes: Array,
-  membership: String,
+  stripeData: Object,
 });
 
 let owners = mongoose.model("owners", ownersSchema);

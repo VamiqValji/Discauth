@@ -18,6 +18,12 @@ interface ownersDocumentVerificationCodes {
     avatar: string,
 }
 
+interface stripeData {
+    membership: string,
+    customerId: string,
+    paymentDate: string,
+}
+
 export default interface ownersDocument {
     servers: ownersDocumentServers[],
     verificationCodes: ownersDocumentVerificationCodes[],
@@ -25,5 +31,5 @@ export default interface ownersDocument {
     discordName: string,
     email: string,
     googleId: string,
-    membership: string,
+    stripeData: stripeData,
 }
