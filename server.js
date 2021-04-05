@@ -137,6 +137,14 @@ app.post("/api/cancel", async (req, res) => {
 
       await stripe.subscriptions.del(subscriptionId);
 
+      let oldPayment = {
+        membership: foundOne.stripeData.membership,
+        paymentDate: foundOne.stripeData.paymentDate,
+        subscriptionId: foundOne.stripeData.subscriptionId,
+        cancelledDate: new Date().toUTCString(),
+      };
+
+      foundOne.stripeData.pastPayments.push(oldPayment);
       foundOne.stripeData.membership = "Free";
       foundOne.stripeData.customerId = "";
       foundOne.stripeData.paymentDate = "";

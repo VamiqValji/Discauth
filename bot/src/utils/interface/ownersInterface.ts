@@ -18,11 +18,19 @@ interface ownersDocumentVerificationCodes {
     avatar: string,
 }
 
+interface pastPayments{
+    membership: string,
+    paymentDate: string,
+    subscriptionId: string,
+    cancelledDate: string,
+}
+
 interface stripeData {
     membership: string,
     customerId: string,
     paymentDate: string,
     subscriptionId: string,
+    pastPayments: pastPayments[],
 }
 
 export default interface ownersDocument {

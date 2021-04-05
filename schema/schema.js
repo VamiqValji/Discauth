@@ -54,6 +54,17 @@ const verificationCodeType = new GraphQLObjectType({
   }),
 });
 
+const pastPaymentsType = new GraphQLObjectType({
+  name: "pastPayments",
+  description: "Past Stripe data payments",
+  fields: () => ({
+    membership: { type: GraphQLString },
+    paymentDate: { type: GraphQLString },
+    subscriptionId: { type: GraphQLString },
+    cancelledDate: { type: GraphQLString },
+  }),
+});
+
 const stripeDataType = new GraphQLObjectType({
   name: "stripeData",
   description: "Owner data for Stripe",
@@ -62,6 +73,7 @@ const stripeDataType = new GraphQLObjectType({
     customerId: { type: GraphQLString },
     paymentDate: { type: GraphQLString },
     subscriptionId: { type: GraphQLString },
+    pastPayments: { type: new GraphQLList(pastPaymentsType) },
   }),
 });
 
@@ -133,6 +145,7 @@ const Mutation = new GraphQLObjectType({
                 customerId: "",
                 paymentDate: "",
                 subscriptionId: "",
+                pastPayments: [],
               },
               // verificationCode:
               //   Math.random().toString(36).substring(7) +
