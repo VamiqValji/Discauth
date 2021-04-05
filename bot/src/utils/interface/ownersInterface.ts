@@ -22,6 +22,7 @@ interface stripeData {
     membership: string,
     customerId: string,
     paymentDate: string,
+    subscriptionId: string,
 }
 
 export default interface ownersDocument {

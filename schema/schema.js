@@ -61,6 +61,7 @@ const stripeDataType = new GraphQLObjectType({
     membership: { type: GraphQLString },
     customerId: { type: GraphQLString },
     paymentDate: { type: GraphQLString },
+    subscriptionId: { type: GraphQLString },
   }),
 });
 
@@ -131,6 +132,7 @@ const Mutation = new GraphQLObjectType({
                 membership: "Free",
                 customerId: "",
                 paymentDate: "",
+                subscriptionId: "",
               },
               // verificationCode:
               //   Math.random().toString(36).substring(7) +

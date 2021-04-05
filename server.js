@@ -74,7 +74,7 @@ app.post("/api/charge", async (req, res) => {
     const subscription = await stripe.subscriptions.create({
       customer: CUSTOMER_ID,
       items: [{ plan: "price_1IcwasEdCEoU8nXu38DK2g8I" }],
-      expand: ["latest_invoice.payment_intent"],
+      expand: ["latest_invoice.payment_intent"], //  invoice_settings.default_payment_method
       default_payment_method: id,
     });
 
@@ -83,6 +83,7 @@ app.post("/api/charge", async (req, res) => {
       subscription["latest_invoice"]["payment_intent"]["client_secret"];
 
     foundOne.stripeData.paymentDate = new Date().toUTCString();
+    foundOne.stripeData.subscriptionId = subscription.id;
     if (membership === "Free") {
       foundOne.stripeData.membership = "Basic";
     }
@@ -121,23 +122,40 @@ app.post("/api/charge", async (req, res) => {
 });
 
 app.post("/api/cancel", async (req, res) => {
-  const { /*id,*/ amount, email } = req.body;
+  const { /*id, amount,*/ email } = req.body;
   const foundOne = await owners.findOne({ email });
 
-  const { membership, customerId, paymentDate } = foundOne.stripeData;
+  const {
+    membership,
+    /*customerId, paymentDate*/ subscriptionId,
+  } = foundOne.stripeData;
+
   const onFreeTier = membership === "Free";
   if (!onFreeTier) {
     try {
-      const stripeCustomer = await stripe.customers.retrieve(customerId);
-      // console.log(stripeCustomer);
-      // const deleted = await stripe.subscriptions.del(
-      //   'sub_JFSM6HxaxIAozw'
-      // );
+      // const stripeCustomer = await stripe.customers.retrieve(customerId);
 
-      await stripe.subscriptions.del("sub_JFTR2KNGfNwd91");
+      await stripe.subscriptions.del(subscriptionId);
+
+      foundOne.stripeData.membership = "Free";
+      foundOne.stripeData.customerId = "";
+      foundOne.stripeData.paymentDate = "";
+      foundOne.stripeData.subscriptionId = "";
+      foundOne.markModified("stripeData");
+      foundOne.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "Subscription cancelled.",
+      });
     } catch (err) {
       console.log(err);
     }
+  } else {
+    return res.status(403).json({
+      success: false,
+      message: `Can't cancel free tier!`,
+    });
   }
 });
 
