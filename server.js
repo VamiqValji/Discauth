@@ -139,6 +139,7 @@ app.post("/api/cancel", async (req, res) => {
 
       let oldPayment = {
         membership: foundOne.stripeData.membership,
+        customerId: foundOne.stripeData.customerId,
         paymentDate: foundOne.stripeData.paymentDate,
         subscriptionId: foundOne.stripeData.subscriptionId,
         cancelledDate: new Date().toUTCString(),

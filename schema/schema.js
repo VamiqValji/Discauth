@@ -59,6 +59,7 @@ const pastPaymentsType = new GraphQLObjectType({
   description: "Past Stripe data payments",
   fields: () => ({
     membership: { type: GraphQLString },
+    customerId: { type: GraphQLString },
     paymentDate: { type: GraphQLString },
     subscriptionId: { type: GraphQLString },
     cancelledDate: { type: GraphQLString },

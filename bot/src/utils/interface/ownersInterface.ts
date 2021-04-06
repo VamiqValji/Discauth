@@ -20,6 +20,7 @@ interface ownersDocumentVerificationCodes {
 
 interface pastPayments{
     membership: string,
+    customerId: string,
     paymentDate: string,
     subscriptionId: string,
     cancelledDate: string,
