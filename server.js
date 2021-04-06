@@ -105,7 +105,7 @@ app.post("/api/charge", async (req, res) => {
     return res.status(200).json({
       success: true,
       tracking: "id",
-      message: "Payment processed.",
+      message: "Payment processed (Basic Membership).",
       status: status,
       client_secret: client_secret,
     });
