@@ -23,7 +23,11 @@ interface resData {
     client_secret: string,
 }
 
-const CheckoutForm = () => {
+interface CheckOutForm {
+    membership: string
+}
+
+const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
     const elements = useElements();
 
     const stripe = useStripe();
@@ -97,7 +101,7 @@ const CheckoutForm = () => {
         } else {
             if (resData.success) {
                 return (
-                    <CustomTextModal header={"Payment processed."} content={resData.message} updateParent={clickedOkayOnModal}/>
+                    <CustomTextModal header={"Payment processed. Please refresh the page."} content={resData.message} updateParent={clickedOkayOnModal}/>
                 );
             } else {
                 return (
@@ -115,7 +119,7 @@ const CheckoutForm = () => {
         } else {
             if (resData.success) {
                 return (
-                    <CustomTextModal header={"Subscription cancelled."} content={<>{resData.message}</>} updateParent={clickedOkayOnModal}/>
+                    <CustomTextModal header={"Subscription cancelled. Please refresh the page."} content={<>{resData.message}</>} updateParent={clickedOkayOnModal}/>
                 );
             } else {
                 return (
@@ -129,14 +133,20 @@ const CheckoutForm = () => {
     return (<>
         {paid && clickedPaid()}
         {cancelled && clickedCancelled()}
-        <form onSubmit={handleSubmit}>
-            Basic Membership Tier: $5.00 CAD
-            <CardElement />
-            <button type="submit" disabled={!stripe || !elements}>Pay</button>
-        </form>
-        <form onSubmit={handleCancel}>
-            <button type="submit" disabled={!stripe || !elements}>Cancel Subscription</button>
-        </form>
+        {membership === "Free" && 
+            <div className="membershipContainer">
+                <form className="membershipBasic" onSubmit={handleSubmit}>
+                    Basic Membership Tier: $5.00 CAD
+                    <CardElement />
+                    <button type="submit" disabled={!stripe || !elements}>Pay</button>
+                </form>
+            </div>
+        }
+        {membership !== "Free" && 
+            <form onSubmit={handleCancel}>
+                <button type="submit" disabled={!stripe || !elements}>Cancel Subscription</button>
+            </form>
+        }
     </>);
 };
 
@@ -154,6 +164,11 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
     try {
 
         const { membership, paymentDate, pastPayments }:stripeData = stripeData.ownerData.stripeData;
+        
+        let memberShipFee:string = "$0.00";
+        if (membership === "Basic") {
+            memberShipFee = "$5.00";
+        } 
 
         return (
             <>
@@ -161,11 +176,11 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
                 <br/>
                 <h1>Account</h1>
                 <br/>
-                <h3>{membership}</h3>
-                <h4>{paymentDate && paymentDate}</h4>
+                <h3>Your account membership: {membership} ({memberShipFee} CAD a month.)</h3>
+                <h4>{paymentDate && `Payment date: ${paymentDate}`}</h4>
                 <br/>
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm />
+                    <CheckoutForm membership={membership} />
                 </Elements>
                 <br/>
                 <h2>Your Previous Payments</h2>
