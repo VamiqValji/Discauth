@@ -25,7 +25,7 @@ interface ownersDocumentVerificationCodes {
     avatar: string,
 }
 
-interface pastPayments{
+export interface pastPayments{
     membership: string,
     customerId: string,
     paymentDate: string,
@@ -33,7 +33,7 @@ interface pastPayments{
     cancelledDate: string,
 }
 
-interface stripeData {
+export interface stripeData {
     membership: string,
     customerId: string,
     paymentDate: string,
@@ -41,7 +41,7 @@ interface stripeData {
     pastPayments: pastPayments[],
 }
 
-export default interface ownersDocument {
+export interface ownersDocument {
     servers: ownersDocumentServers[],
     verificationCodes: ownersDocumentVerificationCodes[],
     discordId: string,

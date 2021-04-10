@@ -46,3 +46,19 @@ query ($googleId: ID!){
   }
 }
 `;
+
+export const getStripeDataQuery = gql`
+query ($googleId: ID!){
+  ownerData(googleId: $googleId) {
+    stripeData {
+      membership
+      paymentDate
+      pastPayments {
+        membership
+        paymentDate
+        cancelledDate
+      }
+    }
+  }
+}
+`;

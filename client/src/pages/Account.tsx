@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 import { loggedInformation } from "../ts/interface";
 import CustomTextModal from '../components/CustomTextModal';
 import Modal from '../components/Modal';
-// import ownersDocument from "../ts/ownersDocumentInterface";
+import { useQuery } from '@apollo/client';
+import { getStripeDataQuery } from '../queries/ownerQueries';
+import { stripeData } from "../ts/ownersDocumentInterface";
 
 interface AccountProps {}
 
@@ -89,7 +91,7 @@ const CheckoutForm = () => {
     const clickedPaid = () => {
         if (!resData) {
             return (
-                <CustomTextModal header={"Payment processing or invalid card details."} content={"Please wait."} updateParent={clickedOkayOnModal} />
+                <CustomTextModal header={"Payment processing or invalid card details."} content={"Please wait if you had entered your card details..."} updateParent={clickedOkayOnModal} />
             );
         } else {
             if (resData.success) {
@@ -139,15 +141,44 @@ const CheckoutForm = () => {
 
 const Account: React.FC<AccountProps> = (/*{}*/) => {
 
+    const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
+
+    const { loading: stripeDataLoading, error: stripeDataError, data: stripeData } = useQuery(getStripeDataQuery, {
+        variables: { googleId: loggedInfo.id }
+    });
+    
+    if (stripeDataLoading || !stripeData) return <h3>Loading...</h3>;
+    if (stripeDataError) return <h3>Error.</h3>;
+
     return (
     <>
         <Modal message={"Please Login."} />
         <br/>
+        <h1>Account</h1>
+        <br/>
+        {/* <h3>{membership}</h3>
+        <h4>{paymentDate && paymentDate}</h4> */}
+        <br/>
         <Elements stripe={stripePromise}>
-            <h1>Account</h1>
             <CheckoutForm />
         </Elements>
-
+        <br/>
+        <h2>Your Previous Payments</h2>
+        {/* {pastPayments.length > 0 ? (
+            <>
+                {
+                    pastPayments.map((payment) => {
+                       <div>
+                           <h3>Membership: {payment.membership}</h3>
+                           <h4>Payment Date: {payment.paymentDate}</h4>
+                           <h4>Cancellation Date: {payment.cancelledDate}</h4>
+                       </div> 
+                    })
+                }
+            </>
+        ) : (
+            <></>
+        )} */}
     </>);
 }
 
