@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { loggedInformation } from "../ts/interface";
 import CustomTextModal from '../components/CustomTextModal';
+import ownersDocument from "../ts/ownersDocumentInterface";
 
 interface AccountProps {}
 
@@ -25,7 +26,7 @@ const CheckoutForm = () => {
 
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
 
-    const [resData, setResData] = useState<resData>();
+    const [resData, setResData] = useState<resData | null>(null);
     const [paid, setPaid] = useState<boolean>(false);
     const [cancelled, setCancelled] = useState<boolean>(false);
 
@@ -78,19 +79,25 @@ const CheckoutForm = () => {
         // }
     };
 
+    const clickedOkayOnModal = () => {
+        setPaid(false);
+        setCancelled(false);
+        setResData(null);
+    };
+
     const clickedPaid = () => {
         if (!resData) {
             return (
-                <CustomTextModal header={"Payment processing."} content={"Please wait."} />
+                <CustomTextModal header={"Payment processing."} content={"Please wait."} updateParent={clickedOkayOnModal} />
             );
         } else {
             if (resData.success) {
                 return (
-                    <CustomTextModal header={"Payment processed."} content={resData.message}/>
+                    <CustomTextModal header={"Payment processed."} content={resData.message} updateParent={clickedOkayOnModal}/>
                 );
             } else {
                 return (
-                    <CustomTextModal header={"Payment error."} content={resData.message}/>
+                    <CustomTextModal header={"Payment error."} content={resData.message} updateParent={clickedOkayOnModal}/>
                 );
             }
         }
@@ -99,16 +106,16 @@ const CheckoutForm = () => {
     const clickedCancelled = () => {
         if (!resData) {
             return (
-                <CustomTextModal header={"Subscription cancelling."} content={"Please wait."} />
+                <CustomTextModal header={"Subscription cancelling."} content={"Please wait."} updateParent={clickedOkayOnModal}/>
             );
         } else {
             if (resData.success) {
                 return (
-                    <CustomTextModal header={"Subscription cancelled."} content={<>{resData.message}</>}/>
+                    <CustomTextModal header={"Subscription cancelled."} content={<>{resData.message}</>} updateParent={clickedOkayOnModal}/>
                 );
             } else {
                 return (
-                    <CustomTextModal header={"Error in cancelling subscription."} content={resData.message}/>
+                    <CustomTextModal header={"Error in cancelling subscription."} content={resData.message} updateParent={clickedOkayOnModal}/>
                 );
             }
         }

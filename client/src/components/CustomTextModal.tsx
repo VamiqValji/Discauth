@@ -12,9 +12,10 @@ interface customTextModalProps {
     header: string,
     content: any,
     buttonOptions?: buttonOptions,
+    updateParent: () => void,
 }
 
-const CustomTextModal: React.FC<customTextModalProps> = ({header, content, buttonOptions={ on: true, text: "" } }) => {
+const CustomTextModal: React.FC<customTextModalProps> = ({header, content, buttonOptions={ on: true, text: "" }, updateParent }) => {
     const { loggedIn }:loggedInformation = useSelector((state:any) => state.loggedInfo);
     const [active, setActive] = useState<boolean>(true);
     if (loggedIn && active) {
@@ -28,7 +29,10 @@ const CustomTextModal: React.FC<customTextModalProps> = ({header, content, butto
                 </div>
                 {buttonOptions.on &&
                     <div className="flexCenter" style={{marginTop: 10}}>
-                        <><button style={{margin: "0 auto"}} onClick={() => setActive(false)}>{buttonOptions.text ? <>{buttonOptions.text}</> : <>Okay.</> }</button></>
+                        <><button style={{margin: "0 auto"}} onClick={() => {
+                            setActive(false);
+                            updateParent();
+                        }}>{buttonOptions.text ? <>{buttonOptions.text}</> : <>Okay.</> }</button></>
                     </div>
                 }
                 </div>
