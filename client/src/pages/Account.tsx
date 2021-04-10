@@ -9,6 +9,7 @@ import Modal from '../components/Modal';
 import { useQuery } from '@apollo/client';
 import { getStripeDataQuery } from '../queries/ownerQueries';
 import { stripeData } from "../ts/ownersDocumentInterface";
+import PaymentsContainer from '../components/PaymentsContainer/PaymentsContainer';
 
 interface AccountProps {}
 
@@ -168,27 +169,9 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
                 </Elements>
                 <br/>
                 <h2>Your Previous Payments</h2>
-                <div className="paymentsContainer">
-                    {pastPayments.length > 0 ? (
-                        <>
-                            {
-                                pastPayments.map((payment, idx: number) => {
-                                    return (
-                                    <div className="paymentContainer" key={idx}>
-                                        <h3>Membership: {payment.membership}</h3>
-                                        <h4>Payment Date: {payment.paymentDate}</h4>
-                                        <h5>Cancellation Date: {payment.cancelledDate}</h5>
-                                    </div>) 
-                                })
-                            }
-                        </>
-                    ) : (
-                        <h4 className="muted" style={{fontWeight: "normal"}}>You haven't bought anything before!</h4>
-                    )}
-                </div>
+                <PaymentsContainer pastPayments={pastPayments} />
             </>
         )
-
     } catch {
         return <>Loading...</>;
     }
