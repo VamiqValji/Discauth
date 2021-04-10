@@ -152,6 +152,7 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
             <div className="membershipContainer">
                 <form className="membershipBasic" onSubmit={handleSubmit}>
                     <h3>Basic Membership Tier: <span>$5.00 CAD</span></h3>
+                    <h5>Allows more than 50 verified users per server.</h5>
                     <CardElement options={cardElementOptions} />
                     <button type="submit" disabled={!stripe || !elements}>Pay</button>
                 </form>

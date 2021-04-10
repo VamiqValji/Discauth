@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .accountDetails {
   h3,
   h4 {
@@ -17,11 +19,16 @@
   h3 {
     color: whitesmoke;
     font-weight: 600;
-    margin-bottom: 0.5rem;
     span {
       font-weight: 300;
       color: white;
     }
+  }
+  h5 {
+    color: var(--primaryColor);
+    @include linearGradient;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
   }
   button {
     margin-top: 0.5rem;

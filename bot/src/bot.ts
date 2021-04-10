@@ -7,6 +7,7 @@ import ownersDocument from "./utils/interface/ownersInterface";
 import dotenv from "dotenv";
 import sendEmail from "./utils/nodeMailer";
 import addRole from "./utils/addRole";
+import isMembershipUpgradeNeeded from "./utils/checkUpgradeNeeded";
 dotenv.config();
 
 const { Client } = require("discord.js");
@@ -82,6 +83,13 @@ client.on("message", async (message:Message) => {
             "Already registered for this server. If you are not verified on this server: DM me '.registerEmail `YOUR_EMAIL` `NAME_OF_SERVER_YOU_WANT_TO_REGISTER_IN_WITH_UNDERSCORES_INSTEAD_OF_SPACES`' as your next step towards registering on this server."
           );
         } else {
+
+          if (await isMembershipUpgradeNeeded(message, message.guild!.id)) {
+            return message.author.send(
+              "Ask the server owner to upgrade their membership first (found on website). Only 50 verified members are allowed on the free tier for each server."
+            );
+          }
+
           const verificationCode =
           Math.random().toString(36).substring(7) +
           Math.random().toString(36).substring(7);
@@ -254,6 +262,12 @@ client.on("message", async (message:Message) => {
       if (!foundOne) return message.author.send(
         "Please pass in an appropriate verification code. Example: '.verify `VerificationCodeFromEmail`'"
       );
+
+      if (await isMembershipUpgradeNeeded(message, message.guild!.id)) {
+        return message.author.send(
+          "Ask the server owner to upgrade their membership first (found on website). Only 50 verified members are allowed on the free tier for each server."
+        );
+      }
 
       const registeredEmail = foundOne.email !== "";
       const isSameUser = foundOne.discordId === message.author.id;
