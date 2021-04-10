@@ -147,31 +147,28 @@ nav a {
   background: black;
   padding: 1rem;
   z-index: 10;
-}
-
-.nav nav li {
-  display: block;
-  display: inline-flex;
-  flex-direction: row;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.5em;
-}
-
-.nav a {
-  color: whitesmoke;
-  text-decoration: none;
-  transition: 0.2s;
-}
-.nav a:hover {
-  color: var(--primaryColor);
-  text-decoration: underline;
-}
-
-.rightNav {
-  position: absolute;
-  right: 1rem;
-  bottom: 0.5rem;
+  a {
+    color: whitesmoke;
+    text-decoration: none;
+    transition: 0.2s;
+    &:hover {
+      color: var(--primaryColor);
+      text-decoration: underline;
+    }
+  }
+  nav li {
+    display: block;
+    display: inline-flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5em;
+  }
+  .rightNav {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.5rem;
+  }
 }
 
 .appContainer {
