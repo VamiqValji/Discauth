@@ -5,7 +5,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { loggedInformation } from "../ts/interface";
 import CustomTextModal from '../components/CustomTextModal';
-import ownersDocument from "../ts/ownersDocumentInterface";
+import Modal from '../components/Modal';
+// import ownersDocument from "../ts/ownersDocumentInterface";
 
 interface AccountProps {}
 
@@ -45,7 +46,7 @@ const CheckoutForm = () => {
 
             try {
                 const { id } = paymentMethod!;
-                console.log({ id, amount: 500 });
+                // console.log({ id, amount: 500 });
                 const { data } = await axios.post("http://localhost:3001/api/charge", { id, amount: 500, email: loggedInfo.email });
                 console.log(data);
                 setResData(data);
@@ -88,7 +89,7 @@ const CheckoutForm = () => {
     const clickedPaid = () => {
         if (!resData) {
             return (
-                <CustomTextModal header={"Payment processing."} content={"Please wait."} updateParent={clickedOkayOnModal} />
+                <CustomTextModal header={"Payment processing or invalid card details."} content={"Please wait."} updateParent={clickedOkayOnModal} />
             );
         } else {
             if (resData.success) {
@@ -106,7 +107,7 @@ const CheckoutForm = () => {
     const clickedCancelled = () => {
         if (!resData) {
             return (
-                <CustomTextModal header={"Subscription cancelling."} content={"Please wait."} updateParent={clickedOkayOnModal}/>
+                <CustomTextModal header={"Subscription cancelling or invalid card details."} content={"Please wait."} updateParent={clickedOkayOnModal}/>
             );
         } else {
             if (resData.success) {
@@ -121,7 +122,7 @@ const CheckoutForm = () => {
         }
     };
 
-    console.log(resData);
+    
     return (<>
         {paid && clickedPaid()}
         {cancelled && clickedCancelled()}
@@ -140,6 +141,7 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
 
     return (
     <>
+        <Modal message={"Please Login."} />
         <br/>
         <Elements stripe={stripePromise}>
             <h1>Account</h1>

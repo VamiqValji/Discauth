@@ -30,7 +30,7 @@ app.post("/api/charge", async (req, res) => {
 
   try {
     const foundOne = await owners.findOne({ email: email });
-    console.log(foundOne);
+    // console.log(foundOne);
     const { customerId, membership } = foundOne.stripeData;
     let customer;
     let CUSTOMER_ID;
