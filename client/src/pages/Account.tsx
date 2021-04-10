@@ -10,6 +10,7 @@ import { useQuery } from '@apollo/client';
 import { getStripeDataQuery } from '../queries/ownerQueries';
 import { stripeData } from "../ts/ownersDocumentInterface";
 import PaymentsContainer from '../components/PaymentsContainer/PaymentsContainer';
+import "../components/componentStyles/Account.scss";
 
 interface AccountProps {}
 
@@ -129,6 +130,20 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
         }
     };
 
+    const cardElementOptions={
+        style: {
+          base: {
+            fontSize: "1.2rem",
+            color: '#9b59b6',
+            '::placeholder': {
+              color: '#aab7c4',
+            },
+          },
+          invalid: {
+            color: '#9e2146',
+          },
+        },
+    };
     
     return (<>
         {paid && clickedPaid()}
@@ -136,8 +151,8 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
         {membership === "Free" && 
             <div className="membershipContainer">
                 <form className="membershipBasic" onSubmit={handleSubmit}>
-                    Basic Membership Tier: $5.00 CAD
-                    <CardElement />
+                    <h3>Basic Membership Tier: <span>$5.00 CAD</span></h3>
+                    <CardElement options={cardElementOptions} />
                     <button type="submit" disabled={!stripe || !elements}>Pay</button>
                 </form>
             </div>
@@ -176,8 +191,10 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
                 <br/>
                 <h1>Account</h1>
                 <br/>
-                <h3>Your account membership: {membership} ({memberShipFee} CAD a month.)</h3>
-                <h4>{paymentDate && `Payment date: ${paymentDate}`}</h4>
+                <div className="accountDetails">
+                    <h3>Your current account membership: <span>{membership} ({memberShipFee} CAD a month.)</span></h3>
+                    <h4>{paymentDate && <>Last payment date: <span>{new Date(paymentDate).toLocaleString()}</span></>}</h4>
+                </div>
                 <br/>
                 <Elements stripe={stripePromise}>
                     <CheckoutForm membership={membership} />

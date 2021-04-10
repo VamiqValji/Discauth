@@ -1,0 +1,35 @@
+.accountDetails {
+  h3,
+  h4 {
+    color: whitesmoke;
+    font-weight: 500;
+  }
+  span {
+    font-weight: 300;
+    color: white;
+  }
+}
+
+.membershipContainer {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  h3 {
+    color: whitesmoke;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    span {
+      font-weight: 300;
+      color: white;
+    }
+  }
+  button {
+    margin-top: 0.5rem;
+    width: 5rem;
+  }
+  .membershipBasic {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
