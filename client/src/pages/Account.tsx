@@ -150,36 +150,48 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
     if (stripeDataLoading || !stripeData) return <h3>Loading...</h3>;
     if (stripeDataError) return <h3>Error.</h3>;
 
-    return (
-    <>
-        <Modal message={"Please Login."} />
-        <br/>
-        <h1>Account</h1>
-        <br/>
-        {/* <h3>{membership}</h3>
-        <h4>{paymentDate && paymentDate}</h4> */}
-        <br/>
-        <Elements stripe={stripePromise}>
-            <CheckoutForm />
-        </Elements>
-        <br/>
-        <h2>Your Previous Payments</h2>
-        {/* {pastPayments.length > 0 ? (
+    try {
+
+        const { membership, paymentDate, pastPayments }:stripeData = stripeData.ownerData.stripeData;
+
+        return (
             <>
-                {
-                    pastPayments.map((payment) => {
-                       <div>
-                           <h3>Membership: {payment.membership}</h3>
-                           <h4>Payment Date: {payment.paymentDate}</h4>
-                           <h4>Cancellation Date: {payment.cancelledDate}</h4>
-                       </div> 
-                    })
-                }
+                <Modal message={"Please Login."} />
+                <br/>
+                <h1>Account</h1>
+                <br/>
+                <h3>{membership}</h3>
+                <h4>{paymentDate && paymentDate}</h4>
+                <br/>
+                <Elements stripe={stripePromise}>
+                    <CheckoutForm />
+                </Elements>
+                <br/>
+                <h2>Your Previous Payments</h2>
+                <div className="paymentsContainer">
+                    {pastPayments.length > 0 ? (
+                        <>
+                            {
+                                pastPayments.map((payment, idx: number) => {
+                                    return (
+                                    <div className="paymentContainer" key={idx}>
+                                        <h3>Membership: {payment.membership}</h3>
+                                        <h4>Payment Date: {payment.paymentDate}</h4>
+                                        <h5>Cancellation Date: {payment.cancelledDate}</h5>
+                                    </div>) 
+                                })
+                            }
+                        </>
+                    ) : (
+                        <h4 className="muted" style={{fontWeight: "normal"}}>You haven't bought anything before!</h4>
+                    )}
+                </div>
             </>
-        ) : (
-            <></>
-        )} */}
-    </>);
+        )
+
+    } catch {
+        return <>Loading...</>;
+    }
 }
 
 export default Account;
