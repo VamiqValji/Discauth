@@ -6,14 +6,12 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
-
+import Nav from "./components/NavBar/Nav";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
-
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import Account from './pages/Account';
@@ -28,35 +26,9 @@ export default function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <div className="nav">
-          <nav>
-            <ul>
-            <span className="leftNav">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              {/* <li>
-                <Link to="/test">Test</Link>
-              </li> */}
-              <li>
-                <Link to="/documentation">Documentation</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/account">Account</Link>
-              </li>
-              </span>
-              <span className="rightNav"><li><Login /></li></span>
-            </ul>
-          </nav>
-          </div>
+          <Nav />
           <div className="appContainer">
             <Switch>
-              {/* <Route path="/test">
-                <Test />
-              </Route> */}
               <Route path="/documentation">
                 <Documentation />
               </Route>

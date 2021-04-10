@@ -139,38 +139,6 @@ nav a {
 
 /* SHORTCUTS */
 
-.nav {
-  position: fixed;
-  top: 0;
-  justify-content: center;
-  width: 100vw;
-  background: black;
-  padding: 1rem;
-  z-index: 10;
-  a {
-    color: whitesmoke;
-    text-decoration: none;
-    transition: 0.2s;
-    &:hover {
-      color: var(--primaryColor);
-      text-decoration: underline;
-    }
-  }
-  nav li {
-    display: block;
-    display: inline-flex;
-    flex-direction: row;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.5em;
-  }
-  .rightNav {
-    position: absolute;
-    right: 1rem;
-    bottom: 0.5rem;
-  }
-}
-
 .appContainer {
   margin: 0 auto;
   width: 50vw;
