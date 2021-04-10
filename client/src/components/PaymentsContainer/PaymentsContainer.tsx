@@ -8,19 +8,21 @@ interface PaymentsContainerProps {
 
 const PaymentsContainer: React.FC<PaymentsContainerProps> = ({pastPayments}) => {
     return (
-        <div className="paymentsContainer">
+        <div className="paymentsContainer customScrollbarDark">
             {pastPayments.length > 0 ? (
                 <>
-                    {
-                        pastPayments.map((payment, idx: number) => {
-                            return (
-                            <div className="paymentContainer" key={idx}>
-                                <h3>Membership: {payment.membership}</h3>
-                                <h4>Payment Date: {payment.paymentDate}</h4>
-                                <h5>Cancellation Date: {payment.cancelledDate}</h5>
-                            </div>) 
-                        })
-                    }
+                    <div className="payments">
+                        {
+                            pastPayments.map((payment, idx: number) => {
+                                return (
+                                    <div className="payment" key={idx}>
+                                    <h3>Membership: {payment.membership}</h3>
+                                    <h4>Payment Date: {new Date(payment.paymentDate).toLocaleString()}</h4>
+                                    <h5>Cancellation Date: {new Date(payment.cancelledDate).toLocaleString()}</h5>
+                                </div>) 
+                            })
+                        }
+                    </div>
                 </>
             ) : (
                 <h4 className="muted" style={{fontWeight: "normal"}}>You haven't bought anything before!</h4>

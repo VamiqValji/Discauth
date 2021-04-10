@@ -1,5 +1,35 @@
-// .paymentsContainer {
-// .paymentContainer {
-
-// }
-// }
+.paymentsContainer {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.1rem 0rem 0.1rem 0rem;
+  margin: 1rem;
+  margin-left: 0rem;
+  max-width: 50vw;
+  max-height: 28rem;
+  border-radius: 0.5rem;
+  overflow-y: auto;
+  h3 {
+    font-weight: 600;
+    color: var(--primaryColor);
+  }
+  h4 {
+    font-weight: normal;
+    font-size: 0.9rem;
+  }
+  h5 {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+  .payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .payment {
+      text-align: center;
+      width: 20vw;
+      border-radius: 0.5rem;
+      background: rgba(0, 0, 0, 0.4);
+      margin: 0.5rem;
+      padding: 0.5rem;
+    }
+  }
+}
