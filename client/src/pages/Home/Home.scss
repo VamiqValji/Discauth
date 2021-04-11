@@ -1,0 +1,66 @@
+@import "../../mixins.scss";
+
+.landingContainer {
+  margin-top: -0.5rem;
+  width: 100vw;
+  background: rgb(40, 44, 52);
+  background: linear-gradient(
+    0deg,
+    rgba(40, 44, 52, 1) 0%,
+    rgba(155, 89, 182, 1) 100%
+  );
+  transform: translateX(-25%);
+  height: 40rem;
+}
+
+.landing {
+  margin: 0 auto;
+  width: 50vw;
+  background: rgba(0, 0, 0, 0.4);
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .content {
+    display: inline-flex;
+    .left,
+    .right {
+      background: rgba(0, 0, 0, 0.4);
+      width: 50%;
+      height: 20rem;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      h1 {
+        font-weight: 600;
+      }
+      h2 {
+        font-weight: 400;
+        color: lightgrey;
+      }
+      button {
+        width: 50%;
+        @include linearGradient;
+        background: white;
+        color: var(--primaryColor);
+        font-weight: 600;
+        font-size: 1.2rem;
+        border: var(--primaryColor) solid 0.2rem;
+        &:hover {
+          @include linearGradient;
+          background: var(--secondaryColor);
+          color: white;
+          border: white solid 0.2rem;
+        }
+        &:active {
+          @include linearGradient;
+          background: white;
+          color: var(--primaryColor);
+          border: var(--primaryColor) solid 0.2rem;
+        }
+      }
+    }
+  }
+}
