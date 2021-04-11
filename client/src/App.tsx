@@ -1,9 +1,6 @@
 // import React from 'react';
-// import logo from './logo.svg';
 import './App.scss';
-// import Test from "./pages/Test";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
 import Nav from "./components/NavBar/Nav";

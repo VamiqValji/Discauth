@@ -30,6 +30,17 @@
     align-items: center;
     justify-content: space-evenly;
   }
+  .leftNav {
+    display: inline-flex;
+    align-items: center;
+    img {
+      width: 4rem;
+      padding: 0rem;
+    }
+    h2 {
+      margin-left: 0.5rem;
+    }
+  }
 
   //   .rightNav {
   //     position: absolute;
