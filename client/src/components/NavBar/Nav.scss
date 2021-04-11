@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .nav {
   position: fixed;
   top: 0;
@@ -30,14 +32,27 @@
     align-items: center;
     justify-content: space-evenly;
   }
+
+  a.leftNavLink {
+    text-decoration: none;
+  }
   .leftNav {
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
-    img {
+    transition: 0.2s;
+    &:hover {
+      transform: scale(1.04);
+    }
+    svg {
       width: 4rem;
+      height: auto;
       padding: 0rem;
     }
     h2 {
+      @include linearGradient;
+      font-weight: 600;
+      color: var(--primaryColor);
       margin-left: 0.5rem;
     }
   }

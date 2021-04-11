@@ -6,7 +6,7 @@ const DiscauthLogo: React.FC = (/*{}*/) => {
         <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Logo">
             <g id="Entire Logo">
-            <rect id="45degRect" x="256" width="362.039" height="362.039" transform="rotate(45 256 0)" fill="white"/>
+            <rect id="degRect" x="256" width="362.039" height="362.039" transform="rotate(45 256 0)" fill="white"/>
             <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="131" y="155" width="250" height="202">
             <g id="checkmark">
             <rect id="top" x="378.039" y="196.52" width="222.764" height="55.0616" transform="rotate(135 378.039 196.52)" fill="#C4C4C4" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
