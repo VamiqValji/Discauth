@@ -79,3 +79,12 @@
     }
   }
 }
+
+.featuresContainer {
+  .featuresCardsContainer {
+    margin: 1rem 0rem 1rem 0rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem 1rem;
+  }
+}

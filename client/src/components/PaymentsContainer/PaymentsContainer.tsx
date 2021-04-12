@@ -25,7 +25,7 @@ const PaymentsContainer: React.FC<PaymentsContainerProps> = ({pastPayments}) => 
                     </div>
                 </>
             ) : (
-                <h4 className="muted" style={{fontWeight: "normal"}}>You haven't bought anything before!</h4>
+                <h4 className="muted" style={{fontWeight: "normal", padding: "1rem"}}>You haven't bought anything before!</h4>
             )}
         </div>
     );
