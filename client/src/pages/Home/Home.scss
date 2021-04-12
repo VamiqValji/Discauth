@@ -15,8 +15,9 @@
 
 .landing {
   margin: 0 auto;
-  width: 50vw;
-  background: rgba(0, 0, 0, 0.4);
+  width: 60vw;
+  /* Uncomment for helper boxes */
+  //   background: rgba(0, 0, 0, 0.4);
   height: 40rem;
   display: flex;
   justify-content: center;
@@ -25,11 +26,13 @@
     display: inline-flex;
     .left,
     .right {
-      background: rgba(0, 0, 0, 0.4);
+      /* Uncomment for helper boxes */
+      //   background: rgba(0, 0, 0, 0.4);
       width: 50%;
       height: 20rem;
     }
     .left {
+      align-self: center;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -60,6 +63,18 @@
           color: var(--primaryColor);
           border: var(--primaryColor) solid 0.2rem;
         }
+      }
+    }
+    .right {
+      height: 40rem;
+      perspective: 800px;
+      img {
+        // transform: skew(-10deg, 10deg);
+        margin-top: 2rem;
+        margin-left: 4rem;
+        transform: rotate3d(0.5, -0.866, 0, 15deg) rotateZ(-1deg);
+        width: 30rem;
+        height: auto;
       }
     }
   }
