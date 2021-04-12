@@ -37,6 +37,8 @@
   border-radius: 50%;
   border: 0.2rem solid whitesmoke;
   filter: drop-shadow(0rem 0rem 0.1rem black);
+  width: 138px;
+  height: 138px;
 }
 .myServerCardContainer button {
   transform: translate(9.5rem, -6.7rem);
@@ -73,6 +75,9 @@
 }
 .viewUsersContainer .subHeader {
   width: 14rem;
+  h2 {
+    font-weight: 500;
+  }
 }
 .viewUsersInformationContainer .viewUsersContainer img {
   width: 40%;
@@ -115,8 +120,10 @@
   h5 {
     font-weight: 300;
     @include linearGradient;
+    color: lightgrey;
   }
   h6 {
+    color: lightgrey;
     font-weight: 300;
     margin-top: 0.1rem;
     padding-bottom: 1rem;
