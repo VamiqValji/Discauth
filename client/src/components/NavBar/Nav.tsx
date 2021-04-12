@@ -21,9 +21,9 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
                         </span>
                     </Link>
                     <span className="middleNav">
-                        <li>
+                        {/* <li>
                             <Link to="/">Home</Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/documentation">Documentation</Link>
                         </li>
