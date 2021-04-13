@@ -137,10 +137,18 @@
         grid-template-columns: 60fr 1fr;
         align-items: center;
         width: 100%;
+        h3 {
+          font-weight: 500;
+        }
         i {
-          // display: block;
-          // float: right;
+          background: var(--primaryColor);
+          border-radius: 0.5rem;
+          padding: 0.5rem;
           cursor: pointer;
+          transition: 0.2s;
+          &:hover {
+            background: var(--secondaryColor);
+          }
         }
       }
       .expand {

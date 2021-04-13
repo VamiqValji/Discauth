@@ -13,7 +13,7 @@ const FAQ: React.FC<FAQProps> = ({ faq }) => {
         <div className={`FAQ ${expanded && `expanded`}`}>
             <div className="head">
                 <h3>{faq.question}</h3>
-                <i className="fas fa-plus-circle" onClick={() => {
+                <i className={`fas fa-${expanded ? `minus` : `plus` }-circle`} onClick={() => {
                     setExpanded(!expanded);
                 }}></i>
             </div>
