@@ -125,27 +125,31 @@
     border-radius: 1rem;
     padding: 1rem;
     .FAQ {
-      display: inline-flex;
       background: rgba(0, 0, 0, 0.4);
       border-radius: 0.5rem;
       width: 100%;
       padding: 1rem;
       margin: 0.5rem 0rem 0.5rem 0rem;
-      .text {
-        .expand {
-          display: none;
+      // transition: 0.2s;
+      height: auto;
+      .head {
+        display: grid;
+        grid-template-columns: 60fr 1fr;
+        align-items: center;
+        width: 100%;
+        i {
+          // display: block;
+          // float: right;
+          cursor: pointer;
         }
       }
-      i {
-        padding: 1rem;
-        cursor: pointer;
+      .expand {
+        display: none;
+        color: lightgrey;
       }
       &.expanded {
-        color: red;
-        .text {
-          .expand {
-            display: flex;
-          }
+        .expand {
+          display: flex;
         }
       }
     }

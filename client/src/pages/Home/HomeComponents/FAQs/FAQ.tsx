@@ -11,15 +11,15 @@ const FAQ: React.FC<FAQProps> = ({ faq }) => {
 
     return (
         <div className={`FAQ ${expanded && `expanded`}`}>
-            <div className="text">
+            <div className="head">
                 <h3>{faq.question}</h3>
-                <div className="expand">
-                    <p>{faq.description}</p>
-                </div>
+                <i className="fas fa-plus-circle" onClick={() => {
+                    setExpanded(!expanded);
+                }}></i>
             </div>
-            <i className="fas fa-plus-circle" onClick={() => {
-                setExpanded(!expanded);
-            }}></i>
+            <div className="expand">
+                <p>{faq.description}</p>
+            </div>
         </div>
     );
 }
