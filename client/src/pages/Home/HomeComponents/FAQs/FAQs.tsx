@@ -52,6 +52,8 @@ const FAQs: React.FC<FAQsProps> = () => {
              Then 
             server members will verify on that server using Discauth,
             for them to be able to receive a "Verified" role on that server.
+            This verification process includes a verification code being
+            sent to the user. 
             The "Verified" role should be given special permissions by server
             owners.
             </>
