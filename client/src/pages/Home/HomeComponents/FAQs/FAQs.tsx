@@ -8,8 +8,20 @@ const FAQs: React.FC<FAQsProps> = () => {
 
     const FAQQuestions:FAQ_Interface[] = [
         {
-            header: <></>,
-            description: <></>
+            question: <>What does Discauth do?</>,
+            description: <>Placeholder</>
+        },
+        {
+            question: <>Who is Discauth for?</>,
+            description: <>Placeholder</>
+        },
+        {
+            question: <>How does Discauth work?</>,
+            description: <>Placeholder</>
+        },
+        {
+            question: <>Do my server's members ever have to visit or log in to this site?</>,
+            description: <>No, this site is only for server owners.</>
         }
     ];
 

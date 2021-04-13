@@ -32,6 +32,6 @@ export interface user {
 }
 
 export interface FAQ_Interface {
-    header: JSX.Element,
+    question: JSX.Element,
     description: JSX.Element,
 }

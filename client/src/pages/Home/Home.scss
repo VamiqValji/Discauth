@@ -118,3 +118,36 @@
     }
   }
 }
+
+.FAQsContainer {
+  .FAQs {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
+    padding: 1rem;
+    .FAQ {
+      display: inline-flex;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 0.5rem;
+      width: 100%;
+      padding: 1rem;
+      margin: 0.5rem 0rem 0.5rem 0rem;
+      .text {
+        .expand {
+          display: none;
+        }
+      }
+      i {
+        padding: 1rem;
+        cursor: pointer;
+      }
+      &.expanded {
+        color: red;
+        .text {
+          .expand {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}
