@@ -13,34 +13,34 @@ const Features: React.FC<FeaturesProps> = () => {
 
     const features:feature[] = [
         {
-            showcase: <>Picture Here</>,
+            showcase: <i className="fas fa-sign-in-alt"></i>,
             header: <>Easy To Start</>,
             paragraph: <>Get started as a server owner by simply logging into the website and following the <Link to="/documentation">documentation</Link>.</>
         },
         {
-            showcase:<>Picture Here</>,
+            showcase: <i className="fas fa-money-check-alt"></i>,
             header: <>Free</>,
             paragraph: <>Discauth's starts with a free tier, so that you may upgrade only if your server has greater needs.</>
         },
         {
-            showcase:<>Picture Here</>,
+            showcase: <i className="fas fa-fast-forward"></i>,
             header: <>Speed</>,
             paragraph: <>Server owners must only go through a few quick steps to register their server. The same applies to server members, thought with even less steps! More information <Link to="/documentation">here</Link>.</>
         },
         {
-            showcase:<>Picture Here</>,
+            showcase: <i className="fas fa-user-check"></i>,
             header: <>Trustful Information Based Verification</>,
             paragraph: <>By getting your server members to verify with their email, you can trust that they are serious about your server. This is especially helpful for exclusive chat channels or tournament-based servers.</>
         },
         {
-            showcase:<>Picture Here</>,
+            showcase: <i className="fas fa-database"></i>,
             header: <>Displayed Data</>,
             paragraph: <>You can easily view all of your server members and their verified data, for each server you have registered using Discauth.</>
         },
         {
-            showcase:<>Picture Here</>,
-            header: <>Other</>,
-            paragraph: <>Other</>
+            showcase: <i className="fas fa-tasks"></i>,
+            header: <>Minimal Management</>,
+            paragraph: <>Once you as a server owner setup your server on the web application and with the Discord bot, there is minimal to zero management you will have to do to keep using Discauth, so you can sleep without worrying.</>
         },
     ];
 
