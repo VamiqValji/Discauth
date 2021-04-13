@@ -49,9 +49,9 @@ const Features: React.FC<FeaturesProps> = () => {
             {/* <h2 className="title">Features</h2> */}
             <div className="featuresCardsContainer">
                 {
-                    features.map((feature) => {
+                    features.map((feature, idx:number) => {
                         return (
-                            <div className="card">
+                            <div className="card" key={idx}>
                                 <div className="showcase">{feature.showcase}</div>
                                 <h2 className="header">{feature.header}</h2>
                                 <p>{feature.paragraph}</p>

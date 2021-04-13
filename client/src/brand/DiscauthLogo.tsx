@@ -9,8 +9,8 @@ const DiscauthLogo: React.FC = (/*{}*/) => {
             <rect id="degRect" x="256" width="362.039" height="362.039" transform="rotate(45 256 0)" fill="white"/>
             <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="131" y="155" width="250" height="202">
             <g id="checkmark">
-            <rect id="top" x="378.039" y="196.52" width="222.764" height="55.0616" transform="rotate(135 378.039 196.52)" fill="#C4C4C4" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect id="bottom" x="173.033" y="228.71" width="121.998" height="55.0616" transform="rotate(45 173.033 228.71)" fill="#C4C4C4" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect id="top" x="378.039" y="196.52" width="222.764" height="55.0616" transform="rotate(135 378.039 196.52)" fill="#C4C4C4" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+            <rect id="bottom" x="173.033" y="228.71" width="121.998" height="55.0616" transform="rotate(45 173.033 228.71)" fill="#C4C4C4" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             <rect id="blockInsideStroke" x="339.096" y="159.729" width="52.0275" height="219.736" transform="rotate(45 339.096 159.729)" fill="#C4C4C4"/>
             </g>
             </mask>
@@ -21,8 +21,8 @@ const DiscauthLogo: React.FC = (/*{}*/) => {
             </g>
             <defs>
             <linearGradient id="paint0_linear" x1="257.761" y1="155.009" x2="257.761" y2="357.981" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#8E44AD"/>
-            <stop offset="1" stop-color="#9B59B6"/>
+            <stop stopColor="#8E44AD"/>
+            <stop offset="1" stopColor="#9B59B6"/>
             </linearGradient>
             </defs>
         </svg>

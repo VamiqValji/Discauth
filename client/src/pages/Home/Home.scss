@@ -2,14 +2,15 @@
 
 .landingContainer {
   margin-top: -0.5rem;
-  width: 100vw;
+  /* width not 100vw because of weird overflow... */
+  width: 99.4vw;
+  transform: translateX(-25%);
   background: rgb(40, 44, 52);
   background: linear-gradient(
     0deg,
     rgba(40, 44, 52, 1) 0%,
     rgba(155, 89, 182, 1) 100%
   );
-  transform: translateX(-25%);
   height: 40rem;
 }
 
