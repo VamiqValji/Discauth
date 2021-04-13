@@ -30,3 +30,8 @@ export interface user {
     verified: boolean,
     timeOfVerification: string | Date,
 }
+
+export interface FAQ_Interface {
+    header: JSX.Element,
+    description: JSX.Element,
+}
