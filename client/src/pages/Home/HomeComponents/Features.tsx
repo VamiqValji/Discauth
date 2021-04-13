@@ -15,12 +15,12 @@ const Features: React.FC<FeaturesProps> = () => {
         {
             showcase: <i className="fas fa-sign-in-alt"></i>,
             header: <>Easy To Start</>,
-            paragraph: <>Get started as a server owner by simply logging into the website and following the <Link to="/documentation">documentation</Link>.</>
+            paragraph: <>Get started as a server owner by simply logging into the website and following the organized <Link to="/documentation">documentation</Link>.</>
         },
         {
             showcase: <i className="fas fa-money-check-alt"></i>,
             header: <>Free</>,
-            paragraph: <>Discauth's starts with a free tier, so that you may upgrade only if your server has greater needs.</>
+            paragraph: <>Discauth's starts with a free tier, so that you may upgrade if your server scales with greater needs. More information <Link to="/account">here</Link>.</>
         },
         {
             showcase: <i className="fas fa-fast-forward"></i>,
@@ -35,18 +35,18 @@ const Features: React.FC<FeaturesProps> = () => {
         {
             showcase: <i className="fas fa-database"></i>,
             header: <>Displayed Data</>,
-            paragraph: <>You can easily view all of your server members and their verified data, for each server you have registered using Discauth.</>
+            paragraph: <>You can easily view all of your server members and their verified data, for each server you have registered using Discauth, right here on the web application.</>
         },
         {
             showcase: <i className="fas fa-tasks"></i>,
             header: <>Minimal Management</>,
-            paragraph: <>Once you as a server owner setup your server on the web application and with the Discord bot, there is minimal to zero management you will have to do to keep using Discauth, so you can sleep without worrying.</>
+            paragraph: <>Once you as a server owner setup your server on the web application and with the Discord bot, there is minimal to zero management you will have to do to keep using Discauth.</>
         },
     ];
 
     return (
         <div className="featuresContainer">
-            <h2>Features</h2>
+            {/* <h2 className="title">Features</h2> */}
             <div className="featuresCardsContainer">
                 {
                     features.map((feature) => {

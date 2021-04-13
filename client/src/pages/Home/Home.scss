@@ -81,10 +81,39 @@
 }
 
 .featuresContainer {
+  .title {
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    margin: 1rem;
+  }
   .featuresCardsContainer {
     margin: 1rem 0rem 1rem 0rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem 1rem;
+    .card {
+      padding: 0rem 0.5rem 0.5rem 0.5rem;
+      .showcase {
+        display: flex;
+        justify-content: center;
+        i {
+          color: var(--primaryColor);
+          @include linearGradient;
+          font-size: 2rem;
+        }
+      }
+      .header {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-weight: 600;
+        margin: 0.5rem;
+      }
+      p {
+        text-align: center;
+        color: lightgrey;
+      }
+    }
   }
 }
