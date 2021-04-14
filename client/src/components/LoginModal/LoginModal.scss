@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 .loginModal {
   display: flex;
   position: fixed;
@@ -7,7 +9,27 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  .closeModal {
+    padding: 1rem;
+    button {
+      background: black;
+      position: absolute;
+      margin-top: 1rem;
+      margin-right: 1rem;
+      top: 0px;
+      right: 0px;
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+      color: var(--primaryColor);
+      @include linearGradient;
+    }
+  }
+  .logo {
+    margin-top: -2rem;
+  }
   h2.h2 {
+    color: lightgrey;
+  }
+  p {
     color: lightgrey;
   }
   .flexCenter {

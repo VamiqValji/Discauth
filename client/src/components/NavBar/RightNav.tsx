@@ -20,6 +20,12 @@ const RightNav: React.FC<RightNavProps> = () => {
                 toggleModal();
             }}>{loggedIn ? "Log Out" : "Login / Sign Up"}</button>
             <LoginModal active={modalIsOn} loggedIn={loggedIn} toggleParentFunction={toggleModal} />
+            {/* 
+            display is none because i want the same functionality
+            to occur as if <Login /> was being rendered, such as
+            auto sign in to still occur, though with my own styled
+            button.
+            */}
             <span style={{display: "none"}}>
                 <Login />
             </span>
