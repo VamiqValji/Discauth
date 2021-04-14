@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import Login from '../../pages/Login';
+// import Login from '../../pages/Login';
 import "./Nav.scss";
 // import DiscauthLogo from "../../brand/DiscauthLogo.svg";
 import DiscauthLogo from "../../brand/DiscauthLogo";
+import RightNav from './RightNav';
 
 interface NavProps {}
 
@@ -35,12 +36,7 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
                         </li>
                     </span>
                     <span className="rightNav">
-                        <li style={{padding: 0}}>
-                            <button className="homeButton" style={{width: "100%"}}>Login</button>
-                            <span style={{display: "none"}}>
-                                <Login />
-                            </span>
-                        </li>
+                        <RightNav />
                     </span>
                 </ul>
             </nav>
