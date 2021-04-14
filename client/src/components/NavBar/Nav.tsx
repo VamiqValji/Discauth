@@ -34,7 +34,14 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
                             <Link to="/account">Account</Link>
                         </li>
                     </span>
-                    <span className="rightNav"><li><Login /></li></span>
+                    <span className="rightNav">
+                        <li style={{padding: 0}}>
+                            <button className="homeButton" style={{width: "100%"}}>Login</button>
+                            <span style={{display: "none"}}>
+                                <Login />
+                            </span>
+                        </li>
+                    </span>
                 </ul>
             </nav>
         </div>
