@@ -196,6 +196,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       a {
+        text-align: center;
         text-decoration: none;
         color: lightgrey;
         &:hover {

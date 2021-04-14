@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import DiscauthLogo from "../../../brand/DiscauthLogo";
+import JoinNowButton from '../../../components/JoinNowButton';
 
 interface FooterProps {}
 
@@ -8,7 +9,7 @@ const Footer: React.FC<FooterProps> = () => {
     return (
         <>
             <div className="joinNow">
-                <button className="homeButton footer">Join Now</button>
+                <JoinNowButton extraClasses={"footer"} />
             </div>
             <div className="footerContainer">
                 <div className="footer">
