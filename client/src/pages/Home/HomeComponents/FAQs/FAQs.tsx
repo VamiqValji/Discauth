@@ -24,6 +24,7 @@ const FAQs: React.FC<FAQsProps> = () => {
             verifying with Discauth, server admins and the owner can set in place 
             certain permissions on Discord, to enable those users to access different 
             channels in comparision to those with the "Verified" role.
+            <br/><br/>
             A real world example would include hosting a gaming tournament. 
             Let's say that their is a prize pool, and so you would like to have 
             serious members participating that you can trust. You can get them to 

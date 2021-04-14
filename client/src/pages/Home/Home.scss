@@ -44,27 +44,6 @@
         font-weight: 400;
         color: lightgrey;
       }
-      button {
-        width: 50%;
-        @include linearGradient;
-        background: white;
-        color: var(--primaryColor);
-        font-weight: 600;
-        font-size: 1.2rem;
-        border: var(--primaryColor) solid 0.2rem;
-        &:hover {
-          @include linearGradient;
-          background: var(--secondaryColor);
-          color: white;
-          border: white solid 0.2rem;
-        }
-        &:active {
-          @include linearGradient;
-          background: white;
-          color: var(--primaryColor);
-          border: var(--primaryColor) solid 0.2rem;
-        }
-      }
     }
     .right {
       height: 40rem;
@@ -78,6 +57,28 @@
         height: auto;
       }
     }
+  }
+}
+
+.homeButton {
+  width: 50%;
+  @include linearGradient;
+  background: white;
+  color: var(--primaryColor);
+  font-weight: 600;
+  font-size: 1.2rem;
+  border: var(--primaryColor) solid 0.2rem;
+  &:hover {
+    @include linearGradient;
+    background: var(--secondaryColor);
+    color: white;
+    border: white solid 0.2rem;
+  }
+  &:active {
+    @include linearGradient;
+    background: white;
+    color: var(--primaryColor);
+    border: var(--primaryColor) solid 0.2rem;
   }
 }
 
@@ -158,6 +159,48 @@
       &.expanded {
         .expand {
           display: flex;
+        }
+      }
+    }
+  }
+}
+
+.joinNow {
+  margin: 2rem 0rem 2rem 0rem;
+  display: flex;
+  justify-content: center;
+  .homeButton.footer {
+    width: 15rem;
+  }
+}
+
+.footerContainer {
+  margin: 1rem 0rem 0rem 0rem;
+  width: 99.4vw;
+  transform: translateX(-25%);
+  .footer {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: auto auto auto;
+    .footerLogo,
+    .links,
+    .copyright {
+      display: flex;
+      justify-content: center;
+      margin: 0.5rem 0rem 0.5rem 0rem;
+    }
+    .links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      a {
+        text-decoration: none;
+        color: lightgrey;
+        &:hover {
+          color: whitesmoke;
+          text-decoration: underline;
         }
       }
     }

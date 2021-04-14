@@ -33,33 +33,35 @@
     justify-content: space-evenly;
   }
 
-  a.leftNavLink {
-    text-decoration: none;
-  }
-  .leftNav {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    transition: 0.2s;
-    &:hover {
-      transform: scale(1.04);
-    }
-    svg {
-      width: 4rem;
-      height: auto;
-      padding: 0rem;
-    }
-    h2 {
-      @include linearGradient;
-      font-weight: 600;
-      color: var(--primaryColor);
-      margin-left: 0.5rem;
-    }
-  }
-
   //   .rightNav {
   //     position: absolute;
   //     right: 1rem;
   //     bottom: 0.5rem;
   //   }
+}
+
+a.leftNavLink,
+a.footerLogoLink {
+  text-decoration: none;
+}
+.leftNav,
+.footerLogo {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: 0.2s;
+  &:hover {
+    transform: scale(1.04);
+  }
+  svg {
+    width: 4rem;
+    height: auto;
+    padding: 0rem;
+  }
+  h2 {
+    @include linearGradient;
+    font-weight: 600;
+    color: var(--primaryColor);
+    margin-left: 0.5rem;
+  }
 }

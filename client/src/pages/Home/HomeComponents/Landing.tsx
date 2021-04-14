@@ -11,7 +11,7 @@ const Landing: React.FC<LandingProps> = () => {
                     <div className="left">
                         <h1>Discord server member verification made easy</h1>
                         <h2>The ultimate server member verification system for Discord. Everything a server owner needs, connected with a bot and web application.</h2>
-                        <button>Join Now</button>
+                        <button className="homeButton">Join Now</button>
                     </div>
                     <div className="right">
                         <img src={landingPageImage} alt="Showcase of some of Discauth's user interface and functionality."/>
