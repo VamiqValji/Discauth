@@ -19,7 +19,7 @@ const RightNav: React.FC<RightNavProps> = () => {
             <button className="homeButton" style={{width: "100%"}} onClick={() =>{
                 toggleModal();
             }}>{loggedIn ? "Log Out" : "Login / Sign Up"}</button>
-            <LoginModal active={modalIsOn} toggleParentFunction={toggleModal} />
+            <LoginModal active={modalIsOn} loggedIn={loggedIn} toggleParentFunction={toggleModal} />
             <span style={{display: "none"}}>
                 <Login />
             </span>
