@@ -14,6 +14,11 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
         <div className="nav">
             <nav>
                 <ul>
+                    <div className="burger">
+                        <div className="line1"></div>
+                        <div className="line2"></div>
+                        <div className="line3"></div>
+                    </div>
                     <Link className="leftNavLink" to="/">
                         <span className="leftNav">
                             <DiscauthLogo />

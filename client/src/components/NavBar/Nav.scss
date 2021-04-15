@@ -32,7 +32,9 @@
     align-items: center;
     justify-content: space-evenly;
   }
-
+  .burger {
+    display: none;
+  }
   //   .rightNav {
   //     position: absolute;
   //     right: 1rem;
@@ -63,5 +65,53 @@ a.footerLogoLink {
     font-weight: 600;
     color: var(--primaryColor);
     margin-left: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .nav {
+    nav {
+      li {
+        padding: 1rem;
+        font-size: 1.2em;
+      }
+      .leftNav {
+        svg {
+          width: 3rem;
+        }
+        h2 {
+          font-size: 1.4rem;
+        }
+      }
+      .rightNav {
+        .homeButton {
+          font-size: 1.3rem;
+          padding: 0.6rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .nav {
+    nav {
+      ul {
+        width: 100vw;
+      }
+      .middleNav {
+        display: none;
+      }
+      .burger {
+        display: block;
+        cursor: pointer;
+        div {
+          background: white;
+          width: 25px;
+          height: 3px;
+          margin: 5px;
+        }
+      }
+    }
   }
 }
