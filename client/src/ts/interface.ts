@@ -35,3 +35,7 @@ export interface FAQ_Interface {
     question: JSX.Element,
     description: JSX.Element,
 }
+
+export interface loginModalState {
+    active: boolean,
+}

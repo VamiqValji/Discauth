@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Login from '../../pages/Login';
-import { useSelector } from "react-redux";
-import { loggedInformation } from '../../ts/interface';
+import { useSelector, useDispatch } from "react-redux";
+import { loggedInformation, loginModalState } from '../../ts/interface';
 import LoginModal from '../LoginModal/LoginModal';
+import { activateLoginModal, deactivateLoginModal } from "../../actions/loginModalAction";
 
 interface RightNavProps {}
 
 const RightNav: React.FC<RightNavProps> = () => {
-    const [modalIsOn, setModalIsOn] = useState<boolean>(false);
+    const { active }:loginModalState = useSelector((state:any) => state.loginModalState);
     const { loggedIn }:loggedInformation = useSelector((state:any) => state.loggedInfo);
+    
+    const dispatch = useDispatch();
 
     const toggleModal = () => {
-        setModalIsOn(!modalIsOn);
+        if (active) {
+            dispatch(deactivateLoginModal());
+        } else {
+            dispatch(activateLoginModal());
+        }
     };
 
     return (
@@ -19,12 +26,12 @@ const RightNav: React.FC<RightNavProps> = () => {
             <button className="homeButton" style={{width: "100%"}} onClick={() =>{
                 toggleModal();
             }}>{loggedIn ? "Log Out" : "Login / Sign Up"}</button>
-            <LoginModal active={modalIsOn} loggedIn={loggedIn} toggleParentFunction={toggleModal} />
+            <LoginModal active={active} loggedIn={loggedIn} toggleParentFunction={toggleModal} />
             {/* 
             display is none because i want the same functionality
             to occur as if <Login /> was being rendered, such as
             auto sign in to still occur, though with my own styled
-            button.
+            button in place.
             */}
             <span style={{display: "none"}}>
                 <Login />

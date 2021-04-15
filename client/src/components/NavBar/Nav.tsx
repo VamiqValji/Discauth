@@ -16,15 +16,11 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
                 <ul>
                     <Link className="leftNavLink" to="/">
                         <span className="leftNav">
-                            {/* <img src={DiscauthLogo} alt="Discauth Logo"/> */}
                             <DiscauthLogo />
                             <h2>Discauth</h2>
                         </span>
                     </Link>
                     <span className="middleNav">
-                        {/* <li>
-                            <Link to="/">Home</Link>
-                        </li> */}
                         <li>
                             <Link to="/documentation">Documentation</Link>
                         </li>
