@@ -177,6 +177,10 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
     if (stripeDataLoading || !stripeData) return <h3>Loading...</h3>;
     if (stripeDataError) return <h3>Error.</h3>;
 
+    if (!loggedInfo.loggedIn) {
+        return <Modal message={"Please Login."} />;
+    }
+
     try {
 
         const { membership, paymentDate, pastPayments }:stripeData = stripeData.ownerData.stripeData;
@@ -188,7 +192,6 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
 
         return (
             <>
-                <Modal message={"Please Login."} />
                 <br/>
                 <h1>Account</h1>
                 <br/>
@@ -206,7 +209,7 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
             </>
         )
     } catch {
-        return <>Loading...</>;
+        return <>Loading / Error...</>;
     }
 }
 
