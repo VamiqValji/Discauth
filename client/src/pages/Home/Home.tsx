@@ -13,7 +13,9 @@ const Home: React.FC<HomeProps> = (/*{}*/) => {
     return (
         <>
             <Landing />
-            <div className="appContainer">
+            <div className="appContainer" style={{
+                marginTop: "0rem"
+            }}>
                 <Features />
                 <FAQs />
             </div>

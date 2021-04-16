@@ -205,6 +205,91 @@
   }
 }
 
+@media only screen and (max-width: 1250px) {
+  .landing {
+    width: 70vw;
+    .content {
+      .left {
+        h1 {
+          font-size: 1.7rem;
+        }
+        h2 {
+          font-size: 1.4rem;
+        }
+        button {
+          min-width: 50%;
+        }
+      }
+      .right {
+        img {
+          margin-left: 0rem;
+          width: 30rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .landing {
+    width: 90vw;
+    .content {
+      .left {
+        height: 22rem;
+        justify-content: space-around;
+        h1 {
+          font-size: 1.65rem;
+        }
+        h2 {
+          font-size: 1.35rem;
+        }
+        button {
+          min-width: 50%;
+        }
+      }
+      .right {
+        img {
+          margin-left: -1rem;
+          width: 30rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .landing {
+    width: 90vw;
+    /* Uncomment for helper boxes */
+    // background: rgba(0, 0, 0, 0.4);
+    .content {
+      .left,
+      .right {
+        background: rgba(0, 0, 0, 0.4);
+      }
+      .left {
+        width: 70%;
+        margin: 0 auto;
+        justify-content: space-evenly;
+        text-align: center;
+        h1 {
+          font-size: 1.65rem;
+        }
+        h2 {
+          font-size: 1.35rem;
+        }
+        button {
+          min-width: 70%;
+          margin: 0 auto;
+        }
+      }
+      .right {
+        display: none;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .appContainer {
     width: 80vw;
