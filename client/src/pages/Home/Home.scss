@@ -265,7 +265,7 @@
     .content {
       .left,
       .right {
-        background: rgba(0, 0, 0, 0.4);
+        // background: rgba(0, 0, 0, 0.4);
       }
       .left {
         width: 70%;
@@ -286,6 +286,48 @@
       .right {
         display: none;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .landing .content {
+    .left {
+      width: 80%;
+    }
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .landing .content {
+    .left {
+      height: 25rem;
+      width: 90%;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  .landing .content {
+    .left {
+      height: 28rem;
+      width: 100%;
+      h1 {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  .landing .content {
+    .left {
+      height: 30rem;
+      justify-content: space-between;
     }
   }
 }
