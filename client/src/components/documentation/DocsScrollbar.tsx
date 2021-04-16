@@ -42,8 +42,8 @@ const DocsScrollbar: React.FC<DocsScrollbarProps> = (/*{}*/) => {
     <>
         <div className="documentationContainer">
             <ul className="documentationScrollbar customScrollbarDark">
-                {sections.map((section:section) => {
-                    return <li className={section.className} onClick={() => {
+                {sections.map((section:section, idx:number) => {
+                    return <li className={section.className} key={idx} onClick={() => {
                         setSelectedSection(section.text);
                     }}>{section.text}</li>
                 })}
