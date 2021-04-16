@@ -188,3 +188,33 @@ input[type="text"] {
     border: 0.1rem solid var(--secondaryColor);
   }
 }
+
+@media only screen and (max-width: 1400px) {
+  .appContainer {
+    width: 60vw;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .appContainer {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .appContainer {
+    width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .appContainer {
+    width: 90vw;
+  }
+}
+
+// @media only screen and (max-width: 315px) {
+//   .appContainer {
+//     width: 100vw;
+//   }
+// }

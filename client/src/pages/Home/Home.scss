@@ -207,3 +207,31 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .appContainer {
+    width: 80vw;
+  }
+  .featuresContainer {
+    .featuresCardsContainer {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .appContainer {
+    width: 90vw;
+  }
+  .featuresContainer {
+    .featuresCardsContainer {
+      grid-template-columns: 1fr;
+    }
+    .card {
+      p {
+        margin: 0 auto;
+        width: 80%;
+      }
+    }
+  }
+}

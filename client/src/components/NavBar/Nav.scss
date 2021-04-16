@@ -46,12 +46,13 @@
     background: rgba(0, 0, 0, 0);
     position: absolute;
     transform: translate(50%, -50%);
-    top: 450%;
+    top: 250%;
     left: -50%;
     width: 120vw;
     height: 120vh;
     transition: 0.2s;
     display: none;
+    overflow: hidden;
   }
   .middleNavInner {
     .logoContainer {
@@ -130,7 +131,7 @@ a.footerLogoLink {
         background: rgba(0, 0, 0, 1);
         display: flex;
         position: absolute;
-        transform: translate(-150%, -2rem); // 2rem to not cover nav
+        transform: translate(-150%, -3rem); // 2rem to not cover nav
         top: 50%;
         left: 8rem;
         transition: 0.2s;
@@ -183,7 +184,7 @@ a.footerLogoLink {
           }
         }
         &.toggled {
-          transform: translate(-50%, -2rem);
+          transform: translate(-50%, -3rem);
         }
       }
       .burgerContainer {
