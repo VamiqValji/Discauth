@@ -32,7 +32,7 @@
     align-items: center;
     justify-content: space-evenly;
   }
-  .burger {
+  .burgerContainer {
     display: none;
   }
   //   .rightNav {
@@ -100,16 +100,54 @@ a.footerLogoLink {
         width: 100vw;
       }
       .middleNav {
-        display: none;
+        // display: none;
+        background: black;
+        display: flex;
+        position: absolute;
+        transform: translate(-50%, 2rem);
+        top: 50%;
+        left: 50%;
+        transition: 0.2s;
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+
+        // .background {
+        //   display: flex;
+        //   position: absolute;
+        //   transform: translate(-50%, -50%);
+        //   top: 50%;
+        //   left: 50%;
+        //   width: 100vw;
+        //   height: 100vh;
+        //   background: red;
+        // }
+
+        .middleNavInner {
+          display: flex;
+          flex-direction: column;
+          li {
+            a {
+              font-size: 1.5rem;
+            }
+          }
+        }
+        &.toggled {
+          transform: translate(-150%, 2rem);
+        }
       }
-      .burger {
+      .burgerContainer {
         display: block;
         cursor: pointer;
-        div {
-          background: white;
-          width: 25px;
-          height: 3px;
-          margin: 5px;
+        .burger {
+          div {
+            background: white;
+            width: 25px;
+            height: 3px;
+            margin: 5px;
+          }
         }
       }
     }
