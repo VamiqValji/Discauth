@@ -202,3 +202,55 @@ a.footerLogoLink {
     }
   }
 }
+
+@media only screen and (max-width: 480px) {
+  .nav {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    .leftNav {
+      svg {
+        width: 3rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+    .rightNav {
+      .homeButton {
+        font-size: 1.3rem;
+        padding: 0.6rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  .nav {
+    .leftNav {
+      svg {
+        width: 2.5rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+    .rightNav {
+      .homeButton {
+        font-size: 1.1rem;
+        padding: 0.4rem;
+      }
+      margin-right: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 260px) {
+  .nav {
+    ul {
+      li {
+        transform: scale(0.9);
+      }
+    }
+  }
+}
