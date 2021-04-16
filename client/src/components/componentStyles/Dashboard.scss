@@ -1,0 +1,8 @@
+.dashboardContainer {
+  button {
+    &.selected {
+      background: var(--secondaryColor);
+      border-color: var(--primaryColor);
+    }
+  }
+}
