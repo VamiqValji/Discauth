@@ -62,6 +62,10 @@ const FAQs: React.FC<FAQsProps> = () => {
         {
             question: <>Do my server's members ever have to visit or log in to this site?</>,
             description: <>No, this site is only for server owners.</>
+        },
+        {
+            question: <>How do I get started?</>,
+            description: <>Visit the <Link to="/documentation">documentation</Link>.</>
         }
     ];
 
