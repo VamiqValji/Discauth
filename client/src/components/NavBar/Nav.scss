@@ -252,5 +252,9 @@ a.footerLogoLink {
         transform: scale(0.9);
       }
     }
+    nav .middleNav .middleNavInner .logoContainer button {
+      float: left;
+      background: red;
+    }
   }
 }
