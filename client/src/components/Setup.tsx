@@ -50,8 +50,6 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                 <p className="tip gradient">First, add some servers using the above instructions.</p>);
                 
             return getAddedServersQueryData.ownerData.verificationCodes.map((server:ownerVerificationCodesInformation, idx:number) => {
-                // const isVerified = ;
-                console.log(server.serverName);
                 const isVerified = server.code === "" || server.code === null;
                 return(
                 <div key={idx}>
@@ -77,7 +75,7 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                     <br/>
                     <h3>Your Added Servers</h3>
                     <h5 className="muted">Once you verify them, they will move to the "My Servers" tab.</h5>
-                    <div className="addServersContainer" >
+                    <div className="addServersContainer customScrollbarDark" >
                         {renderAddedServers()}
                     </div>
                 </>

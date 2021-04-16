@@ -8,9 +8,10 @@
 
 .addServersContainer {
   @include basicBox;
-  margin-top: 1rem;
-  width: 40rem;
-  height: calc(2rem + 20vh);
+  margin: 1rem 0rem 1rem 0rem;
+  // width: 40rem;
+  width: 100%;
+  height: calc(2rem + 25vh);
   flex-wrap: wrap;
   overflow-y: auto;
   justify-content: center;
@@ -109,5 +110,16 @@
   .userInstructions {
     @include basicInstructionsBox;
     margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .addedServerContainer {
+    padding: 1rem;
+    margin: 0.5rem;
+    width: 12rem;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
   }
 }
