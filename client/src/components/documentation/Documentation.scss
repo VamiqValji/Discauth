@@ -1,8 +1,25 @@
 @import "../../mixins.scss";
 
+.documentationContainerContainer {
+  .documentationHeader {
+    margin-top: 7rem;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    // background: red;
+    // span {
+    //   width: 50%;
+    // }
+  }
+  width: 100%;
+}
+
 .documentationContainer {
   margin-top: 1rem;
   display: inline-flex;
+  // height: 100vh;
+  width: 100%;
+  justify-content: center;
   .documentationScrollbar {
     background: rgba(0, 0, 0, 0.4);
     width: 12rem;
@@ -33,7 +50,8 @@
   }
   .documentationWriting {
     // margin-left: 0.6rem;
-    width: calc(10rem + 35vw);
+    // width: calc(10rem + 35vw);
+    width: 80%;
     height: 75vh;
     overflow-y: auto;
     .sectionBackground {

@@ -5,9 +5,13 @@ interface DocumentationProps {}
 
 const Documentation: React.FC<DocumentationProps> = (/*{}*/) => {
     return (
-    <div className="appContainer">
+    <div className="documentationContainerContainer">
         <br/>
-        <h1>Documentation</h1>
+        <div className="documentationHeader">
+            <span>
+                <h1>Documentation</h1>
+            </span>
+        </div>
         <DocsScrollbar />
     </div>);
 }
