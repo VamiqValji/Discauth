@@ -12,6 +12,18 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
 
     const [burgerMenuIsOn, setBurgerMenuIsOn] = useState<boolean>(false);
 
+
+    const logoWithText = () => {
+        return (
+            <Link className="leftNavLink" to="/">
+                <span className="leftNav">
+                    <DiscauthLogo />
+                    <h2>Discauth</h2>
+                </span>
+            </Link>
+        );
+    }
+
     return (
     <>
         <div className="nav">
@@ -24,17 +36,19 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
                             <div className="line3"></div>
                         </div>
                     </div>
-                    <Link className="leftNavLink" to="/">
-                        <span className="leftNav">
-                            <DiscauthLogo />
-                            <h2>Discauth</h2>
-                        </span>
-                    </Link>
+                        {logoWithText()}
                     <span className={`middleNavOuter ${burgerMenuIsOn && "toggled"}`}></span>
                     <span className={`middleNav ${burgerMenuIsOn && "toggled"}`}>
                         <div className="middleNavInner">
-                            <div className="logo">
-                                d
+                            <div className="logoContainer">
+                                <div>
+                                    <button onClick={() => {
+                                            setBurgerMenuIsOn(!burgerMenuIsOn)
+                                    }}><i className="fas fa-times"></i></button>
+                                </div>
+                                <div>
+                                    {logoWithText()}
+                                </div>
                             </div>
                             <li>
                                 <Link to="/documentation">Documentation</Link>
