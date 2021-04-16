@@ -20,9 +20,9 @@ const Footer: React.FC<FooterProps> = () => {
                         </div>
                     </Link>
                     <div className="links">
-                        <Link to="/documentation">Documentation</Link>
+                        {/* <Link to="/documentation">Documentation</Link>
                         <Link to="/dashboard">Dashboard</Link>
-                        <Link to="/account">Account</Link>
+                        <Link to="/account">Account</Link> */}
                         <Link to="/legal">Terms and Conditions</Link>
                         <Link to="/privacy">Privacy Policy</Link>
                     </div>

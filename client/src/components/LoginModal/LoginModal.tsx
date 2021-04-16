@@ -17,7 +17,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ active, loggedIn, toggleParentF
                 <div className="loginModal">
                     <div className="popContainer">
                         <div className="pop">
-                            <div className="closeModal">
+                            <div className="closeModal" style={{marginBottom: "1rem"}}>
                                 <button onClick={() => {
                                         toggleParentFunction();
                                 }}><i className="fas fa-times"></i></button>

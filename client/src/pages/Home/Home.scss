@@ -188,10 +188,15 @@
       display: flex;
       justify-content: center;
       margin: 0.5rem 0rem 0.5rem 0rem;
+      .muted {
+        text-align: center;
+      }
     }
     .links {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      // grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
+      gap: 0.5rem 0.5rem;
       a {
         text-align: center;
         text-decoration: none;
@@ -263,10 +268,10 @@
     /* Uncomment for helper boxes */
     // background: rgba(0, 0, 0, 0.4);
     .content {
-      .left,
-      .right {
-        // background: rgba(0, 0, 0, 0.4);
-      }
+      // .left,
+      // .right {
+      //   // background: rgba(0, 0, 0, 0.4);
+      // }
       .left {
         width: 70%;
         margin: 0 auto;

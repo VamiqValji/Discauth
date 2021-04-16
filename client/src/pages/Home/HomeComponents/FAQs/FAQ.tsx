@@ -15,10 +15,10 @@ const FAQ: React.FC<FAQProps> = ({ faq }) => {
                 <h3>{faq.question}</h3>
                 <i className={`fas fa-${expanded ? `minus` : `plus` }-circle`} onClick={() => {
                     setExpanded(!expanded);
-                }}></i>
+                }} style={{marginLeft: "1rem"}}></i>
             </div>
             <div className="expand">
-                <p>{faq.description}</p>
+                <p style={{marginTop: "1rem"}}>{faq.description}</p>
             </div>
         </div>
     );
