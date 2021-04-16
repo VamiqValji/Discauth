@@ -44,12 +44,12 @@
   .middleNavOuter {
     z-index: 0;
     background: rgba(0, 0, 0, 0);
-    position: absolute;
-    transform: translate(50%, -50%);
-    top: 250%;
-    left: -50%;
-    width: 120vw;
-    height: 120vh;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
     transition: 0.2s;
     display: none;
     overflow: hidden;
