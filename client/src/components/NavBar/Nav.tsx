@@ -30,8 +30,12 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
                             <h2>Discauth</h2>
                         </span>
                     </Link>
+                    <span className={`middleNavOuter ${burgerMenuIsOn && "toggled"}`}></span>
                     <span className={`middleNav ${burgerMenuIsOn && "toggled"}`}>
                         <div className="middleNavInner">
+                            <div className="logo">
+                                d
+                            </div>
                             <li>
                                 <Link to="/documentation">Documentation</Link>
                             </li>

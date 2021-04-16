@@ -40,6 +40,23 @@
   //     right: 1rem;
   //     bottom: 0.5rem;
   //   }
+
+  .middleNavOuter {
+    z-index: 0;
+    background: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    transform: translate(50%, -50%);
+    top: 450%;
+    left: -50%;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+  }
+  .middleNavInner {
+    .logo {
+      display: none;
+    }
+  }
 }
 
 a.leftNavLink,
@@ -99,43 +116,49 @@ a.footerLogoLink {
       ul {
         width: 100vw;
       }
+
+      .middleNavOuter {
+        &.toggled {
+          display: flex;
+        }
+      }
+
       .middleNav {
         // display: none;
-        background: black;
+        background: rgba(0, 0, 0, 1);
         display: flex;
         position: absolute;
-        transform: translate(-50%, 2rem);
+        transform: translate(-150%, -2rem); // 2rem to not cover nav
         top: 50%;
-        left: 50%;
+        left: 8rem;
         transition: 0.2s;
         padding: 1rem;
         border-radius: 1rem;
-        width: 100vw;
+        width: auto;
         height: 100vh;
-        overflow: hidden;
-
-        // .background {
-        //   display: flex;
-        //   position: absolute;
-        //   transform: translate(-50%, -50%);
-        //   top: 50%;
-        //   left: 50%;
-        //   width: 100vw;
-        //   height: 100vh;
-        //   background: red;
-        // }
 
         .middleNavInner {
           display: flex;
           flex-direction: column;
           li {
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            margin: 0.4rem;
+            border-radius: 1rem;
+            &:hover {
+              background: rgba(255, 255, 255, 0.2);
+            }
             a {
               font-size: 1.5rem;
             }
           }
+          .logo {
+            display: flex;
+          }
         }
         &.toggled {
-          transform: translate(-150%, 2rem);
+          transform: translate(-50%, -2rem);
         }
       }
       .burgerContainer {
