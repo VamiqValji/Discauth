@@ -24,7 +24,6 @@ export default function App() {
       <Router>
         <div>
           <Nav />
-          <div className="appContainer">
             <Switch>
               <Route path="/documentation">
                 <Documentation />
@@ -39,7 +38,6 @@ export default function App() {
                 <Home />
               </Route>
             </Switch>
-          </div>
         </div>
       </Router>
     </ApolloProvider>

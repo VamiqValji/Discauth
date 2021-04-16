@@ -19,7 +19,7 @@ const Dashboard: React.FC<DashboardProps> = (/*{}*/) => {
     console.log(panel);
 
     return (
-        <>  
+        <div className="appContainer">  
             <Modal message={"Please Login."} />
             <br/>
             <h1>Owner Dashboard</h1>
@@ -35,7 +35,7 @@ const Dashboard: React.FC<DashboardProps> = (/*{}*/) => {
                     <MyServers />
                 )
             }
-        </>
+        </div>
     );
 }
 

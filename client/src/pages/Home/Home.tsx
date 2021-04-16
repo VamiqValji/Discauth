@@ -13,8 +13,10 @@ const Home: React.FC<HomeProps> = (/*{}*/) => {
     return (
         <>
             <Landing />
-            <Features />
-            <FAQs />
+            <div className="appContainer">
+                <Features />
+                <FAQs />
+            </div>
             <Footer />
         </>
     );

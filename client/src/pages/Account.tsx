@@ -191,7 +191,7 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
         } 
 
         return (
-            <>
+            <div className="appContainer">
                 <br/>
                 <h1>Account</h1>
                 <br/>
@@ -206,7 +206,7 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
                 <br/>
                 <h2>Your Previous Payments</h2>
                 <PaymentsContainer pastPayments={pastPayments} />
-            </>
+            </div>
         )
     } catch {
         return <>Loading / Error...</>;

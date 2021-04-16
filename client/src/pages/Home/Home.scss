@@ -1,10 +1,8 @@
 @import "../../mixins.scss";
 
 .landingContainer {
-  margin-top: -0.8rem;
+  margin-top: 6.2rem;
   /* width not 100vw because of weird overflow... */
-  width: 99.4vw;
-  transform: translateX(-25%);
   background: rgb(40, 44, 52);
   background: linear-gradient(
     0deg,
@@ -12,6 +10,7 @@
     rgba(155, 89, 182, 1) 100%
   );
   height: 40rem;
+  overflow: hidden;
 }
 
 .landing {
@@ -176,8 +175,6 @@
 
 .footerContainer {
   margin: 1rem 0rem 0rem 0rem;
-  width: 99.4vw;
-  transform: translateX(-25%);
   .footer {
     padding: 1.5rem;
     background: rgba(0, 0, 0, 0.8);
