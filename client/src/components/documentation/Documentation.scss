@@ -106,3 +106,25 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .documentationContainer {
+    .documentationScrollbar {
+      display: none;
+    }
+    .documentationWriting {
+      width: 95%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .documentationContainer {
+    .documentationWriting {
+      img,
+      p {
+        max-width: 70%;
+      }
+    }
+  }
+}
