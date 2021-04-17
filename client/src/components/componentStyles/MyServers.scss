@@ -11,6 +11,16 @@
 
 .myServerContainer {
   display: inline-flex;
+  .viewUsersHeader {
+    display: none;
+    justify-content: center;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+    width: 30rem;
+    font-size: 1rem;
+    color: lightgrey;
+  }
 }
 .myServersCardsContainer {
   height: calc(20rem + 30vh);
@@ -206,6 +216,74 @@
         margin-top: 0rem;
       }
       grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media only screen and (max-width: 735px) {
+  .myServerContainer {
+    flex-direction: column;
+
+    .myServersCardsContainer {
+      height: calc(8rem + 30vh);
+      margin-bottom: 1rem;
+    }
+
+    .viewUsersContainer,
+    .myServersCardsContainer {
+      width: 30rem;
+    }
+
+    .viewUsersHeader {
+      display: flex;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .myServerContainer {
+    .viewUsersContainer,
+    .myServersCardsContainer,
+    .viewUsersHeader {
+      width: 100%;
+    }
+  }
+}
+
+// @media only screen and (max-width: 365px) {
+//   .myServerContainer {
+//     .viewUsersContainer,
+//     .myServersCardsContainer,
+//     .viewUsersHeader {
+//       // width: 18rem;
+//     }
+//   }
+// }
+
+@media only screen and (max-width: 315px) {
+  .myServerContainer {
+    // .viewUsersContainer,
+    // .myServersCardsContainer,
+    // .viewUsersHeader {
+    //   // width: 15rem;
+    // }
+    .myServersCardsContainer .myServerCardContainer,
+    .viewUsersContainer .viewUsersInformationContainer .header {
+      word-break: break-all;
+      .title,
+      .subtitle {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+      .title {
+        font-size: 1.4rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+    .usersListContainer .usersList * {
+      word-break: break-all;
     }
   }
 }

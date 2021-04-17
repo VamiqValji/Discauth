@@ -69,6 +69,7 @@ const ViewUsers: React.FC<ViewUsersProps> = (
 
     return (
     <>
+        <h2 className="viewUsersHeader">Verified Users of Selected Server</h2>
         <div className="viewUsersContainer customScrollbarDark">
             <div className="viewUsersInformationContainer">
                 <div className="header">
