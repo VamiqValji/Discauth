@@ -20,6 +20,9 @@
     font-size: 0.8rem;
     font-weight: 300;
   }
+  b {
+    font-weight: 500;
+  }
   .payments {
     display: flex;
     flex-wrap: wrap;
@@ -32,5 +35,26 @@
       margin: 0.5rem;
       padding: 0.5rem;
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .paymentsContainer .payments {
+    justify-content: space-around;
+    .payment {
+      width: 14rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 615px) {
+  .paymentsContainer .payments .payment {
+    width: 12rem;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .paymentsContainer .payments .payment {
+    width: 14rem;
   }
 }

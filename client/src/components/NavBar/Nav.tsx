@@ -39,7 +39,7 @@ const Nav: React.FC<NavProps> = (/*{}*/) => {
                         {logoWithText()}
                     <span className={`middleNavOuter ${burgerMenuIsOn && "toggled"}`}></span>
                     <span className={`middleNav ${burgerMenuIsOn && "toggled"}`}>
-                        <div className="middleNavInner">
+                        <div className="middleNavInner customScrollbarLight">
                             <div className="logoContainer">
                                 <div>
                                     <button onClick={() => {

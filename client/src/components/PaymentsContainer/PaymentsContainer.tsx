@@ -7,18 +7,20 @@ interface PaymentsContainerProps {
 }
 
 const PaymentsContainer: React.FC<PaymentsContainerProps> = ({pastPayments}) => {
+    const reversedPastPayments = pastPayments.slice().reverse();
+    // .slice() was used to get an "unfrozen" version of the list
     return (
         <div className="paymentsContainer customScrollbarDark">
             {pastPayments.length > 0 ? (
                 <>
                     <div className="payments">
                         {
-                            pastPayments.map((payment, idx: number) => {
+                            reversedPastPayments.map((payment, idx: number) => {
                                 return (
                                     <div className="payment" key={idx}>
                                     <h3>Membership: {payment.membership}</h3>
-                                    <h4>Payment Date: {new Date(payment.paymentDate).toLocaleString()}</h4>
-                                    <h5>Cancellation Date: {new Date(payment.cancelledDate).toLocaleString()}</h5>
+                                    <h4>Payment Date: <b>{new Date(payment.paymentDate).toLocaleString()}</b></h4>
+                                    <h5>Cancellation Date: <b>{new Date(payment.cancelledDate).toLocaleString()}</b></h5>
                                 </div>) 
                             })
                         }
