@@ -75,22 +75,24 @@ const ViewUsers: React.FC<ViewUsersProps> = (
                     {renderData()}
                 </div>
             </div>
-            {!isPlaceHolder && currentUsersList.map((user:user, idx:number) => {
-                return (
-                <div key={idx} className="usersList">
-                    <div className="textContainer">
-                        <h2>{user.name}</h2>
-                        <h3 className="muted">{user.id}</h3>
-                        <h4 style={user.verified ? {color:"green"} : {color:"red"} }>{user.verified ? "Verified!" : "Not Verified."}</h4>
-                        <h5>Email: {user.email}</h5>
-                        <h6>Verified On: {new Date(user.timeOfVerification).toLocaleString()}</h6>
+            <div className="usersListContainer">
+                {!isPlaceHolder && currentUsersList.map((user:user, idx:number) => {
+                    return (
+                    <div key={idx} className="usersList">
+                        <div className="imgContainer">
+                            <img className="userAvatar" src={user.avatar} alt="User Avatar"/>
+                        </div>
+                        <div className="textContainer">
+                            <h2>{user.name}</h2>
+                            <h4 style={user.verified ? {color:"green"} : {color:"red"} }>{user.verified ? "Verified!" : "Not Verified."}</h4>
+                            <h3 className="muted">{user.id}</h3>
+                            <h5>Email: {user.email}</h5>
+                            <h6>Verified On: {new Date(user.timeOfVerification).toLocaleString()}</h6>
+                        </div>
                     </div>
-                    <div className="imgContainer">
-                        <img className="userAvatar" src={user.avatar} alt="User Avatar"/>
-                    </div>
-                </div>
-                );
-            })}
+                    );
+                })}
+            </div>
         </div>
     </>
     );
