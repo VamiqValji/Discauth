@@ -86,7 +86,7 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
     return (
         <>
             <br/>
-            <h1>Setup</h1>
+            <h1 style={{fontWeight: 600}}>Setup</h1>
             {renderIfLoggedIn()}
         </>
     );

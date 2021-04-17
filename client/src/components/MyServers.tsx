@@ -38,16 +38,20 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                             <div className="myServerCardContainer">
                                 <h2 className="title">{server.serverName}</h2>
                                 <h3 className="muted subtitle">Server ID: {server.serverId}</h3>
-                                <img className="serverIcon" src={server.icon} alt="Server Icon"/>
-                                <button className="btn" onClick={() => {
-                                    const alreadySelected = userSelected.serverName === server.serverName;
-                                    if (alreadySelected) return;
-                                    setUserSelected({
-                                        serverName: server.serverName,
-                                        serverId: server.serverId,
-                                        serverIcon: server.icon,
-                                    });
-                                }}>View Verified Users</button>
+                                <div className="imgAndButtonContainer">
+                                    <img className="serverIcon" src={server.icon} alt="Server Icon"/>
+                                    <div className="buttonContainer">
+                                        <button className="btn" onClick={() => {
+                                            const alreadySelected = userSelected.serverName === server.serverName;
+                                            if (alreadySelected) return;
+                                            setUserSelected({
+                                                serverName: server.serverName,
+                                                serverId: server.serverId,
+                                                serverIcon: server.icon,
+                                            });
+                                        }}>View Verified Users</button>
+                                    </div>
+                                </div>
                             </div>
                         </>
                     ) : (<></>)
@@ -59,9 +63,9 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
     return (
         <>
             <br/>
-            <h1>My Servers</h1>
+            <h1 style={{fontWeight: 600}}>My Servers</h1>
             <div className="myServerContainer">
-                <div className="myServersCardsContainer">
+                <div className="myServersCardsContainer customScrollbarDark">
                     {renderIfLoggedIn()}
                 </div>
                     {userSelected === "" ? (<ViewUsers />) : 

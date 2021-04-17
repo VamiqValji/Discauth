@@ -1,11 +1,20 @@
 @import "../../mixins.scss";
 
+@mixin imgStyles {
+  margin: 0.5rem;
+  border-radius: 50%;
+  border: 0.2rem solid whitesmoke;
+  filter: drop-shadow(0rem 0rem 0.1rem black);
+  width: 138px;
+  height: 138px;
+}
+
 .myServerContainer {
   display: inline-flex;
 }
 .myServersCardsContainer {
   height: calc(20rem + 30vh);
-  width: 23rem;
+  width: 24.5rem;
   background: rgba(0, 0, 0, 0.4);
   // margin-left: 1rem;
   padding: 0rem 1rem 1rem 1rem;
@@ -16,37 +25,45 @@
 
 .myServerCardContainer {
   height: 15.5rem;
-  width: 21rem;
+  width: 100%;
   padding: 1rem;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 1rem;
-}
-.myServerCardContainer .title {
-  margin: 0.5rem;
-  font-weight: 500;
-}
-.myServerCardContainer .subtitle {
-  margin: 0.5rem;
-  margin-top: -0.4rem;
-  font-weight: 400;
-  font-size: 1rem;
-}
-.myServerCardContainer .serverIcon,
-.viewUsersContainer img {
-  margin: 0.5rem;
-  border-radius: 50%;
-  border: 0.2rem solid whitesmoke;
-  filter: drop-shadow(0rem 0rem 0.1rem black);
-  width: 138px;
-  height: 138px;
-}
-.myServerCardContainer button {
-  transform: translate(9.5rem, -6.7rem);
-  font-size: 1rem;
-  font-weight: 600;
-  max-width: 10rem;
-  padding: 0.5rem;
-  overflow-x: hidden;
+  margin-top: 1rem;
+  &:first-child {
+    margin-top: 0rem;
+  }
+  .title {
+    margin: 0.5rem;
+    font-weight: 500;
+  }
+  .subtitle {
+    margin: 0.5rem;
+    margin-top: -0.4rem;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+  .imgAndButtonContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    img {
+      @include imgStyles;
+    }
+    .buttonContainer {
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      place-self: center;
+      button {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.5rem;
+        width: 9rem;
+        height: 5rem;
+      }
+    }
+  }
 }
 
 .viewUsersContainer {
@@ -58,6 +75,9 @@
   border-radius: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  img {
+    @include imgStyles;
+  }
 }
 .viewUsersInformationContainer {
   display: flex;
