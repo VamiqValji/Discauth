@@ -152,3 +152,60 @@
     }
   }
 }
+
+@media only screen and (max-width: 1120px) {
+  .myServerContainer {
+    // flex-direction: column;
+    margin-top: 1rem;
+    .myServersCardsContainer {
+      // height: calc(5rem + 30vh);
+      margin: 0rem 1rem 0rem 0rem;
+      width: 20rem;
+      .myServerCardContainer {
+        height: auto;
+        .title,
+        .subtitle {
+          text-align: center;
+        }
+        .title {
+          margin-top: 0rem;
+        }
+        .imgAndButtonContainer {
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr auto;
+          gap: 0.5rem;
+          img {
+            place-self: center;
+          }
+          .buttonContainer {
+            button {
+              margin-bottom: 0.2rem;
+            }
+          }
+        }
+      }
+    }
+    .viewUsersContainer {
+      margin-top: 0rem;
+      margin-left: 0rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 970px) {
+  .viewUsersContainer {
+    width: 20rem;
+    .viewUsersInformationContainer {
+      margin-bottom: 1rem;
+      .header {
+        flex-direction: column;
+      }
+    }
+    .usersListContainer {
+      .usersList {
+        margin-top: 0rem;
+      }
+      grid-template-columns: 1fr;
+    }
+  }
+}
