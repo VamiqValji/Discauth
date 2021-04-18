@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const owners = require("./models/ownersModel");
 const cors = require("cors");
 const Stripe = require("stripe");
+const path = require("path");
 
 require("dotenv").config();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -21,9 +22,9 @@ app.use(
   })
 );
 
-app.get("/test", (req, res) => {
-  res.send("hi!");
-});
+// app.get("/test", (req, res) => {
+//   res.send("hi!");
+// });
 
 app.post("/api/charge", async (req, res) => {
   const { id, amount, email } = req.body;
@@ -167,6 +168,13 @@ app.post("/api/cancel", async (req, res) => {
     });
   }
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 mongoose
   .connect(process.env.DB_CONNECT, {
