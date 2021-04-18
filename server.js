@@ -73,7 +73,7 @@ app.post("/api/charge", async (req, res) => {
 
     const subscription = await stripe.subscriptions.create({
       customer: CUSTOMER_ID,
-      items: [{ plan: "price_1IcwasEdCEoU8nXu38DK2g8I" }],
+      items: [{ plan: "price_1IhilLEdCEoU8nXugiSY6XBL" }], // price_1IcwasEdCEoU8nXu38DK2g8I
       expand: ["latest_invoice.payment_intent"], //  invoice_settings.default_payment_method
       default_payment_method: id,
     });
