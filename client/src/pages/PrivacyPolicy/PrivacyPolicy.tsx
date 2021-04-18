@@ -19,7 +19,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                 <br/>
                 We collect Device Information using the following technologies:
                 <br/>
-                    <br/> - “Cookies” are data files that are placed on your device or computer and often include an anonymous unique identifier. For more information about cookies, and how to disable cookies, visit http://www.allaboutcookies.org.
+                    <br/> - “Cookies” are data files that are placed on your device or computer and often include an anonymous unique identifier. For more information about cookies, and how to disable cookies, visit http://www.allaboutcookies.org. 
+                    Some cookies on our website also facilitate our integrated social media login functionality (e.g.{/*, via Facebook, */} Google{/*, or GitHub*/}). 
                     <br/> - “Log files” track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.
                     <br/> - “Web beacons,” “tags,” and “pixels” are electronic files used to record information about how you browse the Site.
                 <br/>

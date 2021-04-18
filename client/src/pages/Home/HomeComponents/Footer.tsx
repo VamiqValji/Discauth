@@ -23,7 +23,7 @@ const Footer: React.FC<FooterProps> = () => {
                         {/* <Link to="/documentation">Documentation</Link>
                         <Link to="/dashboard">Dashboard</Link>
                         <Link to="/account">Account</Link> */}
-                        <Link to="/legal">Terms of Service</Link>
+                        <Link to="/legal">Terms and Conditions</Link>
                         <Link to="/privacy">Privacy Policy</Link>
                     </div>
                     <div className="copyright">
