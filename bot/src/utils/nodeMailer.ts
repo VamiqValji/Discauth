@@ -18,11 +18,11 @@ const sendEmail = async (
     },
   });
 
-  let mailOptions = {
+  let mailOptions:nodemailer.SendMailOptions = {
     from: process.env.NODEMAILER_USER,
     to: to,
     subject: "Discauth Verification",
-    text: `Your Discauth verification code for the server '${serverName}' is '${verificationCode}'. DM the Discauth bot '.verify ${verificationCode}' to verify yourself.`,
+    text: `Your Discauth verification code for the server '${serverName}' is '${verificationCode}'. DM the Discauth bot '.verify ${verificationCode}' to verify yourself. By using Discauth and its Services, you are agreeing to our terms of service and privacy policy. More information here: https://discauth.herokuapp.com/`,
   };
 
   transporter.sendMail(mailOptions, (err: any, data: any) => {
