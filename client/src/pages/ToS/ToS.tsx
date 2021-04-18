@@ -23,6 +23,8 @@ const ToS: React.FC<ToSProps> = () => {
                 Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.
 
                 Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.
+            
+                All purchases and or payments of any kind are final and non-refundable.
             </p>
 
             <br/>
@@ -75,7 +77,7 @@ const ToS: React.FC<ToSProps> = () => {
             <h4>SECTION 5 - PRODUCTS OR SERVICES (if applicable)</h4>
 
             <p>
-                Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.
+                Certain products or services may be available exclusively online through the website. These products or services may have limited quantities{/* and are subject to return or exchange only*/}.
 
                 We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.
 
@@ -90,9 +92,7 @@ const ToS: React.FC<ToSProps> = () => {
             <p>
                 We reserve the right to refuse any order you place with us. We may, in our sole discretion, limit or cancel quantities purchased per person, per household or per order. These restrictions may include orders placed by or under the same customer account, the same credit card, and/or orders that use the same billing and/or shipping address. In the event that we make a change to or cancel an order, we may attempt to notify you by contacting the e-mail and/or billing address/phone number provided at the time the order was made. We reserve the right to limit or prohibit orders that, in our sole judgment, appear to be placed by dealers, resellers or distributors.
 
-                You agree to provide current, complete and accurate purchase and account information for all purchases made at our store. You agree to promptly update your account and other information, including your email address and credit card numbers and expiration dates, so that we can complete your transactions and contact you as needed.
-
-                For more detail, please review our Returns Policy.
+                You agree to provide current, complete and accurate purchase and account information for all purchases made at our store and or with our service. You agree to promptly update your account and other information, including your email address and credit card numbers and expiration dates, so that we can complete your transactions and contact you as needed.
             </p>
 
             <br/>
