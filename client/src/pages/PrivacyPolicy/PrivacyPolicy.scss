@@ -1,4 +1,9 @@
-.privacyPolicyContainer {
+.privacyPolicyContainer,
+.tosContainer {
+  h3 {
+    font-weight: 600;
+    color: lightgrey;
+  }
   h4 {
     font-weight: 700;
     color: whitesmoke;
