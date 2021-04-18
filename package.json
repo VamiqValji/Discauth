@@ -1,7 +1,11 @@
 {
   "name": "my-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discauth is the ultimate server member verification system for Discord. It is everything a server owner needs, connected with a bot and web application.",
+  "engines": {
+    "node": "14.15.1",
+    "npm": "6.14.8"
+  },
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
