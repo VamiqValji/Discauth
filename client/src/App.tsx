@@ -4,6 +4,8 @@ import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
 import Nav from "./components/NavBar/Nav";
+import ToS from "./pages/ToS/ToS";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +35,12 @@ export default function App() {
               </Route>
               <Route path="/account">
                 <Account />
+              </Route>
+              <Route path="/legal">
+                <ToS />
+              </Route>
+              <Route path="/privacy">
+                <PrivacyPolicy />
               </Route>
               <Route path="/">
                 <Home />
