@@ -1,9 +1,14 @@
 .notFoundContainer {
   width: 100%;
   h1,
-  .buttonContainer {
+  .buttonContainer,
+  .logoContainer {
     display: flex;
     justify-content: center;
+  }
+  h1,
+  button {
+    text-align: center;
   }
   .buttonContainer {
     margin-top: 1rem;

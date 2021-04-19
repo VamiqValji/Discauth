@@ -11,7 +11,7 @@ const NotFound: React.FC<NotFoundProps> = () => {
         <br/>
         <div className="notFoundContainer">
             <div className="logoContainer">
-                <DiscauthLogoWithText />
+            <DiscauthLogoWithText />
             </div>
             <h1>Page Not Found</h1>
             <div className="buttonContainer">

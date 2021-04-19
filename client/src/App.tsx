@@ -6,11 +6,12 @@ import Documentation from "./pages/Documentation";
 import Nav from "./components/NavBar/Nav";
 import ToS from "./pages/ToS/ToS";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
-import NotFound from "./pages/NotFound/NotFound";
+// import NotFound from "./pages/NotFound/NotFound";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
@@ -48,7 +49,8 @@ export default function App() {
                 <Home />
               </Route>
               <Route path="*">
-                <NotFound />
+                {/* <NotFound /> */}
+                <Redirect to="/" />
               </Route>
             </Switch>
         </div>

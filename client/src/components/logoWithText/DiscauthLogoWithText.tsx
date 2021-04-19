@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import DiscauthLogo from '../../brand/DiscauthLogo';
 
-interface DiscauthLogoWithTextProps {}
+interface DiscauthLogoWithTextProps {
+    style?: object
+}
 
-const DiscauthLogoWithText: React.FC<DiscauthLogoWithTextProps> = ({}) => {
+const DiscauthLogoWithText: React.FC<DiscauthLogoWithTextProps> = ({ style={} }) => {
     return (
-    <div className="logoWithTextContainer">
+    <div className="logoWithTextContainer" style={style}>
         <Link className="footerLogoLink" to="/">
             <div className="footerLogo">
                 <DiscauthLogo />
