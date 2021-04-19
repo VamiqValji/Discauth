@@ -11,6 +11,7 @@ import { getStripeDataQuery } from '../queries/ownerQueries';
 import { stripeData } from "../ts/ownersDocumentInterface";
 import PaymentsContainer from '../components/PaymentsContainer/PaymentsContainer';
 import "../components/componentStyles/Account.scss";
+import url from "../ts/serverLink";
 
 interface AccountProps {}
 
@@ -55,7 +56,7 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
             try {
                 const { id } = paymentMethod!;
                 // console.log({ id, amount: 500 });
-                const { data } = await axios.post("http://localhost:3001/api/charge", { id, amount: 500, email: loggedInfo.email });
+                const { data } = await axios.post(`${url}/api/charge`, { id, amount: 500, email: loggedInfo.email });
                 console.log(data);
                 setResData(data);
             } catch(err) {
@@ -78,7 +79,7 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
         // if (!error) {
             try {
                 // const { id } = paymentMethod!;
-                const { data } = await axios.post("http://localhost:3001/api/cancel", { /*id,*/ amount: 500, email: loggedInfo.email });
+                const { data } = await axios.post(`${url}/api/cancel`, { /*id,*/ amount: 500, email: loggedInfo.email });
                 console.log(data);
                 setResData(data);
             } catch(err) {

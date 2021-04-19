@@ -14,9 +14,10 @@ import {
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import Account from './pages/Account';
+import url from "./ts/serverLink";
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  uri: `${url}/graphql`,
   cache: new InMemoryCache()
 });
 
