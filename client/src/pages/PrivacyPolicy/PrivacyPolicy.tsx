@@ -11,7 +11,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         <div className="privacyPolicyContainer">
             <br/>
             <p>
-                This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from https://www.discauth.herokuapp.com (the “Site”), as well as when a server member (registering and verifying in a server owner's Discord) uses Discauth's services. By using Discauth's services, you consent to the data practices described in this statement.
+                This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from https://discauthapp.herokuapp.com (the “Site”), as well as when a server member (registering and verifying in a server owner's Discord) uses Discauth's services. By using Discauth's services, you consent to the data practices described in this statement.
             </p>
             <br/>
             <h4>PERSONAL INFORMATION WE COLLECT</h4>

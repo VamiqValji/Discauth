@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -129,7 +129,8 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
     const cardElementOptions={
         style: {
           base: {
-            fontSize: "1.2rem",
+            fontSize: "16px",
+            fontFamily: '"Montserrat", sans-serif',
             color: '#9b59b6',
             '::placeholder': {
               color: '#aab7c4',
@@ -177,6 +178,12 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
         return <Modal message={"Please Login."} />;
     }
 
+    const ElementOptions:StripeElementsOptions = {
+        fonts: [
+            {cssSrc: 'https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,500,600'}
+        ],
+    };
+
     try {
 
         const { membership, paymentDate, pastPayments }:stripeData = stripeData.ownerData.stripeData;
@@ -196,7 +203,7 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
                     <h4>{paymentDate && <>Last payment date: <span>{new Date(paymentDate).toLocaleString()}</span></>}</h4>
                 </div>
                 <br/>
-                <Elements stripe={stripePromise}>
+                <Elements stripe={stripePromise} options={ElementOptions}>
                     <CheckoutForm membership={membership} />
                 </Elements>
                 <br/>
