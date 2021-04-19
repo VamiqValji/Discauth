@@ -3,15 +3,19 @@ import { Link } from "react-router-dom";
 import DiscauthLogo from "../../../brand/DiscauthLogo";
 import JoinNowButton from '../../../components/JoinNowButton';
 
-interface FooterProps {}
+interface FooterProps {
+    displayJoinNowButton?: boolean
+}
 
-const Footer: React.FC<FooterProps> = () => {
+const Footer: React.FC<FooterProps> = ({ displayJoinNowButton }) => {
     return (
         <>
-            <div className="joinNow">
-                <JoinNowButton extraClasses={"footer"} />
-            </div>
-            <div className="footerContainer">
+            {displayJoinNowButton && (
+                <div className="joinNow">
+                    <JoinNowButton extraClasses={"footer"} />
+                </div>
+            )}
+            <div className="footerContainer" style={displayJoinNowButton ? {} : {marginTop: "3rem"}}>
                 <div className="footer">
                     <Link className="footerLogoLink" to="/">
                         <div className="footerLogo">

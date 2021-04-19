@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = (/*{}*/) => {
                 <Features />
                 <FAQs />
             </div>
-            <Footer />
+            <Footer displayJoinNowButton={true} />
         </>
     );
 }
