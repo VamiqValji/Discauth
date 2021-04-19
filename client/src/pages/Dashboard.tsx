@@ -18,8 +18,6 @@ const Dashboard: React.FC<DashboardProps> = (/*{}*/) => {
         setPanel(e.currentTarget.innerHTML);
     };
 
-    console.log(panel);
-
     return (
         <div className="appContainer">
             <div className="dashboardContainer">

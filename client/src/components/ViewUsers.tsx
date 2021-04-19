@@ -25,16 +25,14 @@ const ViewUsers: React.FC<ViewUsersProps> = (
 
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
 
-    const { loading: getQueryLoading, error: getQueryError, data: getQueryData } = useQuery(getMyServersUsersQuery, {
+    const { /*loading: getQueryLoading, error: getQueryError,*/ data: getQueryData } = useQuery(getMyServersUsersQuery, {
         variables: { googleId: loggedInfo.id }
     });
-    console.log(getQueryLoading, getQueryError, getQueryData);
 
     useEffect(() => {
         // set which list of users to map
         if (getQueryData) {
             getQueryData.ownerData.servers.forEach((server:ownerServersInformation) => {
-                console.log("getQueryData MAP", server.serverId);
                 const thisServerIsSelected = server.serverId === serverId;
                 if (thisServerIsSelected) {
                     setCurrentUsersList(server.users);

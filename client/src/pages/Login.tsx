@@ -16,14 +16,12 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
 
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
     const loggedIn = loggedInfo.loggedIn;
-    console.log(loggedInfo);
 
-    const [addBook, { loading: mutationLoading, error: mutationError }] = useMutation(addOwnerMutation, {
+    const [addBook/*, { loading: mutationLoading, error: mutationError }*/] = useMutation(addOwnerMutation, {
         // refetchQueries: MutationRes => [{query: getBooksQuery}],
     });
     
     const successResponseGoogle = (res: GoogleLoginResponse | GoogleLoginResponseOffline | any) => {
-        console.log(res.profileObj.imageUrl);
         addBook({
             variables: {
                 discordId: "",
@@ -47,7 +45,7 @@ const Login: React.FC<LoginProps> = (/*{}*/) => {
                 buttonText="Login / Sign Up"
                 onSuccess={successResponseGoogle}
                 onFailure={(res:any) => {
-                    console.log(res, mutationLoading, mutationError)
+                    // console.log(res, mutationLoading, mutationError)
                     dispatch(logOut());
                 }}
                 cookiePolicy={'single_host_origin'}

@@ -12,9 +12,8 @@ const Test: React.FC<TestProps> = (/*{}*/) => {
     const genre:any = useRef(null);
 
     const { loading, error, data } = useQuery(getBooksQuery);
-    console.log(loading, error, data);
 
-    const [addBook, { loading: mutationLoading, error: mutationError }] = useMutation(addBookMutation, {
+    const [addBook/*, { loading: mutationLoading, error: mutationError }*/] = useMutation(addBookMutation, {
         refetchQueries: MutationRes => [{query: getBooksQuery}],
         // awaitRefetchQueries: true
     });
@@ -57,7 +56,6 @@ const Test: React.FC<TestProps> = (/*{}*/) => {
             );
                 bookName.current.value = "";
                 genre.current.value = "";
-                console.log("mutationRes", mutationLoading, mutationError);
             }}>
                 <label htmlFor="bookName">Book Name:</label><br/>
                 <input ref={bookName} type="text" placeholder="Book Name" required/><br/>

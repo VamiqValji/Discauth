@@ -15,21 +15,18 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
     const serverAddInputRef:any = useRef(null);
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
     
-    const { loading: getAddedServersQueryLoading, error: getAddedServersQueryError, data: getAddedServersQueryData } = useQuery(getAddedServersQuery, {
+    const { /*loading: getAddedServersQueryLoading, error: getAddedServersQueryError,*/ data: getAddedServersQueryData } = useQuery(getAddedServersQuery, {
         variables: { googleId: loggedInfo.id }
     });
-    console.log(getAddedServersQueryLoading, getAddedServersQueryError, getAddedServersQueryData);
     
-    const [addServerMutationVar, { loading: mutationLoading, error: mutationError }] = useMutation(addServerMutation, {
+    const [addServerMutationVar/*, { loading: mutationLoading, error: mutationError }*/] = useMutation(addServerMutation, {
         // awaitRefetchQueries: true,
         refetchQueries: MutationRes => [{query: getAddedServersQuery, variables:{ googleId: loggedInfo.id }}],
     });
-    console.log(mutationError, mutationLoading);
 
     const addServer = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (serverAddInputRef.current.value.length < 1) return;
-        console.log(serverAddInputRef.current.value);
         const serverName = serverAddInputRef.current.value;
         serverAddInputRef.current.value = "";
         addServerMutationVar({
@@ -45,7 +42,6 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
     const renderAddedServers = () => {
 
         if (getAddedServersQueryData) {
-            console.log(getAddedServersQueryData.ownerData.verificationCodes);
             if (getAddedServersQueryData.ownerData.verificationCodes.length < 1) return (
                 <p className="tip gradient">First, add some servers using the above instructions.</p>);
                 

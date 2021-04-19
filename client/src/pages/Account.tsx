@@ -51,18 +51,14 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
         })
 
         if (!error) {
-            console.log(paymentMethod);
-
             try {
                 const { id } = paymentMethod!;
                 // console.log({ id, amount: 500 });
                 const { data } = await axios.post(`${url}/api/charge`, { id, amount: 500, email: loggedInfo.email });
-                console.log(data);
                 setResData(data);
             } catch(err) {
                 console.log(err);
             }
-
         }
     };
 
@@ -80,7 +76,6 @@ const CheckoutForm:React.FC<CheckOutForm> = ({membership}) => {
             try {
                 // const { id } = paymentMethod!;
                 const { data } = await axios.post(`${url}/api/cancel`, { /*id,*/ amount: 500, email: loggedInfo.email });
-                console.log(data);
                 setResData(data);
             } catch(err) {
                 console.log(err);
@@ -210,7 +205,7 @@ const Account: React.FC<AccountProps> = (/*{}*/) => {
             </div>
         )
     } catch {
-        return <>Loading / Error...</>;
+        return <div className="appContainer">Loading / Error...</div>;
     }
 }
 

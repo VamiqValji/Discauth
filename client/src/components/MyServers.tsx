@@ -15,10 +15,9 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
 
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
 
-    const { loading: getMyServersQueryLoading, error: getMyServersQueryError, data: getMyServersQueryData } = useQuery(getMyServersQuery, {
+    const { /*loading: getMyServersQueryLoading, error: getMyServersQueryError,*/ data: getMyServersQueryData } = useQuery(getMyServersQuery, {
         variables: { googleId: loggedInfo.id }
     });
-    console.log(getMyServersQueryLoading, getMyServersQueryError, getMyServersQueryData);
 
     const renderIfLoggedIn = () => {
 
@@ -34,7 +33,7 @@ const MyServers: React.FC<MyServersProps> = (/*{}*/) => {
                     server.ownerVerified ?
                     (
                         <>
-                            {console.log(`should render ${server.serverName}`)}
+                            {/* {console.log(`should render ${server.serverName}`)} */}
                             <div className="myServerCardContainer">
                                 <h2 className="title">{server.serverName}</h2>
                                 <h3 className="muted subtitle">Server ID: {server.serverId}</h3>

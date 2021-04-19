@@ -16,8 +16,7 @@ const AddedServer: React.FC<AddedServerProps> = ({serverName, code}) => {
 
     const loggedInfo:loggedInformation = useSelector((state:any) => state.loggedInfo);
 
-    const [deleteServerMutationVar, { loading: mutationLoading, error: mutationError }] = useMutation(deleteServerMutation);
-    console.log(mutationLoading, mutationError);
+    const [deleteServerMutationVar/*, { loading: mutationLoading, error: mutationError }*/] = useMutation(deleteServerMutation);
 
     return (
     <div ref={cardRef}>
@@ -28,7 +27,6 @@ const AddedServer: React.FC<AddedServerProps> = ({serverName, code}) => {
                 <h4>Verification Code: <span>{code}</span></h4>
             </div>
             <i onClick={() => {
-                console.log(`${serverName} deleted.`);
                 deleteServerMutationVar({
                     variables: {
                         googleId: loggedInfo.id, 
