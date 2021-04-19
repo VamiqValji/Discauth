@@ -14,13 +14,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(express.json());
 app.use(cors({}));
 
-const inProduction = false;
+const inProduction = true;
 
 app.use(
   "/graphql",
   graphqlHTTP({
     schema: schema,
-    graphiql: inProduction,
+    graphiql: !inProduction,
   })
 );
 
