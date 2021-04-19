@@ -6,6 +6,7 @@ import Documentation from "./pages/Documentation";
 import Nav from "./components/NavBar/Nav";
 import ToS from "./pages/ToS/ToS";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import NotFound from "./pages/NotFound/NotFound";
 import {
   BrowserRouter as Router,
   Switch,
@@ -43,8 +44,11 @@ export default function App() {
               <Route path="/privacy">
                 <PrivacyPolicy />
               </Route>
-              <Route path="/">
+              <Route exact path="/">
                 <Home />
+              </Route>
+              <Route path="*">
+                <NotFound />
               </Route>
             </Switch>
         </div>
