@@ -26,6 +26,13 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
 
     const addServer = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        
+        const MAX_ADDED_SERVERS = 3;
+        const filteredAddedServers:object[] = getAddedServersQueryData.ownerData.verificationCodes.filter((verifCode:any) => verifCode.code !== "")
+        if (filteredAddedServers.length >= MAX_ADDED_SERVERS) {
+            return;
+        }
+
         if (serverAddInputRef.current.value.length < 1) return;
         const serverName = serverAddInputRef.current.value;
         serverAddInputRef.current.value = "";
@@ -68,6 +75,11 @@ const Setup: React.FC<SetupProps> = (/*{}*/) => {
                         <input ref={serverAddInputRef} type="text" name="serverName" placeholder="Server Name..."/>
                         <input type="submit" style={{padding: 8}} value="Add Server"/>
                     </form>
+                    <h5 className="muted">
+                        You can only have a few added servers<br/> 
+                        concurrently. You may need to reload<br/> 
+                        the page for changes to take place.
+                    </h5>
                     <br/>
                     <h3>Your Added Servers</h3>
                     <h5 className="muted">Once you verify them, they will move to the "My Servers" tab.</h5>
