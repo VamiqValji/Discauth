@@ -11,6 +11,12 @@ const FAQs: React.FC<FAQsProps> = () => {
         {
             question: <>What does Discauth do?</>,
             description: <>
+            From a server member's perspective, it's as if you 
+            are signing up to a Discord server with your email.
+            From a server owner's perspective, you can view all
+            of your server member's given data right here on the
+            website.
+            <br/><br/>
             Discauth is a server member verification system that connects a 
             Discord bot with a web application. Once server owners get verify 
             their their server on the website, members of their registered servers 
