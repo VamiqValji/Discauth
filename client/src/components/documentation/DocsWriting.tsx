@@ -91,8 +91,8 @@ const DocsWriting: React.FC<DocsWritingProps> = ({selectedSection}) => {
                     <p>It is recommended to paste the following in a certain Discord channel on your server, so that users understand how to get setup.</p>
                     <br/>
                     <p>1. Write <span className="command">.register</span> in the channel of the server you'd like to register in.</p>
-                    <p>2. <input placeholder="Your server's name..." type="text" ref={serverNameInput} onChange={handleOnChange} /> <br /> Then reply to the bot's DM with <span className="command">.registerEmail <b>YOUR_EMAIL_HERE</b> <b>{serverName}</b></span>. For example, if the server you want to register in is named "Test Server", you would DM the bot ".registerEmail YOUR_EMAIL Test_Server".</p>
-                    <p>3. Check the code emailed to you. Write <span className="command">.verify <b>CODE_FROM_EMAIL_HERE</b></span> in a channel on that server.</p>
+                    <p>2. <input placeholder="Your server's name..." type="text" ref={serverNameInput} onChange={handleOnChange} /> <br /> Then reply to the bot's DM with <span className="command">.registerEmail <b>YOUR_EMAIL</b> <b>{serverName}</b></span>. For example, if the server you want to register in is named "Test Server", you would DM the bot ".registerEmail YOUR_EMAIL Test_Server".</p>
+                    <p>3. Check the code emailed to you. Write <span className="command">.verify <b>CODE_FROM_EMAIL</b></span> in a channel on that server.</p>
                     <br/>
                     <p className="gradient">Nice, you're now verified on that server! Check to make sure you got the 'Verified' role on the server. <i className="fas fa-check"></i></p>
                 </div>

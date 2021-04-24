@@ -20,12 +20,12 @@ const Features: React.FC<FeaturesProps> = () => {
         {
             showcase: <i className="fas fa-money-check-alt"></i>,
             header: <>Free</>,
-            paragraph: <>Discauth's starts with a free tier, so that you may upgrade if your server scales with greater needs. More information <Link to="/account">here</Link>.</>
+            paragraph: <>Discauth's starts with a free tier, so that you may upgrade if your server scales with greater needs. <Link to="/account">More information</Link>.</>
         },
         {
             showcase: <i className="fas fa-fast-forward"></i>,
             header: <>Speed</>,
-            paragraph: <>Server owners must only go through a few quick steps to register their server. The same applies to server members, thought with even less steps! More information <Link to="/documentation">here</Link>.</>
+            paragraph: <>Server owners must only go through a few quick steps to register their server. The same applies to server members, thought with even less steps! <Link to="/documentation">More information</Link></>
         },
         {
             showcase: <i className="fas fa-user-check"></i>,
