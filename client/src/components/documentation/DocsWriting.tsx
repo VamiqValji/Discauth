@@ -74,7 +74,7 @@ const DocsWriting: React.FC<DocsWritingProps> = ({selectedSection}) => {
                 <div ref={ownerInstructionsRef} className="innerSectionBackground">
                     <h4>Owner Instructions</h4>
                     <br/>
-                    <p>1. Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
+                    <p>1. Add <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">Discauth bot</a> to your server.</p>
                     <p>2. Add a role to your server named <b>Verified</b>. This is the role that users will get on verification, and it is case-sensitive.</p>
                     <img style={{width:"100%"}} src="https://cdn.discordapp.com/attachments/828106445835993088/828106466472099870/unknown.png" alt="Verification Role"/>
                     <p>3. Add your server in the "Setup" tab on the <Link to="/dashboard">Dashboard</Link> page. Use the given code from adding your server, in the next step!</p>

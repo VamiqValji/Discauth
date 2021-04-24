@@ -23,7 +23,7 @@ const InstructionsModal: React.FC<InstructionsModalProps> = (/*{}*/) => {
                 <div className="ownerInstructions customScrollbarLight">
                     <h3 className="title">Server Owner Instructions</h3>
                     <br/>
-                    <p>1. Click <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">here</a> to add Discauth bot to your server.</p>
+                    <p>1. Add <a href="https://discord.com/api/oauth2/authorize?client_id=822620298679287850&permissions=8&scope=bot">Discauth bot</a> to your server.</p>
                     <p>2. Add a role to your server named <b>Verified</b>. This is the role that users will get on verification, and it is case-sensitive.</p>
                     <p>3. Add your server below! Use the given code from adding your server, in the next step!</p>
                     <p>4. Now, write <span className="command">.registerServer <b>{"givenCode"}</b></span> in any channel of that server, then refresh this web page.</p>
